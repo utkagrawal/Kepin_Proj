@@ -25,8 +25,9 @@ venv.bak/
 *.h5
 *.hdf5
 *.pkl
-datasets/
-data/
+/datasets/
+/data/
+!kepin/data/
 
 # IDEs
 .idea/
