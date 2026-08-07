@@ -1,0 +1,34 @@
+# Logs
+*.log
+kepin_output*.log
+kepin_error*.log
+experiments_result*/
+nohup.out
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment
+.env
+.venv
+
+# Data and Models
+*.h5
+*.hdf5
+*.pkl
+datasets/
+data/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
