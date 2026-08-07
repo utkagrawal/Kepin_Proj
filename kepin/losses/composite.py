@@ -164,7 +164,13 @@ def make_kepin_loss(loss_weights_layer=None, use_auto_weights=True,
         l_rul = rul_mse_loss(y_true, y_pred)
         l_koop = koopman_one_step_loss(koopman_outputs["one_step_pred"],
                                        koopman_outputs["one_step_target"])
-        l_spec = spectral_stability_loss(koopman_outputs["eigenvalues"])
+        # Use analytical stability bound when K is batched (conditioned model)
+        # — ρ(K) ≤ max(σ) < 1 is guaranteed analytically, so stability_val
+        # is effectively 0.0 and we avoid calling eigvals on the full batched K.
+        if koopman_outputs.get("stability_val") is not None:
+            l_spec = tf.cast(koopman_outputs["stability_val"], tf.float32)
+        else:
+            l_spec = spectral_stability_loss(koopman_outputs["eigenvalues"])
         l_mono = monotonicity_loss(y_true, y_pred) if "mono" in active_losses else tf.constant(0.0)
         l_multi = multi_step_loss(koopman_outputs["multi_step_pred"],
                                   koopman_outputs["multi_step_target"])

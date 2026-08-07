@@ -92,10 +92,33 @@ def train_on_dataset(ds_config, output_dir, *,
     else:
         domain_mode, n_active_losses = "degradation", 7
 
+    # Detect explicit condition column indices from the dataset config.
+    # We look for columns whose names start with "setting" (case-insensitive)
+    # in the feature_cols list, which is the list of columns that actually
+    # end up in X_train (in order).  This is auditable per-run.
+    condition_indices = None
+    if condition_dim > 0:
+        feature_cols = ds_config.get("feature_cols", [])
+        setting_indices = [
+            i for i, col in enumerate(feature_cols)
+            if col.lower().startswith("setting")
+        ]
+        if setting_indices:
+            condition_indices = setting_indices
+            setting_names = [feature_cols[i] for i in setting_indices]
+            print(f"  Condition columns (indices {condition_indices}): {setting_names}")
+        else:
+            # Fall back to first condition_dim columns with explicit warning
+            condition_indices = list(range(min(condition_dim, len(feature_cols))))
+            print(f"  WARNING: no 'setting*' columns found in feature_cols. "
+                  f"Falling back to first {condition_dim} column(s) as conditions: "
+                  f"{[feature_cols[i] for i in condition_indices]}")
+
     model = build_kepin_model(seq_len, n_feat, n_train=n_train,
                               arch_config=arch_config,
                               n_active_losses=n_active_losses,
-                              condition_dim=condition_dim)
+                              condition_dim=condition_dim,
+                              condition_indices=condition_indices)
     print(f"  Domain: {domain_mode} ({n_active_losses} losses)")
 
     loss_fn = make_kepin_loss(
@@ -134,7 +157,7 @@ def train_on_dataset(ds_config, output_dir, *,
     print(f"    Mono violation: {mono_viol:.6f}")
     print(f"    Slope RMSE:     {slope_err:.4f}")
 
-    final_eigs = model.get_eigenvalues()
+    final_eigs = model.get_eigenvalues(inputs=tf.constant(X_test[:32]) if condition_dim > 0 else None)
     eig_mags = np.sort(np.abs(final_eigs))[::-1]
     print(f"    Top |λ|:        {eig_mags[:5]}")
 

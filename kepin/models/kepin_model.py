@@ -61,7 +61,8 @@ class KePINModel(keras.Model):
     """Koopman-Enhanced Physics-Informed Network."""
 
     def __init__(self, input_shape_tuple, arch_config=None, n_train=None,
-                 n_active_losses=7, condition_dim=0, **kwargs):
+                 n_active_losses=7, condition_dim=0,
+                 condition_indices=None, **kwargs):
         super().__init__(**kwargs)
         seq_len, n_features = input_shape_tuple
         if arch_config is None:
@@ -71,6 +72,11 @@ class KePINModel(keras.Model):
         self.seq_len = seq_len
         self.n_features = n_features
         self.condition_dim = arch_config.get("condition_dim", 0)
+
+        # Explicit indices of the operating-condition columns in the feature
+        # tensor.  If None and condition_dim > 0, falls back to the first
+        # condition_dim columns (legacy behaviour — use with care).
+        self.condition_indices = condition_indices
 
         # Input projection
         self.input_proj = keras.layers.Conv1D(
@@ -150,7 +156,8 @@ class KePINModel(keras.Model):
         self.koopman = KoopmanOperator(
             latent_dim=arch_config["latent_dim"],
             rollout_steps=arch_config["rollout"],
-            stability_mode="svd", condition_dim=self.condition_dim, name="koopman_operator")
+            stability_mode="svd", condition_dim=self.condition_dim,
+            name="koopman_operator")
 
         # Dual pooling
         self.gap = keras.layers.GlobalAveragePooling1D(name="latent_gap")
@@ -193,10 +200,23 @@ class KePINModel(keras.Model):
         dummy = tf.zeros((1, seq_len, n_features))
         _ = self(dummy, training=False)
 
+    def _extract_condition(self, inputs):
+        """Extract per-sample condition vector from raw inputs.
+
+        Uses self.condition_indices (explicit column list) when available,
+        otherwise falls back to the first self.condition_dim columns.
+        Returns (batch, condition_dim) float32 tensor.
+        """
+        if self.condition_indices is not None:
+            cond_cols = tf.gather(inputs, self.condition_indices, axis=-1)
+        else:
+            cond_cols = inputs[:, :, :self.condition_dim]
+        return tf.reduce_mean(tf.cast(cond_cols, tf.float32), axis=1)
+
     def call(self, inputs, training=None):
         condition = None
         if self.condition_dim > 0:
-            condition = tf.reduce_mean(inputs[:, :, :self.condition_dim], axis=1)
+            condition = self._extract_condition(inputs)
 
         x = self.input_proj(inputs)
         x = self.input_bn(x, training=training)
@@ -285,14 +305,56 @@ class KePINModel(keras.Model):
         rul_pred, _ = self(inputs, training=False)
         return rul_pred
 
-    def get_koopman_matrix(self):
-        K = self.koopman._get_K().numpy()
+    def get_koopman_matrix(self, inputs=None):
+        """Return the Koopman operator matrix K as a numpy array.
+
+        Args:
+            inputs: Optional raw input batch (batch, T, n_features).
+                If provided, the real per-sample condition is extracted and
+                used to build the representative K(μ) for the FIRST sample.
+                If omitted (or condition_dim=0), returns the BASE operator
+                K at μ=0, which reflects the state of s and U, V weights
+                but NOT the actual per-sample conditioning.  When
+                condition_dim>0, calling this without `inputs` is explicitly
+                documented as returning the μ=0 baseline operator.
+        """
+        condition = None
+        if self.condition_dim > 0 and inputs is not None:
+            condition = self._extract_condition(
+                tf.cast(inputs, tf.float32))[:1]  # use first sample only
+        elif self.condition_dim > 0:
+            import warnings
+            warnings.warn(
+                "get_koopman_matrix() called without `inputs` — returning "
+                "BASE operator at μ=0, not representative of any real sample.",
+                stacklevel=2)
+        K = self.koopman._get_K(condition=condition).numpy()
         if K.ndim == 3 and K.shape[0] == 1:
             K = K[0]
         return K
 
-    def get_eigenvalues(self):
-        K = self.koopman._get_K()
+    def get_eigenvalues(self, inputs=None):
+        """Return eigenvalues of the Koopman operator as a numpy array.
+
+        Args:
+            inputs: Optional raw input batch (batch, T, n_features).
+                If provided, real per-sample condition is extracted and
+                eigenvalues of K(μ) for the FIRST sample are returned.
+                If omitted and condition_dim>0, returns eigenvalues of the
+                BASE operator at μ=0 with a warning.
+        """
+        condition = None
+        if self.condition_dim > 0 and inputs is not None:
+            condition = self._extract_condition(
+                tf.cast(inputs, tf.float32))[:1]  # use first sample only
+        elif self.condition_dim > 0:
+            import warnings
+            warnings.warn(
+                "get_eigenvalues() called without `inputs` — returning "
+                "eigenvalues of BASE operator at μ=0, not representative "
+                "of any real sample's dynamics.",
+                stacklevel=2)
+        K = self.koopman._get_K(condition=condition)
         eigs = tf.linalg.eigvals(tf.cast(K, tf.float32)).numpy()
         if eigs.ndim == 2 and eigs.shape[0] == 1:
             eigs = eigs[0]
@@ -360,9 +422,11 @@ class KePINModel(keras.Model):
 # -------------------------------------------------------------------------
 
 def build_kepin_model(seq_len, n_features, n_train=None, arch_config=None,
-                      n_active_losses=7, condition_dim=0):
+                      n_active_losses=7, condition_dim=0, condition_indices=None):
     """Build and return a ``KePINModel`` instance."""
     return KePINModel(
         input_shape_tuple=(seq_len, n_features),
         arch_config=arch_config, n_train=n_train,
-        n_active_losses=n_active_losses, condition_dim=condition_dim)
+        n_active_losses=n_active_losses, condition_dim=condition_dim,
+        condition_indices=condition_indices)
+
