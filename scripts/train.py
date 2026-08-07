@@ -85,9 +85,8 @@ def train_on_dataset(ds_config, output_dir, *,
         # batch=1024 + LR-scaling causes large-batch degradation on this model.
         batch_size = min(batch_size, 512)
     if lr is None:
-        # Original default: initial_lr=0.003, base_batch=256
-        lr = get_learning_rate(batch_size, base_lr=0.001, base_batch=256)
-        lr = min(lr, 0.003)   # hard-cap matching original initial_lr
+        # Match original exactly: initial_lr=0.003 for batch=512
+        lr = get_learning_rate(batch_size, base_lr=0.003, base_batch=512)
     print(f"  Batch: {batch_size}, LR: {lr:.6f}")
 
     ds_type = ds_config.get("type", "csv")
@@ -131,7 +130,10 @@ def train_on_dataset(ds_config, output_dir, *,
         use_auto_weights=use_auto_weights,
         domain_mode=domain_mode,
     )
-    optimizer = keras.optimizers.Adam(learning_rate=float(lr), clipnorm=1.0)
+    # No clipnorm on Adam — the trainer's tf.clip_by_global_norm(2.0) handles it.
+    # Double-clipping (optimizer clipnorm=1.0 + trainer clip=2.0) reduces effective
+    # gradient scale and slows convergence vs the original.
+    optimizer = keras.optimizers.Adam(learning_rate=float(lr))
 
     if enhanced:
         trainer = EnhancedKePINTrainer(model, loss_fn, optimizer)
