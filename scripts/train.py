@@ -81,8 +81,13 @@ def train_on_dataset(ds_config, output_dir, *,
 
     if batch_size is None:
         batch_size = get_batch_size(n_train, seq_len, n_feat, model_type="kepin")
+        # Cap at 512 to match the original paper's training setup.
+        # batch=1024 + LR-scaling causes large-batch degradation on this model.
+        batch_size = min(batch_size, 512)
     if lr is None:
+        # Original default: initial_lr=0.003, base_batch=256
         lr = get_learning_rate(batch_size, base_lr=0.001, base_batch=256)
+        lr = min(lr, 0.003)   # hard-cap matching original initial_lr
     print(f"  Batch: {batch_size}, LR: {lr:.6f}")
 
     ds_type = ds_config.get("type", "csv")
@@ -319,9 +324,12 @@ def main():
 
     set_seed(seed, deterministic=deterministic)
 
+    # Match the original training setup exactly:
+    # mixed_precision=False and xla=False are required for numerical stability
+    # with the Koopman eigenvalue math (complex eigvals + log in fp16 → NaN).
     setup_gpu(
-        mixed_precision=not args.no_mixed_precision and not deterministic,
-        xla=not args.no_xla and not deterministic,
+        mixed_precision=False,
+        xla=False,
     )
 
     epochs = args.epochs if args.epochs is not None else run_cfg.get("epochs", 200)
