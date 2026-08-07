@@ -414,3 +414,16 @@ Zenodo DOI: TBD
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+## Reproduction Results
+
+We independently reproduced the training of the KePIN model on the CMAPSS datasets. Below is a comparison table of the Root Mean Square Error (RMSE) obtained during our reproduction against the original results reported in the paper.
+
+**Note:** We did not get better results than the original KePIN model. The discrepancies are likely due to running a single random seed (`--n_runs 1`) compared to the paper's multi-seed average, or missing hyperparameter tuning specific to the hardware setup.
+
+| Dataset | Original KePIN RMSE | Our Reproduction RMSE |
+| :--- | :--- | :--- |
+| **FD001** | 12.92 | 18.23 |
+| **FD002** | 15.08 | 17.60 |
+| **FD003** | 11.42 | 15.16 |
+| **FD004** | 17.04 | 19.11 |
