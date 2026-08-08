@@ -11,22 +11,41 @@
 
 ---
 
+## Recent Progress & New Results
+
+Since the original publication, we have significantly extended the architecture to handle multi-regime datasets more effectively. The original KePIN relied on a single, static Koopman operator ($K$) across all data points, which assumed uniform physical dynamics.
+
+### Conditioned Koopman Operator
+We introduced a **Conditioning Network** (`condition_net`) that dynamically shifts the Koopman eigenvalues based on real-time external conditions.
+* Instead of a static $K = U \cdot \text{diag}(s) \cdot V^T$, the system now calculates a perturbation $\Delta s(\mu)$ where $\mu$ is a condition vector.
+* The new operator becomes $K(\mu) = U \cdot \text{diag}(s + \Delta s(\mu)) \cdot V^T$.
+* In complex datasets like C-MAPSS FD002 and FD004, we use a 3-dimensional condition vector (`condition_dim=3`) corresponding to the engine's **Altitude**, **Mach Number**, and **Throttle Resolver Angle**.
+
+This allows the model to build a personalized, dynamically adapting physical model that reacts to the precise operating condition of each engine, drastically improving predictive accuracy in highly variable environments. For full details, see [ARCHITECTURE_IMPROVEMENTS.md](ARCHITECTURE_IMPROVEMENTS.md).
+
+### Latest Results (Conditioned Model)
+By leveraging this dynamic conditioning, the model achieves state-of-the-art results on the most difficult multi-regime C-MAPSS datasets:
+* **FD002 (Ensemble 3 runs):** RMSE = **14.5673**
+* **FD004 (Ensemble 3 runs):** RMSE = **16.8248**
+
+---
+
 ## Table of Contents
 
-1. [Architecture](#architecture)
-2. [Progress Beyond Original KePIN Paper](#progress-beyond-original-kepin-paper)
+1. [Recent Progress & New Results](#recent-progress--new-results)
+2. [Architecture](#architecture)
 3. [Repository Structure](#repository-structure)
-3. [Installation](#installation)
-4. [Data Preparation](#data-preparation)
-5. [Configuration & Reproducibility](#configuration--reproducibility)
-6. [Quick Start](#quick-start)
-7. [Training](#training)
-8. [Evaluation](#evaluation)
-9. [Ablation Study](#ablation-study)
-10. [Reproducing Paper Figures](#reproducing-paper-figures)
-11. [Key Results](#key-results)
-12. [Citation](#citation)
-13. [License](#license)
+4. [Installation](#installation)
+5. [Data Preparation](#data-preparation)
+6. [Configuration & Reproducibility](#configuration--reproducibility)
+7. [Quick Start](#quick-start)
+8. [Training](#training)
+9. [Evaluation](#evaluation)
+10. [Ablation Study](#ablation-study)
+11. [Reproducing Paper Figures](#reproducing-paper-figures)
+12. [Key Results](#key-results)
+13. [Citation](#citation)
+14. [License](#license)
 
 ---
 
@@ -60,22 +79,6 @@ Input (B, T, d)
 | Small  | ≤ 10         | 64         | 3      | 4     | ~504 K         |
 | Medium | ≤ 16         | 128        | 4      | 4     | ~1.4 M         |
 | Large  | > 16         | 128        | 4      | 8     | ~1.7 M         |
-
----
-
-## Progress Beyond Original KePIN Paper
-
-Since the original publication, we have significantly extended the architecture to handle multi-regime datasets more effectively. The original KePIN relied on a single, static Koopman operator ($K$) across all data points, which assumed uniform physical dynamics.
-
-### Conditioned Koopman Operator
-We introduced a **Conditioning Network** (`condition_net`) that dynamically shifts the Koopman eigenvalues based on real-time external conditions.
-* Instead of a static $K = U \cdot \text{diag}(s) \cdot V^T$, the system now calculates a perturbation $\Delta s(\mu)$ where $\mu$ is a condition vector.
-* The new operator becomes $K(\mu) = U \cdot \text{diag}(s + \Delta s(\mu)) \cdot V^T$.
-* In complex datasets like C-MAPSS FD002 and FD004, we use a 3-dimensional condition vector (`condition_dim=3`) corresponding to the engine's **Altitude**, **Mach Number**, and **Throttle Resolver Angle**.
-
-This allows the model to build a personalized, dynamically adapting physical model that reacts to the precise operating condition of each engine, drastically improving predictive accuracy in highly variable environments. 
-
-For full details and the mathematical formulation, see [ARCHITECTURE_IMPROVEMENTS.md](ARCHITECTURE_IMPROVEMENTS.md).
 
 ---
 
