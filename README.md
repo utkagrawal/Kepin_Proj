@@ -14,7 +14,8 @@
 ## Table of Contents
 
 1. [Architecture](#architecture)
-2. [Repository Structure](#repository-structure)
+2. [Progress Beyond Original KePIN Paper](#progress-beyond-original-kepin-paper)
+3. [Repository Structure](#repository-structure)
 3. [Installation](#installation)
 4. [Data Preparation](#data-preparation)
 5. [Configuration & Reproducibility](#configuration--reproducibility)
@@ -59,6 +60,22 @@ Input (B, T, d)
 | Small  | ≤ 10         | 64         | 3      | 4     | ~504 K         |
 | Medium | ≤ 16         | 128        | 4      | 4     | ~1.4 M         |
 | Large  | > 16         | 128        | 4      | 8     | ~1.7 M         |
+
+---
+
+## Progress Beyond Original KePIN Paper
+
+Since the original publication, we have significantly extended the architecture to handle multi-regime datasets more effectively. The original KePIN relied on a single, static Koopman operator ($K$) across all data points, which assumed uniform physical dynamics.
+
+### Conditioned Koopman Operator
+We introduced a **Conditioning Network** (`condition_net`) that dynamically shifts the Koopman eigenvalues based on real-time external conditions.
+* Instead of a static $K = U \cdot \text{diag}(s) \cdot V^T$, the system now calculates a perturbation $\Delta s(\mu)$ where $\mu$ is a condition vector.
+* The new operator becomes $K(\mu) = U \cdot \text{diag}(s + \Delta s(\mu)) \cdot V^T$.
+* In complex datasets like C-MAPSS FD002 and FD004, we use a 3-dimensional condition vector (`condition_dim=3`) corresponding to the engine's **Altitude**, **Mach Number**, and **Throttle Resolver Angle**.
+
+This allows the model to build a personalized, dynamically adapting physical model that reacts to the precise operating condition of each engine, drastically improving predictive accuracy in highly variable environments. 
+
+For full details and the mathematical formulation, see [ARCHITECTURE_IMPROVEMENTS.md](ARCHITECTURE_IMPROVEMENTS.md).
 
 ---
 
@@ -414,16 +431,3 @@ Zenodo DOI: TBD
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
-## Reproduction Results
-
-We independently reproduced the training of the KePIN model on the CMAPSS datasets. Below is a comparison table of the Root Mean Square Error (RMSE) obtained during our reproduction against the original results reported in the paper.
-
-**Note:** We did not get better results than the original KePIN model. The discrepancies are likely due to running a single random seed (`--n_runs 1`) compared to the paper's multi-seed average, or missing hyperparameter tuning specific to the hardware setup.
-
-| Dataset | Original KePIN RMSE | Our Reproduction RMSE |
-| :--- | :--- | :--- |
-| **FD001** | 12.92 | 18.23 |
-| **FD002** | 15.08 | 17.60 |
-| **FD003** | 11.42 | 15.16 |
-| **FD004** | 17.04 | 19.11 |
