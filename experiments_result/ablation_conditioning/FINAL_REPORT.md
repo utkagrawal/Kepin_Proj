@@ -27,16 +27,19 @@ We screened multiple conditioning strategies against each other using a reduced 
 **Winning Strategy**: `raw2_bc` (using only Mach Number and Throttle Resolver Angle) proved to be the most effective conditioning input. Dropping `setting1` (Altitude) actually *improves* the model's ability to condition the Koopman eigenvalues, likely by removing redundant noise and forcing the network to rely on the cleanest regime indicators.
 
 ## Phase 5: Formal Confirmation (3-Run Ensemble, 250 Epochs)
-*(Note: This ensemble is currently training as SLURM job `1950` on `gpu-P100-01` and will take several hours to complete. The table below outlines the expected metrics and structure for comparison against literature baselines).*
 
 ### Final Evaluation Table
 | Model / Strategy | FD002 Test RMSE | NASA Score | Notes |
 |:---|:---:|:---:|:---|
 | Literature (BiLSTM) | 15.61 | - | Best standard RNN baseline |
 | KePIN (Baseline `raw3`) | **14.5673** | - | Original conditioned model using all 3 settings |
-| KePIN (`raw2_bc`) | **[TBD]** | **[TBD]** | Phase 5 confirmation ensemble (Expected < 14.5) |
+| KePIN (`raw2_bc`) | 14.7986 | N/A | Phase 5 confirmation ensemble |
 
-*(Run `python plot_ablation_results.py` in this directory to generate a comparative bar chart once Phase 5 concludes).*
+*(Run `python plot_ablation_results.py` in this directory to generate a comparative bar chart).*
 
-## Future Work
-The `raw2_bc` strategy proved optimal for FD002. However, evaluating the transferability of this conditioning strategy to the even more complex **FD004** dataset was out of scope for this round. If the Phase 5 ensemble confirms a significant beat over the `14.5673` baseline, we strongly recommend evaluating `raw2_bc` on FD004 as an immediate follow-up.
+## Conclusion & Future Work
+While `raw2_bc` achieved an impressive 15.4219 during the rapid 50-epoch screening phase (outperforming all other variants), the full 250-epoch 3-run ensemble converged to **14.7986**. This falls slightly short of the original `raw3` baseline (**14.5673**). 
+
+This indicates that while `setting1` (Altitude) may seem redundant or noisy during early training, its subtle variance still provides marginal long-term capacity for the model when trained fully to convergence. 
+
+**Next Steps**: Since the ablation did not conclusively beat the full-settings baseline, `raw3` remains the state-of-the-art for KePIN. Evaluating the transferability of this conditioning approach to the even more complex **FD004** dataset remains an open follow-up.
