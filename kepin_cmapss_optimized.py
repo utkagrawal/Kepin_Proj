@@ -467,7 +467,6 @@ class EnhancedKePINTrainer(KePINTrainer):
             self.model.set_weights(best_weights)
             if verbose:
                 print(f"  Restored best weights (val_rmse={best_val_rmse:.4f})")
-
         # Also return SWA weights for potential ensemble
         return history, self.swa_weights
 
@@ -477,7 +476,9 @@ class EnhancedKePINTrainer(KePINTrainer):
 # =========================================================================
 
 def train_cmapss_optimized(dataset_key: str, output_dir: str,
-                           condition_dim: int = 0, verbose: int = 1) -> List[dict]:
+                           condition_dim: int = 0, conditioning_strategy: str = "raw3", 
+                           epochs_override: int = None, patience_override: int = None, n_runs_override: int = None,
+                           verbose: int = 1) -> List[dict]:
     """Train KePIN with optimized hyperparameters on a C-MAPSS sub-dataset.
 
     Performs multiple runs and creates an ensemble for final prediction.
@@ -486,6 +487,12 @@ def train_cmapss_optimized(dataset_key: str, output_dir: str,
         List of result dicts (one per run + one for ensemble)
     """
     cfg = CMAPSS_CONFIGS[dataset_key]
+    if epochs_override is not None:
+        cfg["epochs"] = epochs_override
+    if patience_override is not None:
+        cfg["patience"] = patience_override
+    if n_runs_override is not None:
+        cfg["n_runs"] = n_runs_override
 
     # Load dataset config
     config_path = os.path.join(_script_dir, cfg["config_path"])
@@ -538,16 +545,16 @@ def train_cmapss_optimized(dataset_key: str, output_dir: str,
         elif conditioning_strategy == "raw2_bc":
             condition_indices = [setting_cols[1], setting_cols[2]]
         elif conditioning_strategy == "sensor_topk":
-            # s1, s18, s5, s6, s21
-            target_sensors = ["s1", "s18", "s5", "s6", "s21"]
+            # Top 8 from Phase 1 Regime Bias
+            target_sensors = ["s1", "s18", "s5", "s6", "s21", "s10", "s16", "s19"]
             condition_indices = [i for i, col in enumerate(feature_cols) if col in target_sensors][:condition_dim]
         elif conditioning_strategy in ["regime_embed", "hybrid"]:
             condition_indices = setting_cols[:3] # We need all 3 settings for the embedding
             if conditioning_strategy == "hybrid":
-                condition_indices = [setting_cols[0], setting_cols[1]] # raw2_ab default for hybrid raw_indices
+                # Phase 3 winner: raw2_bc (settings 2 and 3)
+                condition_indices = [setting_cols[1], setting_cols[2]]
             
             # Fit or load KMeans
-            import os
             import pickle
             from sklearn.cluster import KMeans
             kmeans_path = "experiments_result/ablation_conditioning/regime_kmeans_FD002.pkl"
@@ -995,6 +1002,12 @@ def main():
     parser.add_argument("--output_dir", type=str, default=None)
     parser.add_argument("--condition_dim", type=int, default=0,
                         help="Number of external parameter features for conditioned Koopman (e.g. 3 for C-MAPSS)")
+    parser.add_argument("--conditioning", type=str, default="raw3",
+                        choices=["raw3", "raw2_ab", "raw2_ac", "raw2_bc", "regime_embed", "sensor_topk", "hybrid"],
+                        help="Conditioning strategy to use")
+    parser.add_argument("--epochs", type=int, default=None, help="Override epochs")
+    parser.add_argument("--patience", type=int, default=None, help="Override patience")
+    parser.add_argument("--n_runs", type=int, default=None, help="Override number of runs")
     parser.add_argument("--verbose", type=int, default=1)
 
     args = parser.parse_args()
@@ -1022,7 +1035,10 @@ def main():
     all_results = []
     for ds_key in datasets:
         ds_dir = os.path.join(output_base, ds_key)
-        results = train_cmapss_optimized(ds_key, ds_dir, condition_dim=args.condition_dim, conditioning_strategy=args.conditioning, verbose=args.verbose)
+        results = train_cmapss_optimized(ds_key, ds_dir, condition_dim=args.condition_dim, 
+                                         conditioning_strategy=args.conditioning, 
+                                         epochs_override=args.epochs, patience_override=args.patience, n_runs_override=args.n_runs,
+                                         verbose=args.verbose)
         all_results.extend(results)
 
     # Summary
