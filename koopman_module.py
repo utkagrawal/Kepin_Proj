@@ -28,6 +28,7 @@ import numpy as np
 import tensorflow as tf
 import keras
 from keras.saving import register_keras_serializable
+from kan_layer import KANLayer
 
 
 # =========================================================================
@@ -141,6 +142,7 @@ class KoopmanOperator(keras.layers.Layer):
                  conditioning_strategy: str = "raw3",
                  condition_indices: list = None,
                  kmeans_centroids = None,
+                 condition_net_type: str = "mlp",
                  **kwargs):
         super().__init__(**kwargs)
         self.latent_dim = latent_dim
@@ -150,14 +152,16 @@ class KoopmanOperator(keras.layers.Layer):
         self.conditioning_strategy = conditioning_strategy
         self.condition_indices = condition_indices
         self.kmeans_centroids = kmeans_centroids
+        self.condition_net_type = condition_net_type
 
     def build(self, input_shape):
         d = self.latent_dim
 
         if self.stability_mode == "svd":
             # SVD factorisation: K = U · diag(sigmoid(s + delta_s(mu))) · V^T
-            self.U = self.add_weight(
-                name="U", shape=(d, d),
+            # Cayley transform parameterisation for exact orthogonality
+            self.M_U = self.add_weight(
+                name="M_U", shape=(d, d),
                 initializer=keras.initializers.Orthogonal(),
                 trainable=True,
             )
@@ -167,8 +171,8 @@ class KoopmanOperator(keras.layers.Layer):
                 initializer=keras.initializers.Zeros(),
                 trainable=True,
             )
-            self.V = self.add_weight(
-                name="V", shape=(d, d),
+            self.M_V = self.add_weight(
+                name="M_V", shape=(d, d),
                 initializer=keras.initializers.Orthogonal(),
                 trainable=True,
             )
@@ -185,17 +189,23 @@ class KoopmanOperator(keras.layers.Layer):
                     embed_indices = list(range(3)) # assuming settings are the first 3
                     self.strategy_layer = HybridConditioning(embed_indices, self.condition_indices, self.kmeans_centroids, embed_dim=3)
                 
-                # 2. Setup MLP
-                self.condition_net = keras.Sequential([
-                    keras.layers.Dense(64, activation="relu"),
-                    keras.layers.Dense(64, activation="relu"),
-                    keras.layers.Dense(
-                        d, 
-                        kernel_initializer="zeros", 
-                        bias_initializer="zeros",
-                        name="delta_s_out"
-                    )
-                ], name="condition_net")
+                # 2. Setup MLP or KAN
+                if self.condition_net_type == "kan":
+                    self.condition_net = keras.Sequential([
+                        KANLayer(max(16, d // 4), grid_size=5, name="kan_hidden1"),
+                        KANLayer(d, grid_size=5, name="kan_output")
+                    ], name="condition_net_kan")
+                else:
+                    self.condition_net = keras.Sequential([
+                        keras.layers.Dense(64, activation="relu"),
+                        keras.layers.Dense(64, activation="relu"),
+                        keras.layers.Dense(
+                            d, 
+                            kernel_initializer="zeros", 
+                            bias_initializer="zeros",
+                            name="delta_s_out"
+                        )
+                    ], name="condition_net")
         else:
             # Unconstrained K (for ablation)
             self.K_raw = self.add_weight(
@@ -210,7 +220,22 @@ class KoopmanOperator(keras.layers.Layer):
         """Construct the Koopman operator matrix K.
         If raw_inputs is provided, we compute mu = strategy(raw_inputs).
         """
+        d = self.latent_dim
+        I = tf.eye(d, dtype=tf.float32)
+
         if self.stability_mode == "svd":
+            # Exact orthogonal matrices via Cayley transform: U = (I - A)(I + A)^-1, A = M - M^T
+            M_U_f32 = tf.cast(self.M_U, tf.float32)
+            A_U = M_U_f32 - tf.transpose(M_U_f32)
+            U = tf.matmul(I - A_U, tf.linalg.inv(I + A_U))
+            
+            M_V_f32 = tf.cast(self.M_V, tf.float32)
+            A_V = M_V_f32 - tf.transpose(M_V_f32)
+            V = tf.matmul(I - A_V, tf.linalg.inv(I + A_V))
+            
+            # Store U and V for output dictionary
+            self.U = U
+            self.V = V
             s_val = self.s
             mu = None
             if self.condition_dim > 0 and raw_inputs is not None:
@@ -323,6 +348,8 @@ class KoopmanOperator(keras.layers.Layer):
             "K": K,
             "eigenvalues": eigenvalues,
             "final_state": final_state,
+            "U": self.U,
+            "V": self.V,
         }
         if sigma is not None:
             outputs["sigma"] = sigma
@@ -338,6 +365,7 @@ class KoopmanOperator(keras.layers.Layer):
             "conditioning_strategy": self.conditioning_strategy,
             "condition_indices": self.condition_indices,
             "kmeans_centroids": self.kmeans_centroids.tolist() if self.kmeans_centroids is not None else None,
+            "condition_net_type": self.condition_net_type,
         })
         return config
 

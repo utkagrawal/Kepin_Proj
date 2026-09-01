@@ -1,0 +1,7 @@
+{
+  "datasets": ["CMAPSS_FD002"],
+  "model_type": "KePIN",
+  "epochs": 30,
+  "runs": 1,
+  "save_dir": "experiments_result/phase11/fd002_orth_reg"
+}

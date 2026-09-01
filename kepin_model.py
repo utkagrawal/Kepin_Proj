@@ -93,13 +93,15 @@ class KePINModel(keras.Model):
 
     def __init__(self, input_shape_tuple, arch_config=None, n_train=None,
                  n_active_losses=7, condition_dim=0, condition_indices=None, 
-                 conditioning_strategy="raw3", kmeans_centroids=None, **kwargs):
+                 conditioning_strategy="raw3", kmeans_centroids=None, 
+                 condition_net_type="mlp", **kwargs):
         super().__init__(**kwargs)
 
         self.condition_dim = condition_dim
         self.condition_indices = condition_indices
         self.conditioning_strategy = conditioning_strategy
         self.kmeans_centroids = kmeans_centroids
+        self.condition_net_type = condition_net_type
 
         seq_len, n_features = input_shape_tuple
         if arch_config is None:
@@ -208,6 +210,7 @@ class KePINModel(keras.Model):
             conditioning_strategy=self.conditioning_strategy,
             condition_indices=self.condition_indices,
             kmeans_centroids=self.kmeans_centroids,
+            condition_net_type=self.condition_net_type,
             name="koopman_operator",
         )
 
@@ -441,7 +444,9 @@ class KePINModel(keras.Model):
 
 def build_kepin_model(seq_len, n_features, n_train=None, arch_config=None,
                       n_active_losses=7, condition_dim=0, condition_indices=None,
-                      conditioning_strategy="raw3", kmeans_centroids=None):
+                      conditioning_strategy="raw3", kmeans_centroids=None,
+                      condition_net_type="mlp"):
+    """Build and return a ``KePINModel`` instance."""
     return KePINModel(
         input_shape_tuple=(seq_len, n_features),
         arch_config=arch_config, n_train=n_train,
@@ -450,6 +455,7 @@ def build_kepin_model(seq_len, n_features, n_train=None, arch_config=None,
         condition_indices=condition_indices,
         conditioning_strategy=conditioning_strategy,
         kmeans_centroids=kmeans_centroids,
+        condition_net_type=condition_net_type,
     )
 
 

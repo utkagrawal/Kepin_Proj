@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --partition=gpu-A100
-#SBATCH --job-name=kepin_A100_half2
+#SBATCH --partition=gpu-P100
+#SBATCH --job-name=kepin_full_batch
 #SBATCH --nodes=1
 #SBATCH --gpus=1
 #SBATCH --cpus-per-task=4
 #SBATCH --time=24:00:00
-#SBATCH --output=kepin_output_a100_half2.log
-#SBATCH --error=kepin_error_a100_half2.log
+#SBATCH --output=kepin_output_full_batch.log
+#SBATCH --error=kepin_error_full_batch.log
 
 eval "$(conda shell.bash hook)"
 conda activate kepin
@@ -16,18 +16,26 @@ cd "$TMPDIR" || exit 1
 cp -r ~/Kepin_code .
 cd Kepin_code
 
-# Run FD002 (250 epochs to perfectly align the Cosine Annealing cycle)
+echo "Starting FD002..."
 python -u scripts/train.py \
     --config configs/datasets_kepin_config.json \
     --dataset_idx 1 \
-    --output_dir experiments_result_a100_half2 \
+    --output_dir experiments_result_full_batch \
     --epochs 250 --seed 42
 
-# Run FD004 (250 epochs to perfectly align the Cosine Annealing cycle)
+echo "Starting FD003..."
+python -u scripts/train.py \
+    --config configs/datasets_kepin_config.json \
+    --dataset_idx 2 \
+    --output_dir experiments_result_full_batch \
+    --epochs 250 --seed 42
+
+echo "Starting FD004..."
 python -u scripts/train.py \
     --config configs/datasets_kepin_config.json \
     --dataset_idx 3 \
-    --output_dir experiments_result_a100_half2 \
+    --output_dir experiments_result_full_batch \
     --epochs 250 --seed 42
 
-cp -r experiments_result_a100_half2 ~/Kepin_code/
+cp -r experiments_result_full_batch ~/Kepin_code/
+echo "All done! Results saved to ~/Kepin_code/experiments_result_full_batch"

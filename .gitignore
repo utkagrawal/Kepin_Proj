@@ -33,3 +33,12 @@ venv.bak/
 .idea/
 .vscode/
 *.swp
+
+# Additional ignores
+*.err
+C-MAPSS-Data/
+*.pdf
+*.txt
+*.out
+*.swp
+code/datasets/

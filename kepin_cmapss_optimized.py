@@ -477,6 +477,7 @@ class EnhancedKePINTrainer(KePINTrainer):
 
 def train_cmapss_optimized(dataset_key: str, output_dir: str,
                            condition_dim: int = 0, conditioning_strategy: str = "raw3", 
+                           condition_net_type: str = "mlp",
                            epochs_override: int = None, patience_override: int = None, n_runs_override: int = None,
                            verbose: int = 1) -> List[dict]:
     """Train KePIN with optimized hyperparameters on a C-MAPSS sub-dataset.
@@ -493,6 +494,7 @@ def train_cmapss_optimized(dataset_key: str, output_dir: str,
         cfg["patience"] = patience_override
     if n_runs_override is not None:
         cfg["n_runs"] = n_runs_override
+    cfg["condition_net_type"] = condition_net_type
 
     # Load dataset config
     config_path = os.path.join(_script_dir, cfg["config_path"])
@@ -618,7 +620,8 @@ def train_cmapss_optimized(dataset_key: str, output_dir: str,
                                   condition_dim=condition_dim,
                                   condition_indices=condition_indices,
                                   conditioning_strategy=conditioning_strategy,
-                                  kmeans_centroids=kmeans_centroids)
+                                  kmeans_centroids=kmeans_centroids,
+                                  condition_net_type=cfg.get("condition_net_type", "mlp"))
 
         if run_id == 0:
             n_params = sum(np.prod(v.shape) for v in model.trainable_variables)
@@ -1003,8 +1006,10 @@ def main():
     parser.add_argument("--condition_dim", type=int, default=0,
                         help="Number of external parameter features for conditioned Koopman (e.g. 3 for C-MAPSS)")
     parser.add_argument("--conditioning", type=str, default="raw3",
-                        choices=["raw3", "raw2_ab", "raw2_ac", "raw2_bc", "regime_embed", "sensor_topk", "hybrid"],
+                        choices=["raw3", "raw2_ab", "raw2_ac", "raw2_bc", "regime_embed", "sensor_topk", "hybrid", "latent_inject"],
                         help="Conditioning strategy to use")
+    parser.add_argument("--condition_net_type", type=str, default="mlp", choices=["mlp", "kan"],
+                        help="Network type for mapping condition to eigenvalues")
     parser.add_argument("--epochs", type=int, default=None, help="Override epochs")
     parser.add_argument("--patience", type=int, default=None, help="Override patience")
     parser.add_argument("--n_runs", type=int, default=None, help="Override number of runs")
@@ -1037,6 +1042,7 @@ def main():
         ds_dir = os.path.join(output_base, ds_key)
         results = train_cmapss_optimized(ds_key, ds_dir, condition_dim=args.condition_dim, 
                                          conditioning_strategy=args.conditioning, 
+                                         condition_net_type=args.condition_net_type,
                                          epochs_override=args.epochs, patience_override=args.patience, n_runs_override=args.n_runs,
                                          verbose=args.verbose)
         all_results.extend(results)
