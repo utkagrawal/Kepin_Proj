@@ -1,0 +1,170 @@
+/userhome/mtech/a.utkarsh/miniconda3/lib/python3.14/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.175 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+/userhome/mtech/a.utkarsh/miniconda3/lib/python3.14/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.175 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+/userhome/mtech/a.utkarsh/miniconda3/lib/python3.14/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.175 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+/userhome/mtech/a.utkarsh/miniconda3/lib/python3.14/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.175 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+/userhome/mtech/a.utkarsh/miniconda3/lib/python3.14/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.175 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+/userhome/mtech/a.utkarsh/miniconda3/lib/python3.14/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.175 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+/userhome/mtech/a.utkarsh/miniconda3/lib/python3.14/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.175 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+/userhome/mtech/a.utkarsh/miniconda3/lib/python3.14/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.175 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+/userhome/mtech/a.utkarsh/miniconda3/lib/python3.14/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.175 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+/userhome/mtech/a.utkarsh/miniconda3/lib/python3.14/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.175 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+/userhome/mtech/a.utkarsh/miniconda3/lib/python3.14/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.175 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+/userhome/mtech/a.utkarsh/miniconda3/lib/python3.14/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.175 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+
+--- Running 3koopman (Seed 42) ---
+RegimeKePIN(3koopman) | params=1,463,884 | latent=128 | blocks=4 | heads=4
+Epoch   0 | Train: 0.0216 | Val RMSE: 21.55 | Pat: 0
+Epoch  10 | Train: 0.0004 | Val RMSE: 19.89 | Pat: 7
+Epoch  20 | Train: 0.0004 | Val RMSE: 22.58 | Pat: 17
+Epoch  30 | Train: 0.0001 | Val RMSE: 23.07 | Pat: 27
+Epoch  40 | Train: 0.0001 | Val RMSE: 22.62 | Pat: 37
+Early stopping at epoch 43
+
+Final Results - RMSE: 18.3864, MAE: 13.6414, NASA: 956.8860
+
+--- Running 3koopman (Seed 43) ---
+RegimeKePIN(3koopman) | params=1,463,884 | latent=128 | blocks=4 | heads=4
+Epoch   0 | Train: 0.0133 | Val RMSE: 20.60 | Pat: 0
+Epoch  10 | Train: 0.0004 | Val RMSE: 20.09 | Pat: 1
+Epoch  20 | Train: 0.0007 | Val RMSE: 22.67 | Pat: 7
+Epoch  30 | Train: 0.0002 | Val RMSE: 23.37 | Pat: 17
+Epoch  40 | Train: 0.0002 | Val RMSE: 22.28 | Pat: 27
+Epoch  50 | Train: 0.0001 | Val RMSE: 23.69 | Pat: 37
+Early stopping at epoch 53
+
+Final Results - RMSE: 18.6955, MAE: 13.5313, NASA: 1434.9431
+
+--- Running 3koopman (Seed 44) ---
+RegimeKePIN(3koopman) | params=1,463,884 | latent=128 | blocks=4 | heads=4
+Epoch   0 | Train: 0.0209 | Val RMSE: 22.17 | Pat: 0
+Epoch  10 | Train: 0.0003 | Val RMSE: 20.70 | Pat: 3
+Epoch  20 | Train: 0.0003 | Val RMSE: 22.86 | Pat: 13
+Epoch  30 | Train: 0.0001 | Val RMSE: 22.10 | Pat: 23
+Epoch  40 | Train: 0.0001 | Val RMSE: 21.65 | Pat: 33
+Early stopping at epoch 47
+
+Final Results - RMSE: 19.7302, MAE: 14.7835, NASA: 1187.1493
+
+--- Running proposed (Seed 42) ---
+RegimeKePIN(proposed) | params=1,468,108 | latent=128 | blocks=4 | heads=4
+Epoch   0 | Train: 0.0153 | Val RMSE: 22.44 | Pat: 0
+Epoch  10 | Train: 0.0004 | Val RMSE: 21.66 | Pat: 5
+Epoch  20 | Train: 0.0007 | Val RMSE: 21.74 | Pat: 9
+Epoch  30 | Train: 0.0004 | Val RMSE: 22.26 | Pat: 19
+Epoch  40 | Train: 0.0003 | Val RMSE: 21.52 | Pat: 29
+Epoch  50 | Train: 0.0002 | Val RMSE: 21.46 | Pat: 39
+Early stopping at epoch 51
+
+Final Results - RMSE: 20.4805, MAE: 14.5622, NASA: 2839.0215
+
+--- Running proposed (Seed 43) ---
+RegimeKePIN(proposed) | params=1,468,108 | latent=128 | blocks=4 | heads=4
+Epoch   0 | Train: 0.0136 | Val RMSE: 21.86 | Pat: 0
+Epoch  10 | Train: 0.0003 | Val RMSE: 19.04 | Pat: 6
+Epoch  20 | Train: 0.0004 | Val RMSE: 21.22 | Pat: 16
+Epoch  30 | Train: 0.0002 | Val RMSE: 21.41 | Pat: 26
+Epoch  40 | Train: 0.0001 | Val RMSE: 21.95 | Pat: 36
+Early stopping at epoch 44
+
+Final Results - RMSE: 18.3360, MAE: 12.9047, NASA: 1570.1232
+
+--- Running proposed (Seed 44) ---
+RegimeKePIN(proposed) | params=1,468,108 | latent=128 | blocks=4 | heads=4
+Epoch   0 | Train: 0.0225 | Val RMSE: 23.53 | Pat: 0
+Epoch  10 | Train: 0.0004 | Val RMSE: 19.99 | Pat: 7
+Epoch  20 | Train: 0.0005 | Val RMSE: 22.67 | Pat: 17
+Epoch  30 | Train: 0.0002 | Val RMSE: 23.14 | Pat: 27
+Epoch  40 | Train: 0.0001 | Val RMSE: 22.06 | Pat: 37
+Early stopping at epoch 43
+
+Final Results - RMSE: 19.3284, MAE: 14.3760, NASA: 901.9045
+
+--- Running proposed_nosmooth (Seed 42) ---
+RegimeKePIN(proposed_nosmooth) | params=1,468,108 | latent=128 | blocks=4 | heads=4
+Epoch   0 | Train: 0.0153 | Val RMSE: 22.44 | Pat: 0
+Epoch  10 | Train: 0.0004 | Val RMSE: 20.93 | Pat: 8
+Epoch  20 | Train: 0.0005 | Val RMSE: 21.66 | Pat: 18
+Epoch  30 | Train: 0.0003 | Val RMSE: 22.34 | Pat: 28
+Epoch  40 | Train: 0.0002 | Val RMSE: 21.77 | Pat: 38
+Early stopping at epoch 42
+
+Final Results - RMSE: 20.3259, MAE: 14.6886, NASA: 2129.3232
+
+--- Running proposed_nosmooth (Seed 43) ---
+RegimeKePIN(proposed_nosmooth) | params=1,468,108 | latent=128 | blocks=4 | heads=4
+Epoch   0 | Train: 0.0136 | Val RMSE: 21.86 | Pat: 0
+Epoch  10 | Train: 0.0003 | Val RMSE: 20.02 | Pat: 3
+Epoch  20 | Train: 0.0005 | Val RMSE: 21.19 | Pat: 13
+Epoch  30 | Train: 0.0003 | Val RMSE: 20.31 | Pat: 23
+Epoch  40 | Train: 0.0002 | Val RMSE: 21.04 | Pat: 33
+Early stopping at epoch 47
+
+Final Results - RMSE: 18.5149, MAE: 12.7251, NASA: 1197.7045
+
+--- Running proposed_nosmooth (Seed 44) ---
+RegimeKePIN(proposed_nosmooth) | params=1,468,108 | latent=128 | blocks=4 | heads=4
+Epoch   0 | Train: 0.0225 | Val RMSE: 23.53 | Pat: 0
+Epoch  10 | Train: 0.0004 | Val RMSE: 19.72 | Pat: 5
+Epoch  20 | Train: 0.0005 | Val RMSE: 21.29 | Pat: 15
+Epoch  30 | Train: 0.0003 | Val RMSE: 22.50 | Pat: 25
+Epoch  40 | Train: 0.0002 | Val RMSE: 21.90 | Pat: 35
+Early stopping at epoch 45
+
+Final Results - RMSE: 19.2193, MAE: 13.9246, NASA: 1351.0710
+
+--- Running proposed_nophysics (Seed 42) ---
+RegimeKePIN(proposed_nophysics) | params=1,468,108 | latent=128 | blocks=4 | heads=4
+Epoch   0 | Train: 0.0153 | Val RMSE: 22.44 | Pat: 0
+Epoch  10 | Train: 0.0004 | Val RMSE: 20.51 | Pat: 9
+Epoch  20 | Train: 0.0002 | Val RMSE: 21.23 | Pat: 19
+Epoch  30 | Train: 0.0001 | Val RMSE: 20.88 | Pat: 29
+Epoch  40 | Train: 0.0000 | Val RMSE: 20.59 | Pat: 39
+Early stopping at epoch 41
+
+Final Results - RMSE: 20.0795, MAE: 14.7524, NASA: 1436.4297
+
+--- Running proposed_nophysics (Seed 43) ---
+RegimeKePIN(proposed_nophysics) | params=1,468,108 | latent=128 | blocks=4 | heads=4
+Epoch   0 | Train: 0.0136 | Val RMSE: 21.86 | Pat: 0
+Epoch  10 | Train: 0.0003 | Val RMSE: 19.57 | Pat: 3
+Epoch  20 | Train: 0.0002 | Val RMSE: 19.84 | Pat: 13
+Epoch  30 | Train: 0.0001 | Val RMSE: 20.48 | Pat: 23
+Epoch  40 | Train: 0.0000 | Val RMSE: 20.52 | Pat: 33
+Early stopping at epoch 47
+
+Final Results - RMSE: 18.5284, MAE: 13.6767, NASA: 939.3074
+
+--- Running proposed_nophysics (Seed 44) ---
+RegimeKePIN(proposed_nophysics) | params=1,468,108 | latent=128 | blocks=4 | heads=4
+Epoch   0 | Train: 0.0225 | Val RMSE: 23.53 | Pat: 0
+Epoch  10 | Train: 0.0004 | Val RMSE: 20.78 | Pat: 7
+Epoch  20 | Train: 0.0002 | Val RMSE: 21.87 | Pat: 17
+Epoch  30 | Train: 0.0001 | Val RMSE: 21.44 | Pat: 27
+Epoch  40 | Train: 0.0000 | Val RMSE: 21.47 | Pat: 37
+Early stopping at epoch 43
+
+Final Results - RMSE: 19.3132, MAE: 14.1583, NASA: 930.5180
+
+
+==================================================
+FINAL AGGREGATED RESULTS
+==================================================
+                       rmse              mae               nasa          
+                       mean     std     mean     std       mean       std
+model                                                                    
+3koopman            18.9374  0.7038  13.9854  0.6934  1192.9928  239.0821
+proposed            19.3817  1.0732  13.9476  0.9080  1770.3497  983.9581
+proposed_nophysics  19.3070  0.7756  14.1958  0.5388  1102.0850  289.5843
+proposed_nosmooth   19.3533  0.9129  13.7794  0.9898  1559.3663  499.5183
