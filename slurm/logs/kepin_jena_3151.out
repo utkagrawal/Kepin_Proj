@@ -1,0 +1,81 @@
+[gpu_config] No GPU detected — running on CPU
+[gpu_config] No GPU detected — running on CPU
+[gpu_config] No GPU detected — running on CPU
+
+======================================================================
+  KePIN Jena_Climate Regime Conditioned (Forecasting Mode)
+  epochs=150, patience=40, lr=0.001, batch=512
+======================================================================
+  Loaded Regime vectors: Train (22048, 4), Test (5459, 4)
+  X_train shape: (22048, 72, 14)
+  X_test shape: (5459, 72, 14)
+
+  --- Run 1/3 ---
+  Total params: 1,380,105
+KePIN v2 Architecture
+  Tier: medium
+  Input: (72, 14)
+  Encoder: 4 residual Conv1D+SE blocks
+    Block 1: Conv1D(64, k=7) + Conv1D(3) + SE [residual]
+    Block 2: Conv1D(128, k=5) + Conv1D(3) + SE [residual]
+    Block 3: Conv1D(128, k=5) + Conv1D(3) + SE [residual]
+    Block 4: Conv1D(256, k=3) + Conv1D(3) + SE [residual]
+  BiLSTM: 128 units (bidirectional)
+  Multi-Head Attention: 4 heads, key_dim=32
+  Latent dim: 128
+  Koopman rollout: 3 steps
+  Spectral features: 12 (top-5 modes)
+  Head: Dense(256)→BN→Dense(128)→BN→Dense(64)→Skip→Dense(1)
+  Dropout: 0.35
+  Epoch    1/150 | LR=0.000200 | Train: loss=2.0405 rmse=2.16 | Val: loss=1.3793 rmse=1.06 | g_norm=15.70 (scale=0.19) | |λ|=[0.4995262  0.4995262  0.49915898]
+  Epoch    8/150 | LR=0.000996 | Train: loss=-0.5644 rmse=0.30 | Val: loss=-0.6301 rmse=0.16 | g_norm=1.00 (scale=1.00) | |λ|=[0.580181   0.56789124 0.54802006]
+  Epoch   15/150 | LR=0.000916 | Train: loss=-1.2660 rmse=0.20 | Val: loss=-1.3148 rmse=0.10 | g_norm=1.01 (scale=1.00) | |λ|=[0.7027151 0.6346242 0.5684876]
+  Epoch   22/150 | LR=0.000750 | Train: loss=-1.8259 rmse=0.19 | Val: loss=-1.8601 rmse=0.11 | g_norm=1.02 (scale=1.00) | |λ|=[0.76886    0.65120184 0.57368994]
+  Epoch   29/150 | LR=0.000533 | Train: loss=-2.2405 rmse=0.20 | Val: loss=-2.2632 rmse=0.10 | g_norm=1.04 (scale=1.00) | |λ|=[0.8000795  0.65710783 0.5766576 ]
+  Epoch   36/150 | LR=0.000309 | Train: loss=-2.5076 rmse=0.20 | Val: loss=-2.5190 rmse=0.09 | g_norm=1.02 (scale=1.00) | |λ|=[0.81640047 0.66021746 0.5778653 ]
+  Epoch   43/150 | LR=0.000125 | Train: loss=-2.6419 rmse=0.20 | Val: loss=-2.6436 rmse=0.09 | g_norm=1.01 (scale=1.00) | |λ|=[0.82378787 0.66177154 0.578847  ]
+  Epoch   50/150 | LR=0.000018 | Train: loss=-2.6821 rmse=0.20 | Val: loss=-2.6784 rmse=0.10 | g_norm=1.01 (scale=1.00) | |λ|=[0.8258582  0.66224164 0.579542  ]
+  Epoch   57/150 | LR=0.000990 | Train: loss=-2.9778 rmse=0.19 | Val: loss=-3.0105 rmse=0.13 | g_norm=1.13 (scale=1.00) | |λ|=[0.8445087  0.65274984 0.5672147 ]
+  Early stopping at epoch 60 (patience=40)
+  Restored best weights (val_rmse=0.0911)
+  Run 1 -- Best weights: RMSE=5.4363, MAE=4.4014
+
+  --- Run 2/3 ---
+  Epoch    1/150 | LR=0.000200 | Train: loss=1.5919 rmse=1.70 | Val: loss=1.3365 rmse=1.17 | g_norm=10.46 (scale=0.21) | |λ|=[0.49955016 0.49955016 0.4995058 ]
+  Epoch    8/150 | LR=0.000996 | Train: loss=-0.5778 rmse=0.29 | Val: loss=-0.6462 rmse=0.13 | g_norm=0.99 (scale=1.00) | |λ|=[0.58645386 0.5294922  0.5172247 ]
+  Epoch   15/150 | LR=0.000916 | Train: loss=-1.2719 rmse=0.20 | Val: loss=-1.3206 rmse=0.11 | g_norm=1.01 (scale=1.00) | |λ|=[0.667387   0.5384713  0.52410764]
+  Epoch   22/150 | LR=0.000750 | Train: loss=-1.8286 rmse=0.19 | Val: loss=-1.8648 rmse=0.10 | g_norm=1.02 (scale=1.00) | |λ|=[0.7151174  0.54270524 0.5310627 ]
+  Epoch   29/150 | LR=0.000533 | Train: loss=-2.2438 rmse=0.19 | Val: loss=-2.2684 rmse=0.09 | g_norm=1.01 (scale=1.00) | |λ|=[0.74491256 0.54380566 0.5359272 ]
+  Epoch   36/150 | LR=0.000309 | Train: loss=-2.5112 rmse=0.19 | Val: loss=-2.5237 rmse=0.09 | g_norm=1.01 (scale=1.00) | |λ|=[0.7614554 0.5416319 0.5416319]
+  Epoch   43/150 | LR=0.000125 | Train: loss=-2.6450 rmse=0.19 | Val: loss=-2.6485 rmse=0.09 | g_norm=1.00 (scale=1.00) | |λ|=[0.7691628  0.5429754  0.54207164]
+  Epoch   50/150 | LR=0.000018 | Train: loss=-2.6857 rmse=0.19 | Val: loss=-2.6842 rmse=0.09 | g_norm=1.01 (scale=1.00) | |λ|=[0.77136636 0.5439563  0.5418143 ]
+  Epoch   57/150 | LR=0.000990 | Train: loss=-2.9671 rmse=0.18 | Val: loss=-3.0111 rmse=0.13 | g_norm=1.46 (scale=0.97) | |λ|=[0.7904386  0.5517159  0.54244256]
+  Epoch   64/150 | LR=0.000897 | Train: loss=-3.5698 rmse=0.19 | Val: loss=-3.6076 rmse=0.10 | g_norm=1.07 (scale=1.00) | |λ|=[0.8201222 0.5536006 0.5536006]
+  Early stopping at epoch 70 (patience=40)
+  Restored best weights (val_rmse=0.0905)
+  Run 2 -- Best weights: RMSE=5.3997, MAE=4.3538
+
+  --- Run 3/3 ---
+  Epoch    1/150 | LR=0.000200 | Train: loss=1.8517 rmse=1.96 | Val: loss=1.2404 rmse=0.81 | g_norm=14.29 (scale=0.15) | |λ|=[0.4991037  0.4991037  0.49902403]
+  Epoch    8/150 | LR=0.000996 | Train: loss=-0.5906 rmse=0.29 | Val: loss=-0.6626 rmse=0.13 | g_norm=0.99 (scale=1.00) | |λ|=[0.5875971 0.5875971 0.5369528]
+  Epoch   15/150 | LR=0.000916 | Train: loss=-1.2993 rmse=0.20 | Val: loss=-1.3489 rmse=0.10 | g_norm=1.01 (scale=1.00) | |λ|=[0.69130456 0.6668553  0.5724607 ]
+  Epoch   22/150 | LR=0.000750 | Train: loss=-1.8630 rmse=0.19 | Val: loss=-1.8991 rmse=0.09 | g_norm=1.00 (scale=1.00) | |λ|=[0.7663676  0.72842324 0.5828903 ]
+  Epoch   29/150 | LR=0.000533 | Train: loss=-2.2794 rmse=0.19 | Val: loss=-2.3029 rmse=0.10 | g_norm=1.03 (scale=1.00) | |λ|=[0.80153525 0.763984   0.5872857 ]
+  Epoch   36/150 | LR=0.000309 | Train: loss=-2.5476 rmse=0.20 | Val: loss=-2.5593 rmse=0.09 | g_norm=1.01 (scale=1.00) | |λ|=[0.82004637 0.78138536 0.59099233]
+  Epoch   43/150 | LR=0.000125 | Train: loss=-2.6817 rmse=0.20 | Val: loss=-2.6839 rmse=0.09 | g_norm=1.01 (scale=1.00) | |λ|=[0.8285432  0.7887525  0.59321696]
+  Epoch   50/150 | LR=0.000018 | Train: loss=-2.7225 rmse=0.20 | Val: loss=-2.7194 rmse=0.09 | g_norm=1.00 (scale=1.00) | |λ|=[0.8308433  0.79085785 0.59348005]
+  Epoch   57/150 | LR=0.000990 | Train: loss=-3.0261 rmse=0.20 | Val: loss=-3.0624 rmse=0.11 | g_norm=1.10 (scale=1.00) | |λ|=[0.8491894  0.81340986 0.59926915]
+  Epoch   64/150 | LR=0.000897 | Train: loss=-3.6197 rmse=0.20 | Val: loss=-3.6490 rmse=0.10 | g_norm=1.09 (scale=1.00) | |λ|=[0.8755754  0.8336052  0.60081655]
+  Epoch   71/150 | LR=0.000721 | Train: loss=-4.1269 rmse=0.21 | Val: loss=-4.1446 rmse=0.10 | g_norm=1.09 (scale=1.00) | |λ|=[0.89185125 0.8457653  0.59798545]
+  Early stopping at epoch 76 (patience=40)
+  Restored best weights (val_rmse=0.0927)
+  Run 3 -- Best weights: RMSE=5.5304, MAE=4.4384
+
+======================================================================
+  Jena_Climate REGIME-CONDITIONED ENSEMBLE (3 runs):
+    RMSE: 5.2466
+    MAE:  4.2301
+    R2:   0.5761
+======================================================================
+
+  All results saved to: /userhome/mtech/a.utkarsh/RCKePIN/regime_conditioned/results_jena_climate_conditioned_3151

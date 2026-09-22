@@ -1,0 +1,82 @@
+[gpu_config] No GPU detected — running on CPU
+[gpu_config] No GPU detected — running on CPU
+[gpu_config] No GPU detected — running on CPU
+
+======================================================================
+  KePIN Building_Energy Regime Conditioned (Forecasting Mode)
+  epochs=200, patience=50, lr=0.001, batch=256
+======================================================================
+  Loaded Regime vectors: Train (202848, 4), Test (50712, 4)
+  X_train shape: (202848, 48, 10)
+  X_test shape: (50712, 48, 10)
+
+  --- Run 1/3 ---
+  Total params: 498,217
+KePIN v2 Architecture
+  Tier: small
+  Input: (48, 10)
+  Encoder: 3 residual Conv1D+SE blocks
+    Block 1: Conv1D(64, k=7) + Conv1D(3) + SE [residual]
+    Block 2: Conv1D(128, k=5) + Conv1D(3) + SE [residual]
+    Block 3: Conv1D(128, k=3) + Conv1D(3) + SE [residual]
+  BiLSTM: 64 units (bidirectional)
+  Multi-Head Attention: 4 heads, key_dim=16
+  Latent dim: 64
+  Koopman rollout: 3 steps
+  Spectral features: 10 (top-4 modes)
+  Head: Dense(256)→BN→Dense(128)→BN→Dense(64)→Skip→Dense(1)
+  Dropout: 0.3
+  Epoch    1/200 | LR=0.000200 | Train: loss=0.1123 rmse=0.76 | Val: loss=-0.3604 rmse=0.18 | g_norm=2.11 (scale=0.88) | |λ|=[0.5456445 0.5432143 0.5432143]
+  Epoch   11/200 | LR=0.000985 | Train: loss=-11.3347 rmse=0.30 | Val: loss=-11.5393 rmse=0.05 | g_norm=7.41 (scale=0.30) | |λ|=[0.975371   0.97125226 0.97125226]
+  Epoch   21/200 | LR=0.000874 | Train: loss=-11.6771 rmse=0.30 | Val: loss=-11.7901 rmse=0.04 | g_norm=4.74 (scale=0.49) | |λ|=[0.9930524 0.9846841 0.9846841]
+  Epoch   31/200 | LR=0.000678 | Train: loss=-11.7142 rmse=0.30 | Val: loss=-11.8235 rmse=0.04 | g_norm=3.26 (scale=0.70) | |λ|=[0.9962856 0.9854062 0.9854062]
+  Epoch   41/200 | LR=0.000440 | Train: loss=-11.7495 rmse=0.30 | Val: loss=-11.8209 rmse=0.04 | g_norm=2.49 (scale=0.81) | |λ|=[0.99804246 0.98670495 0.98670495]
+  Epoch   51/200 | LR=0.000217 | Train: loss=-11.7808 rmse=0.30 | Val: loss=-11.8186 rmse=0.04 | g_norm=2.03 (scale=0.88) | |λ|=[0.998214  0.9864857 0.9864857]
+  Epoch   61/200 | LR=0.000058 | Train: loss=-11.7975 rmse=0.30 | Val: loss=-11.8262 rmse=0.04 | g_norm=1.92 (scale=0.90) | |λ|=[0.998623  0.9874021 0.9874021]
+  Epoch   71/200 | LR=0.001000 | Train: loss=-11.7277 rmse=0.30 | Val: loss=-11.8122 rmse=0.04 | g_norm=3.51 (scale=0.67) | |λ|=[0.9974541 0.9817904 0.9817904]
+  Epoch   81/200 | LR=0.000943 | Train: loss=-11.7493 rmse=0.30 | Val: loss=-11.7955 rmse=0.04 | g_norm=2.63 (scale=0.79) | |λ|=[0.9983575 0.9690853 0.9690853]
+  Epoch   91/200 | LR=0.000784 | Train: loss=-11.7772 rmse=0.30 | Val: loss=-11.7834 rmse=0.05 | g_norm=2.20 (scale=0.87) | |λ|=[0.99928486 0.969825   0.969825  ]
+  Early stopping at epoch 92 (patience=50)
+  Restored best weights (val_rmse=0.0403)
+  Run 1 -- Best weights: RMSE=0.0796, MAE=0.0523
+
+  --- Run 2/3 ---
+  Epoch    1/200 | LR=0.000200 | Train: loss=0.1453 rmse=0.83 | Val: loss=-0.3633 rmse=0.12 | g_norm=2.33 (scale=0.88) | |λ|=[0.5441258  0.54248035 0.54248035]
+  Epoch   11/200 | LR=0.000985 | Train: loss=-11.5048 rmse=0.30 | Val: loss=-11.7239 rmse=0.04 | g_norm=6.72 (scale=0.35) | |λ|=[0.9742348  0.9742348  0.97349405]
+  Epoch   21/200 | LR=0.000874 | Train: loss=-11.6990 rmse=0.30 | Val: loss=-11.7645 rmse=0.05 | g_norm=5.55 (scale=0.47) | |λ|=[0.9869427  0.98641545 0.98641545]
+  Epoch   31/200 | LR=0.000678 | Train: loss=-11.7481 rmse=0.30 | Val: loss=-11.8041 rmse=0.04 | g_norm=4.08 (scale=0.63) | |λ|=[0.9871774 0.9871774 0.9868631]
+  Epoch   41/200 | LR=0.000440 | Train: loss=-11.7938 rmse=0.30 | Val: loss=-11.7959 rmse=0.04 | g_norm=3.16 (scale=0.72) | |λ|=[0.9881208  0.9881208  0.98781896]
+  Epoch   51/200 | LR=0.000217 | Train: loss=-11.8252 rmse=0.30 | Val: loss=-11.8112 rmse=0.04 | g_norm=2.89 (scale=0.74) | |λ|=[0.9898942  0.9898942  0.98925185]
+  Epoch   61/200 | LR=0.000058 | Train: loss=-11.8427 rmse=0.30 | Val: loss=-11.8096 rmse=0.04 | g_norm=2.43 (scale=0.81) | |λ|=[0.9908866 0.9908866 0.9902893]
+  Epoch   71/200 | LR=0.001000 | Train: loss=-11.7586 rmse=0.30 | Val: loss=-11.7974 rmse=0.04 | g_norm=4.19 (scale=0.62) | |λ|=[0.98658025 0.98593277 0.98593277]
+  Early stopping at epoch 77 (patience=50)
+  Restored best weights (val_rmse=0.0422)
+  Run 2 -- Best weights: RMSE=0.0834, MAE=0.0538
+
+  --- Run 3/3 ---
+  Epoch    1/200 | LR=0.000200 | Train: loss=0.0993 rmse=0.75 | Val: loss=-0.3382 rmse=0.14 | g_norm=1.94 (scale=0.93) | |λ|=[0.5421398 0.5359853 0.5309113]
+  Epoch   11/200 | LR=0.000985 | Train: loss=-10.9706 rmse=0.30 | Val: loss=-11.3896 rmse=0.05 | g_norm=9.80 (scale=0.22) | |λ|=[0.96389943 0.69968396 0.6451003 ]
+  Epoch   21/200 | LR=0.000874 | Train: loss=-11.6574 rmse=0.30 | Val: loss=-11.7713 rmse=0.05 | g_norm=7.46 (scale=0.30) | |λ|=[0.98976177 0.7515126  0.5470234 ]
+  Epoch   31/200 | LR=0.000678 | Train: loss=-11.6934 rmse=0.30 | Val: loss=-11.7904 rmse=0.04 | g_norm=4.80 (scale=0.48) | |λ|=[0.99319065 0.83507085 0.5163571 ]
+  Epoch   41/200 | LR=0.000440 | Train: loss=-11.7302 rmse=0.30 | Val: loss=-11.8103 rmse=0.04 | g_norm=3.12 (scale=0.70) | |λ|=[0.99347806 0.8984793  0.52256596]
+  Epoch   51/200 | LR=0.000217 | Train: loss=-11.7568 rmse=0.30 | Val: loss=-11.8124 rmse=0.04 | g_norm=2.63 (scale=0.79) | |λ|=[0.994701   0.91466063 0.52557874]
+  Epoch   61/200 | LR=0.000058 | Train: loss=-11.7751 rmse=0.30 | Val: loss=-11.8207 rmse=0.04 | g_norm=2.31 (scale=0.84) | |λ|=[0.9949266 0.9239662 0.5302652]
+  Epoch   71/200 | LR=0.001000 | Train: loss=-11.7098 rmse=0.30 | Val: loss=-11.8031 rmse=0.04 | g_norm=5.81 (scale=0.42) | |λ|=[0.9902921 0.9214392 0.5437179]
+  Epoch   81/200 | LR=0.000943 | Train: loss=-11.7338 rmse=0.30 | Val: loss=-11.7899 rmse=0.04 | g_norm=3.35 (scale=0.66) | |λ|=[0.9921227  0.93577045 0.49949774]
+  Epoch   91/200 | LR=0.000784 | Train: loss=-11.7638 rmse=0.30 | Val: loss=-11.8088 rmse=0.04 | g_norm=2.60 (scale=0.81) | |λ|=[0.9928923  0.9519848  0.47824717]
+  Epoch  101/200 | LR=0.000561 | Train: loss=-11.7932 rmse=0.30 | Val: loss=-11.8119 rmse=0.04 | g_norm=2.24 (scale=0.87) | |λ|=[0.9945084  0.9530521  0.47012162]
+  Epoch  111/200 | LR=0.000323 | Train: loss=-11.8151 rmse=0.30 | Val: loss=-11.8150 rmse=0.04 | g_norm=2.00 (scale=0.89) | |λ|=[0.99539196 0.9592405  0.480204  ]
+  Epoch  121/200 | LR=0.000127 | Train: loss=-11.8304 rmse=0.30 | Val: loss=-11.8181 rmse=0.04 | g_norm=1.98 (scale=0.90) | |λ|=[0.99614865 0.9640504  0.51792693]
+  Epoch  131/200 | LR=0.000016 | Train: loss=-11.8359 rmse=0.30 | Val: loss=-11.8148 rmse=0.04 | g_norm=2.03 (scale=0.89) | |λ|=[0.99643534 0.96476716 0.528178  ]
+  Early stopping at epoch 132 (patience=50)
+  Restored best weights (val_rmse=0.0411)
+  Run 3 -- Best weights: RMSE=0.0813, MAE=0.0530
+
+======================================================================
+  Building_Energy REGIME-CONDITIONED ENSEMBLE (3 runs):
+    RMSE: 0.0785
+    MAE:  0.0507
+    R2:   0.9652
+======================================================================
+
+  All results saved to: /userhome/mtech/a.utkarsh/RCKePIN/regime_conditioned/results_building_energy_conditioned_3198

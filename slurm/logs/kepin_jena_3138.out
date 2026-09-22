@@ -1,0 +1,13 @@
+[gpu_config] No GPU detected — running on CPU
+[gpu_config] No GPU detected — running on CPU
+[gpu_config] No GPU detected — running on CPU
+
+======================================================================
+  KePIN Jena_Climate Regime Conditioned (Forecasting Mode)
+  epochs=150, patience=40, lr=0.001, batch=512
+======================================================================
+  Loaded Regime vectors: Train (22048, 4), Test (5459, 4)
+  X_train shape: (22048, 72, 14)
+  X_test shape: (5459, 72, 14)
+
+  --- Run 1/3 ---

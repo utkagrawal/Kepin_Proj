@@ -1,0 +1,13 @@
+[gpu_config] No GPU detected — running on CPU
+[gpu_config] No GPU detected — running on CPU
+[gpu_config] No GPU detected — running on CPU
+
+======================================================================
+  KePIN Cylinder_Wake Regime Conditioned (Forecasting Mode)
+  epochs=200, patience=50, lr=0.001, batch=256
+======================================================================
+  Loaded Regime vectors: Train (91320, 4), Test (22830, 4)
+  X_train shape: (91320, 40, 8)
+  X_test shape: (22830, 40, 8)
+
+  --- Run 1/3 ---
