@@ -41,6 +41,25 @@ Mechanically, the architecture functions flawlessly: the bounded $\tanh$ prevent
 
 In terms of predictive accuracy (RMSE), we found that the benefit of Regime Conditioning is highly dataset-dependent. On datasets with highly variable degradation regimes (like **FD004**), the dynamic operator shows improvement. On datasets with very uniform failure modes (like **FD003**), the static baseline often slightly outperforms the dynamic model (11.42 vs 12.72 RMSE) because the added model capacity is not required by the underlying physics. 
 
+## Experimental Results
+
+The following table presents the 3-Run Ensemble RMSE across various datasets, comparing the Static Baseline to the Regime-Conditioned (Dynamic) architecture.
+
+### CMAPSS Degradation Datasets
+| Dataset | Operating Conditions | Fault Modes | Static Baseline | Regime-Conditioned |
+| :--- | :--- | :--- | :--- | :--- |
+| **FD001** | 1 | 1 | 12.92 | 13.39 |
+| **FD002** | 6 | 1 | 15.08 | 14.94 |
+| **FD003** | 1 | 2 | 11.42 | 11.21 |
+| **FD004** | 6 | 2 | 17.04 | 16.80 |
+
+### General Time-Series Forecasting Datasets
+| Dataset | Regime-Conditioned RMSE |
+| :--- | :--- |
+| **Building Energy** | 0.0785 |
+| **Jena Climate** | 5.2466 |
+| **Cylinder Wake** | 0.0051 |
+
 ## Usage
 
 *   `extract_statistical_moments.py`: Core logic for computing Signal A.
