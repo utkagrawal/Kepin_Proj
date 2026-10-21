@@ -33,3 +33,10 @@ venv.bak/
 .idea/
 .vscode/
 *.swp
+
+# dynamic_koopman: training outputs stay local (weights are ~800 MB); curated copies live in dynamic_koopman/results/
+dynamic_koopman/runs/
+dynamic_koopman/runs_smoke/
+dynamic_koopman/slurm/logs/
+__pycache__/
+*.weights.h5

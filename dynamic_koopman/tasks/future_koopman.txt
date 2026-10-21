@@ -1,0 +1,14 @@
+# Future-trained Koopman in original KePIN (2026-10-20): long-horizon loss on real same-engine
+# future windows (h = 5..60). Paper protocol, 3 seeds, weights 1 and 10. Compare with svd_static (paper).
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 0 --future_loss 1
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 1 --future_loss 1
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 2 --future_loss 1
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 0 --future_loss 1
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 1 --future_loss 1
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 2 --future_loss 1
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 0 --future_loss 10
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 1 --future_loss 10
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 2 --future_loss 10
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 0 --future_loss 10
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 1 --future_loss 10
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 2 --future_loss 10

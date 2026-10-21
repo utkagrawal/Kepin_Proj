@@ -1,0 +1,15 @@
+# Ablation (2026-10-19): KePIN with Koopman removed completely, paper protocol, 3 seeds.
+# Compared side by side with full KePIN (svd_static, paper protocol) already run with the same seeds.
+# Largest datasets first so the long runs start immediately.
+--dataset FD004 --koopman none --mode static --protocol paper --run_id 0
+--dataset FD004 --koopman none --mode static --protocol paper --run_id 1
+--dataset FD004 --koopman none --mode static --protocol paper --run_id 2
+--dataset FD002 --koopman none --mode static --protocol paper --run_id 0
+--dataset FD002 --koopman none --mode static --protocol paper --run_id 1
+--dataset FD002 --koopman none --mode static --protocol paper --run_id 2
+--dataset FD003 --koopman none --mode static --protocol paper --run_id 0
+--dataset FD003 --koopman none --mode static --protocol paper --run_id 1
+--dataset FD003 --koopman none --mode static --protocol paper --run_id 2
+--dataset FD001 --koopman none --mode static --protocol paper --run_id 0
+--dataset FD001 --koopman none --mode static --protocol paper --run_id 1
+--dataset FD001 --koopman none --mode static --protocol paper --run_id 2

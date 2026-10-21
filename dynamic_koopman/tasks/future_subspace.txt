@@ -1,0 +1,8 @@
+# Subspace future loss with growth term (2026-10-20): future loss only on 16 dedicated latent dims
+# (8 state + 8 rate) with an eigenvalue-1 growth term. Paper protocol, 3 seeds, weight 1.
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 0 --future_loss 1 --future_subspace 8
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 1 --future_loss 1 --future_subspace 8
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 2 --future_loss 1 --future_subspace 8
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 0 --future_loss 1 --future_subspace 8
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 1 --future_loss 1 --future_subspace 8
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 2 --future_loss 1 --future_subspace 8

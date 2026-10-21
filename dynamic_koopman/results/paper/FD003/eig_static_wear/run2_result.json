@@ -1,0 +1,21 @@
+{
+  "dataset": "FD003",
+  "arm": "eig_static_wear",
+  "protocol": "paper",
+  "run_id": 2,
+  "rmse": 11.620523452758789,
+  "mae": 8.409067153930664,
+  "r2": 0.9119699369095167,
+  "score": 228.44183349609375,
+  "val_rmse": 11.620523452758789,
+  "weights_used": "best",
+  "epochs_trained": 205,
+  "train_time_s": 5281.891061067581,
+  "sec_per_epoch": 25.765322249110152,
+  "params": 1046858,
+  "gpu": "gpu-P100",
+  "slurm_job": "5018",
+  "smoke": false,
+  "mono_violation": 0.9340943906823217,
+  "slope_rmse": 15.161276871038176
+}

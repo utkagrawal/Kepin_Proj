@@ -1,0 +1,59 @@
+{
+  "sanity": {
+    "n_windows": 46219,
+    "max_abs_diff_vs_saved_A": 0.24258488416671753,
+    "rul_matches_saved_Y": true
+  },
+  "out_of_fold_R2": {
+    "signalA_mean": {
+      "R2_RUL_only": -0.0034150622437618683,
+      "R2_conditions_only": 0.9669733874066856,
+      "R2_both": 0.9725697326054966
+    },
+    "signalA_variance": {
+      "R2_RUL_only": -0.01160676082995038,
+      "R2_conditions_only": 0.9912058892269637,
+      "R2_both": 0.9910414358926241
+    },
+    "signalA_skewness": {
+      "R2_RUL_only": -0.01312922548682538,
+      "R2_conditions_only": 0.9795105101191082,
+      "R2_both": 0.9788232558659964
+    },
+    "signalA_kurtosis": {
+      "R2_RUL_only": -0.011223389797891725,
+      "R2_conditions_only": 0.9931793122234881,
+      "R2_both": 0.9930081762865186
+    },
+    "run0_delta_s_PC1": {
+      "R2_RUL_only": 0.024128116880502204,
+      "R2_conditions_only": 0.8716096023360563,
+      "R2_both": 0.873085250177897
+    },
+    "run0_mean_sigma": {
+      "R2_RUL_only": 0.023083932596039136,
+      "R2_conditions_only": 0.8686590163657318,
+      "R2_both": 0.8688670441285025
+    },
+    "run1_delta_s_PC1": {
+      "R2_RUL_only": 0.01906651082152988,
+      "R2_conditions_only": 0.882066289677825,
+      "R2_both": 0.8860974825479564
+    },
+    "run1_mean_sigma": {
+      "R2_RUL_only": 0.015197983918402436,
+      "R2_conditions_only": 0.89222167966943,
+      "R2_both": 0.8945557461813686
+    },
+    "run2_delta_s_PC1": {
+      "R2_RUL_only": 0.036807773558604984,
+      "R2_conditions_only": 0.8482914976220224,
+      "R2_both": 0.8601295086225701
+    },
+    "run2_mean_sigma": {
+      "R2_RUL_only": 0.03483359974192313,
+      "R2_conditions_only": 0.8484099759355918,
+      "R2_both": 0.8624616190613535
+    }
+  }
+}

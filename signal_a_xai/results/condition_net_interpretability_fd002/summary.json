@@ -1,0 +1,245 @@
+{
+  "healthy_baseline": [
+    -0.07524168754066252,
+    -0.0706487518918899,
+    -0.009686399762141928,
+    0.06088103669477104
+  ],
+  "failing_centroid": [
+    0.2843824162890672,
+    0.03180548917653586,
+    -0.04724837971529256,
+    -0.09160093198030421
+  ],
+  "signal_corr": [
+    [
+      1.0,
+      0.003,
+      -0.879,
+      0.256
+    ],
+    [
+      0.003,
+      1.0,
+      0.261,
+      -0.708
+    ],
+    [
+      -0.879,
+      0.261,
+      1.0,
+      -0.519
+    ],
+    [
+      0.256,
+      -0.708,
+      -0.519,
+      1.0
+    ]
+  ],
+  "runs": {
+    "0": {
+      "W1_input_norms": {
+        "mean": 1.8046000003814697,
+        "variance": 1.8431999683380127,
+        "skewness": 1.6532000303268433,
+        "kurtosis": 1.6856000423431396
+      },
+      "dead_units_layer1": 0,
+      "dead_units_layer2": 4,
+      "base_sigma_mean": 0.48625218868255615,
+      "frac_neg_saturated": 0.48493010179796187,
+      "frac_pos_saturated": 0.04589021830848785,
+      "delta_s_pca_explained": [
+        0.8917,
+        0.0766,
+        0.0128,
+        0.0062,
+        0.0042
+      ],
+      "delta_s_effective_rank": 1.5973157454411733,
+      "n_modes_dynamic(std>0.1)": 73,
+      "corr_modestd_vs_base_s": 0.1255809747261301,
+      "corr_PC1_RUL_train": 0.17542777337014145,
+      "corr_mean_sigma_RUL_train": 0.17200290044965655,
+      "corr_mean_sigma_RUL_test": 0.12578087484824182,
+      "mean_sigma_healthy": 0.26626053331883587,
+      "mean_sigma_failing(RUL<=10)": 0.2373594140188104,
+      "corr_PC1_loadings_vs_inputs": {
+        "mean": -0.13406073514106054,
+        "variance": -0.19563832261177752,
+        "skewness": -0.003944713627479548,
+        "kurtosis": 0.032270318360882545
+      },
+      "mean_abs_grad": {
+        "mean": 0.10844,
+        "variance": 0.06681,
+        "skewness": 0.11763,
+        "kurtosis": 0.0818
+      },
+      "mean_abs_jacobian_delta_s": {
+        "mean": 0.5744,
+        "variance": 0.359,
+        "skewness": 0.6347,
+        "kurtosis": 0.4434
+      },
+      "IG_mean(fail_vs_healthy)": {
+        "mean": -0.00779,
+        "variance": -0.00249,
+        "skewness": 0.00543,
+        "kurtosis": -0.05863
+      },
+      "Shapley_mean(fail_vs_healthy)": {
+        "mean": -0.01943,
+        "variance": -0.00811,
+        "skewness": 0.00647,
+        "kurtosis": -0.04243
+      },
+      "Shapley_completeness_err": 5.551115123125783e-17,
+      "IG_completeness_err": 0.0004613513599676953,
+      "mean_sigma_drop(fail-healthy)": -0.06350712013795337
+    },
+    "1": {
+      "W1_input_norms": {
+        "mean": 1.7541999816894531,
+        "variance": 1.7285000085830688,
+        "skewness": 1.6546000242233276,
+        "kurtosis": 1.6699999570846558
+      },
+      "dead_units_layer1": 0,
+      "dead_units_layer2": 2,
+      "base_sigma_mean": 0.45581692457199097,
+      "frac_neg_saturated": 0.7544176569700772,
+      "frac_pos_saturated": 0.03537134349509942,
+      "delta_s_pca_explained": [
+        0.8936,
+        0.0735,
+        0.0167,
+        0.0063,
+        0.0033
+      ],
+      "delta_s_effective_rank": 1.5816561903093374,
+      "n_modes_dynamic(std>0.1)": 50,
+      "corr_modestd_vs_base_s": 0.0941457863649654,
+      "corr_PC1_RUL_train": 0.16605006566258246,
+      "corr_mean_sigma_RUL_train": 0.15219548393074372,
+      "corr_mean_sigma_RUL_test": 0.07434735388900338,
+      "mean_sigma_healthy": 0.16780664269362797,
+      "mean_sigma_failing(RUL<=10)": 0.1581032852971573,
+      "corr_PC1_loadings_vs_inputs": {
+        "mean": 0.11379934839077917,
+        "variance": -0.17986952028815922,
+        "skewness": -0.21939689612244342,
+        "kurtosis": 0.055225394049442524
+      },
+      "mean_abs_grad": {
+        "mean": 0.04702,
+        "variance": 0.03488,
+        "skewness": 0.05602,
+        "kurtosis": 0.03566
+      },
+      "mean_abs_jacobian_delta_s": {
+        "mean": 0.2768,
+        "variance": 0.2184,
+        "skewness": 0.3294,
+        "kurtosis": 0.227
+      },
+      "IG_mean(fail_vs_healthy)": {
+        "mean": -0.01133,
+        "variance": -0.01218,
+        "skewness": -0.00924,
+        "kurtosis": -0.02745
+      },
+      "Shapley_mean(fail_vs_healthy)": {
+        "mean": -0.00849,
+        "variance": -0.0164,
+        "skewness": -0.00918,
+        "kurtosis": -0.02608
+      },
+      "Shapley_completeness_err": 5.551115123125783e-17,
+      "IG_completeness_err": 0.00025293669843093867,
+      "mean_sigma_drop(fail-healthy)": -0.060146589595810054
+    },
+    "2": {
+      "W1_input_norms": {
+        "mean": 1.520799994468689,
+        "variance": 1.979699969291687,
+        "skewness": 1.6715999841690063,
+        "kurtosis": 1.7948999404907227
+      },
+      "dead_units_layer1": 0,
+      "dead_units_layer2": 5,
+      "base_sigma_mean": 0.4732075333595276,
+      "frac_neg_saturated": 0.74021286565049,
+      "frac_pos_saturated": 0.048543855070425586,
+      "delta_s_pca_explained": [
+        0.9212,
+        0.0425,
+        0.0154,
+        0.0083,
+        0.0042
+      ],
+      "delta_s_effective_rank": 1.484240003246227,
+      "n_modes_dynamic(std>0.1)": 39,
+      "corr_modestd_vs_base_s": 0.12946936717934415,
+      "corr_PC1_RUL_train": 0.2211334835057025,
+      "corr_mean_sigma_RUL_train": 0.215044492759646,
+      "corr_mean_sigma_RUL_test": 0.1919734033633307,
+      "mean_sigma_healthy": 0.19807144457081963,
+      "mean_sigma_failing(RUL<=10)": 0.17622392175320806,
+      "corr_PC1_loadings_vs_inputs": {
+        "mean": -0.1075103184213906,
+        "variance": 0.11524046493211113,
+        "skewness": 0.03414056990352143,
+        "kurtosis": -0.09288849429244864
+      },
+      "mean_abs_grad": {
+        "mean": 0.09599,
+        "variance": 0.0674,
+        "skewness": 0.0953,
+        "kurtosis": 0.07196
+      },
+      "mean_abs_jacobian_delta_s": {
+        "mean": 0.5075,
+        "variance": 0.3671,
+        "skewness": 0.5091,
+        "kurtosis": 0.4
+      },
+      "IG_mean(fail_vs_healthy)": {
+        "mean": -0.01024,
+        "variance": 0.00115,
+        "skewness": -0.02417,
+        "kurtosis": -0.0475
+      },
+      "Shapley_mean(fail_vs_healthy)": {
+        "mean": -0.01669,
+        "variance": -0.01096,
+        "skewness": -0.01672,
+        "kurtosis": -0.03639
+      },
+      "Shapley_completeness_err": 5.551115123125783e-17,
+      "IG_completeness_err": 0.0002876923300742603,
+      "mean_sigma_drop(fail-healthy)": -0.08075702438330973
+    }
+  },
+  "shapley_rank_by_run": {
+    "0": [
+      "kurtosis",
+      "mean",
+      "variance",
+      "skewness"
+    ],
+    "1": [
+      "kurtosis",
+      "variance",
+      "skewness",
+      "mean"
+    ],
+    "2": [
+      "kurtosis",
+      "skewness",
+      "mean",
+      "variance"
+    ]
+  }
+}

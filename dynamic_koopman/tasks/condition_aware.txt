@@ -1,0 +1,14 @@
+# Condition-aware Koopman KePIN (2026-10-20): learned per-condition input normalisation (cn),
+# + Koopman with control (ctrl). Paper protocol, 3 seeds, ensemble vs svd_static. FD004 first (largest).
+--dataset FD004 --koopman svd --mode static --protocol paper --run_id 0 --cond_norm --koop_control
+--dataset FD004 --koopman svd --mode static --protocol paper --run_id 0 --cond_norm
+--dataset FD004 --koopman svd --mode static --protocol paper --run_id 1 --cond_norm --koop_control
+--dataset FD004 --koopman svd --mode static --protocol paper --run_id 1 --cond_norm
+--dataset FD004 --koopman svd --mode static --protocol paper --run_id 2 --cond_norm --koop_control
+--dataset FD004 --koopman svd --mode static --protocol paper --run_id 2 --cond_norm
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 0 --cond_norm --koop_control
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 0 --cond_norm
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 1 --cond_norm --koop_control
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 1 --cond_norm
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 2 --cond_norm --koop_control
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 2 --cond_norm

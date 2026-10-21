@@ -1,0 +1,21 @@
+{
+  "dataset": "FD002",
+  "arm": "svd_static_nokooploss",
+  "protocol": "paper",
+  "run_id": 2,
+  "rmse": 15.39796257019043,
+  "mae": 11.666820526123047,
+  "r2": 0.8703414997942867,
+  "score": 1150.3603515625,
+  "val_rmse": 15.39796257019043,
+  "weights_used": "best",
+  "epochs_trained": 73,
+  "train_time_s": 2625.0363807678223,
+  "sec_per_epoch": 35.959402476271535,
+  "params": 1807513,
+  "gpu": "gpu-P100",
+  "slurm_job": "4921",
+  "smoke": false,
+  "mono_violation": 1.447359150728878,
+  "slope_rmse": 22.571102631157697
+}

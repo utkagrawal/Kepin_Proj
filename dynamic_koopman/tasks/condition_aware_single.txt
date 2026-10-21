@@ -1,0 +1,14 @@
+# Condition-aware KePIN on single-condition datasets (2026-10-21): check it does not hurt.
+# Paper protocol, 3 seeds, ensemble vs svd_static.
+--dataset FD003 --koopman svd --mode static --protocol paper --run_id 0 --cond_norm --koop_control
+--dataset FD003 --koopman svd --mode static --protocol paper --run_id 0 --cond_norm
+--dataset FD003 --koopman svd --mode static --protocol paper --run_id 1 --cond_norm --koop_control
+--dataset FD003 --koopman svd --mode static --protocol paper --run_id 1 --cond_norm
+--dataset FD003 --koopman svd --mode static --protocol paper --run_id 2 --cond_norm --koop_control
+--dataset FD003 --koopman svd --mode static --protocol paper --run_id 2 --cond_norm
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 0 --cond_norm --koop_control
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 0 --cond_norm
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 1 --cond_norm --koop_control
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 1 --cond_norm
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 2 --cond_norm --koop_control
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 2 --cond_norm

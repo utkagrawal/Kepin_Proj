@@ -1,0 +1,47 @@
+# FD002 focus (2026-10-18): all Koopman variants, 3 runs each (KePIN seeds).
+# Already running from phase1 (clean): svd_static r0-2, eig_static r0-2, eig_exo r0-1.
+# clean protocol first (main results), then paper protocol (val = test, as original KePIN).
+# Workers re-read this file before every task: edit/reorder freely.
+--dataset FD002 --koopman eig --mode health --protocol clean --run_id 0
+--dataset FD002 --koopman eig --mode both --protocol clean --run_id 0
+--dataset FD002 --koopman eig --mode health --protocol clean --run_id 1
+--dataset FD002 --koopman eig --mode both --protocol clean --run_id 1
+--dataset FD002 --koopman eig --mode health --protocol clean --run_id 2
+--dataset FD002 --koopman eig --mode both --protocol clean --run_id 2
+--dataset FD002 --koopman eig --mode exo --protocol clean --run_id 2
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 0
+--dataset FD002 --koopman eig --mode static --protocol paper --run_id 0
+--dataset FD002 --koopman eig --mode exo --protocol paper --run_id 0
+--dataset FD002 --koopman eig --mode health --protocol paper --run_id 0
+--dataset FD002 --koopman eig --mode both --protocol paper --run_id 0
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 1
+--dataset FD002 --koopman eig --mode static --protocol paper --run_id 1
+--dataset FD002 --koopman eig --mode exo --protocol paper --run_id 1
+--dataset FD002 --koopman eig --mode health --protocol paper --run_id 1
+--dataset FD002 --koopman eig --mode both --protocol paper --run_id 1
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 2
+--dataset FD002 --koopman eig --mode static --protocol paper --run_id 2
+--dataset FD002 --koopman eig --mode exo --protocol paper --run_id 2
+--dataset FD002 --koopman eig --mode health --protocol paper --run_id 2
+--dataset FD002 --koopman eig --mode both --protocol paper --run_id 2
+# Ablation (2026-10-19): does Koopman help at all? Same model, Koopman losses removed.
+--dataset FD002 --koopman svd --mode static --protocol clean --run_id 0 --no_koopman_loss
+--dataset FD002 --koopman svd --mode static --protocol clean --run_id 1 --no_koopman_loss
+--dataset FD002 --koopman svd --mode static --protocol clean --run_id 2 --no_koopman_loss
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 0 --no_koopman_loss
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 1 --no_koopman_loss
+--dataset FD002 --koopman svd --mode static --protocol paper --run_id 2 --no_koopman_loss
+# Koopman time-to-failure head (2026-10-19): RUL = steps until projected health crosses threshold
+--dataset FD002 --koopman eig --mode static --head ttf --protocol clean --run_id 0
+--dataset FD002 --koopman eig --mode static --head ttf --protocol clean --run_id 1
+--dataset FD002 --koopman eig --mode static --head ttf --protocol clean --run_id 2
+--dataset FD002 --koopman eig --mode static --head ttf --protocol paper --run_id 0
+--dataset FD002 --koopman eig --mode static --head ttf --protocol paper --run_id 1
+--dataset FD002 --koopman eig --mode static --head ttf --protocol paper --run_id 2
+# Wear-accumulator TTF head (2026-10-19): Koopman transient + integrator mode with learned wear rate
+--dataset FD002 --koopman eig --mode static --head wear --protocol clean --run_id 0
+--dataset FD002 --koopman eig --mode static --head wear --protocol clean --run_id 1
+--dataset FD002 --koopman eig --mode static --head wear --protocol clean --run_id 2
+--dataset FD002 --koopman eig --mode static --head wear --protocol paper --run_id 0
+--dataset FD002 --koopman eig --mode static --head wear --protocol paper --run_id 1
+--dataset FD002 --koopman eig --mode static --head wear --protocol paper --run_id 2

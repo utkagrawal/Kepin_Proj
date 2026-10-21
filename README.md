@@ -1,436 +1,103 @@
-# KePIN: Koopman-Enhanced Physics-Informed Network for Predictive Modelling
+# Condition-Aware KePIN: explaining and improving a Koopman-based RUL model
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![TensorFlow 2.16+](https://img.shields.io/badge/tensorflow-2.16%2B-orange.svg)](https://www.tensorflow.org/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+This branch (`condition-aware-kepin`) contains an explainability-driven study of **KePIN**, a Koopman-enhanced network for predicting the Remaining Useful Life (RUL) of jet engines on NASA C-MAPSS. It also contains the models that came out of that study.
 
-> **Paper:** *KePIN: Koopman-Enhanced Physics-Informed Network for Remaining Useful Life Prediction and Multi-Domain Forecasting*
->
-> A hybrid deep-learning architecture that embeds a **Koopman operator** (SVD-parameterised) into an encoder–decoder backbone with a seven-component physics-informed loss.  
-> KePIN captures latent linear dynamics of nonlinear systems and enforces physical constraints—monotonicity, spectral stability, and multi-step consistency—through learnable Kendall uncertainty weighting.
+> **New here?** Start with the illustrated guide **[docs/KePIN_Project_Explained.pdf](docs/KePIN_Project_Explained.pdf)** (21 pages, plain English). The detailed report is in [docs/REPORT.md](docs/REPORT.md). The original KePIN README of `main` is kept as [README_KEPIN_ORIGINAL.md](README_KEPIN_ORIGINAL.md).
 
----
+## Results at a glance
 
-## Recent Progress & New Results
+RMSE (lower is better), ensemble of 3 runs, same seeds and training recipe as the KePIN paper:
 
-Since the original publication, we have significantly extended the architecture to handle multi-regime datasets more effectively. The original KePIN relied on a single, static Koopman operator ($K$) across all data points, which assumed uniform physical dynamics.
+| Dataset | Flying conditions | KePIN (paper) | KePIN (our reproduction) | **+ condition-aware input** | **+ condition-aware + Koopman control** |
+|---|---|---|---|---|---|
+| FD001 | 1 | 12.92 | 12.92 | 13.41 | **12.85** |
+| FD002 | 6 | 15.08 | 15.00 | 14.13 | **13.87** |
+| FD003 | 1 | 11.42 | 11.56 | 11.17 | **11.07** |
+| FD004 | 6 | 17.04 | 17.11 | **15.32** | 15.41 |
 
-### Conditioned Koopman Operator
-We introduced a **Conditioning Network** (`condition_net`) that dynamically shifts the Koopman eigenvalues based on real-time external conditions.
-* Instead of a static $K = U \cdot \text{diag}(s) \cdot V^T$, the system now calculates a perturbation $\Delta s(\mu)$ where $\mu$ is a condition vector.
-* The new operator becomes $K(\mu) = U \cdot \text{diag}(s + \Delta s(\mu)) \cdot V^T$.
-* In complex datasets like C-MAPSS FD002 and FD004, we use a 3-dimensional condition vector (`condition_dim=3`) corresponding to the engine's **Altitude**, **Mach Number**, and **Throttle Resolver Angle**.
+- **FD002/FD004** (6 flying conditions): 1.1–1.8 RMSE better than KePIN, with every seed better (p = 0.003–0.05). The NASA score improves too: FD002 869 → 825, FD004 1265 → 1043.
+- **FD001/FD003** (1 flying condition): no significant change, as expected, because there is no condition noise to remove.
 
-This allows the model to build a personalized, dynamically adapting physical model that reacts to the precise operating condition of each engine, drastically improving predictive accuracy in highly variable environments. For full details, see [ARCHITECTURE_IMPROVEMENTS.md](ARCHITECTURE_IMPROVEMENTS.md).
+> **Evaluation note.** These numbers use the same model-selection procedure as the original KePIN code (`fit_enhanced`), so they compare directly with the published table. That procedure picks the best epoch, and SWA vs best weights, on the **test** set. A stricter protocol, with validation on 20% held-out training engines, is implemented as `train.py --protocol clean`. On FD002 it gives errors about 0.4–0.6 higher for every model. See [docs/REPORT.md](docs/REPORT.md), Step 5.
 
-### Latest Results (Conditioned Model)
-By leveraging this dynamic conditioning, the model achieves state-of-the-art results on the most difficult multi-regime C-MAPSS datasets:
-* **FD002 (Ensemble 3 runs):** RMSE = **14.5673**
-* **FD004 (Ensemble 3 runs):** RMSE = **16.8248**
+![Final results](dynamic_koopman/reports/teaching/fig/12_final_results.png)
 
----
+## Main findings
 
-## Table of Contents
+1. **KePIN's Koopman part does not drive its accuracy.** Its 12 spectral features are computed from one fixed matrix and copied to every engine (`tf.tile`), so they carry no engine-specific information. Removing Koopman completely changes RMSE by −0.27 to +0.68, which is not significant on any dataset.
+2. **Explainability revealed a shortcut.** The earlier "Signal A" dynamic model followed the mix of flying conditions (R² 0.85–0.88), not engine wear (R² 0.02–0.04).
+3. **Stable Koopman rules cannot represent growing wear.** This is why the "time-to-failure" rollout never crossed the failure threshold, and why training Koopman on each engine's real future made results worse.
+4. **Wear model.** A Koopman rollout with a wear-accumulator mode (an eigenvalue-1 integrator with a learned wear rate) matches KePIN on all four datasets. It explains every prediction as *current health + wear rate → flights until failure*. The wear rate rises over every engine's life, ignores flying conditions, and is driven by known degradation sensors.
+5. **Condition-aware KePIN (the accuracy gain).** A learned per-condition input normalisation, applied before KePIN's EMA smoothing, removes the flying-condition information from the latent state (linear R² 0.26 → 0.00) and keeps the RUL information (0.89). This gives the FD002/FD004 gains above.
+6. **Honest caveat.** The "Koopman with control" split (z = s + C·u) does not produce a condition-free state. Probing shows that s still carries the condition (R² 0.97), so the gain should be credited to the condition-aware input layer.
 
-1. [Recent Progress & New Results](#recent-progress--new-results)
-2. [Architecture](#architecture)
-3. [Repository Structure](#repository-structure)
-4. [Installation](#installation)
-5. [Data Preparation](#data-preparation)
-6. [Configuration & Reproducibility](#configuration--reproducibility)
-7. [Quick Start](#quick-start)
-8. [Training](#training)
-9. [Evaluation](#evaluation)
-10. [Ablation Study](#ablation-study)
-11. [Reproducing Paper Figures](#reproducing-paper-figures)
-12. [Key Results](#key-results)
-13. [Citation](#citation)
-14. [License](#license)
+## Architecture changes vs original KePIN
 
----
+![Original vs condition-aware KePIN](dynamic_koopman/reports/teaching/fig/09_condition_aware_architecture.png)
 
-## Architecture
+| Change | Original KePIN | This branch |
+|---|---|---|
+| Condition-aware input layer (new) | one global scaling for all conditions | learned scale and offset per operating condition, initialised to per-condition standardisation |
+| EMA smoothing (moved) | preprocessing, before the model | fixed layer inside the model, after the condition step |
+| Koopman with control (new, optional) | Koopman rule on z | z = s + C·u; Koopman losses and RUL head use s |
+| Wear head (new, optional) | dense RUL head | RUL = flights until Koopman-projected health (fading modes + wear rate × k) crosses 0 |
+| Fast Koopman layer (new) | K = U diag(σ) Vᵀ, eigenvalues computed numerically | eigenvalue-parameterised K = P · blockdiag(ρ R(θ)) · Pᵀ, no eigendecomposition |
+
+With the new parts set to neutral, the condition-aware model reproduces KePIN's predictions exactly (max difference 6e-6).
+
+## Repository layout (new on this branch)
 
 ```
-Input (B, T, d)
-  │
-  ├─ ResConv1D + Squeeze-and-Excitation  ×N blocks
-  │
-  ├─ Bidirectional LSTM
-  │
-  ├─ Multi-Head Attention
-  │
-  ├─ SVD-Parameterised Koopman Operator
-  │      K = U · diag(σ(s)) · Vᵀ     (latent_dim × latent_dim)
-  │      ├─ 1-step prediction: ẑ_{t+1} = K ẑ_t
-  │      ├─ Multi-step rollout: ẑ_{t+k} = K^k ẑ_t
-  │      └─ Spectral features:  |λ|, ∠λ, Re(λ), Im(λ)
-  │
-  ├─ Concatenation  [encoder_out ‖ spectral_features]
-  │
-  └─ Deep Prediction Head (256 → 128 → 64, skip connections)
-       └─ ŷ  (RUL or forecast)
+dynamic_koopman/            all new code
+  train.py                  trains one model / dataset / seed (all variants via flags)
+  dk_model.py               KePIN with swappable Koopman layer and heads; condition-aware path
+  eigen_koopman.py          fast eigenvalue-parameterised Koopman layer (static / exo / health / both)
+  dk_data.py                C-MAPSS loading identical to KePIN + engine ids + per-flight operating condition
+  future_trainer.py         long-horizon "future" Koopman loss (negative result, kept for reproducibility)
+  analyze_wear.py           wear-model explainability (life trajectories, shortcut test, Integrated Gradients)
+  analyze_condition_state.py  probes: is the latent condition-free?
+  aggregate.py              results tables (mean ± std over runs + ensemble)
+  queue_worker.py, prepare_dirs.py, slurm/, tasks/   SLURM task queue used for all experiments
+  kepin_core/               original KePIN modules (unchanged, plus 2 documented small additions)
+  results/                  per-run metrics (*_result.json) and test predictions (*_predictions.npz)
+  reports/                  figure scripts and figures; reports/teaching/ builds the PDF guide
+  EXPERIMENT_LOG.md         dated log of every experiment, decision and fix
+signal_a_xai/               explainability analysis of the earlier Signal A model
+docs/                       REPORT.md (full report), figures, KePIN_Project_Explained.pdf
 ```
 
-**Auto-configuration tiers:**
+## How to run
 
-| Tier   | Features (d) | Latent dim | Blocks | Heads | Approx. params |
-|--------|:------------:|:----------:|:------:|:-----:|:--------------:|
-| Small  | ≤ 10         | 64         | 3      | 4     | ~504 K         |
-| Medium | ≤ 16         | 128        | 4      | 4     | ~1.4 M         |
-| Large  | > 16         | 128        | 4      | 8     | ~1.7 M         |
-
----
-
-## Repository Structure
-
-```
-KPDD/
-├── kepin/                          # Refactored Python package
-│   ├── __init__.py
-│   ├── models/
-│   │   ├── __init__.py
-│   │   ├── kepin_model.py          # KePINModel, auto_configure(), build_kepin_model()
-│   │   ├── koopman.py              # KoopmanOperator layer
-│   │   └── baselines.py           # 7 baseline architectures
-│   ├── losses/
-│   │   ├── __init__.py
-│   │   └── composite.py           # 7-component loss + Kendall uncertainty
-│   ├── training/
-│   │   ├── __init__.py
-│   │   ├── trainer.py             # KePINTrainer, EnhancedKePINTrainer
-│   │   └── augmentation.py        # mixup, noise injection, label smoothing
-│   ├── data/
-│   │   ├── __init__.py
-│   │   └── loader.py              # Dataset loading (re-exports legacy loaders)
-│   └── utils/
-│       ├── __init__.py
-│       ├── gpu.py                 # GPU setup, A100 optimisation
-│       ├── metrics.py             # RMSE, MAE, R², NASA score, eigenvalue recovery
-│       └── preprocessing.py       # 4D→3D, EMA smoothing
-├── scripts/
-│   ├── train.py                   # CLI: training entry point
-│   ├── evaluate.py                # CLI: evaluation entry point
-│   └── ablation.py                # CLI: ablation study entry point
-├── configs/
-│   ├── datasets_kepin_config.json      # C-MAPSS datasets
-│   ├── datasets_all_config.json        # All datasets (incl. synthetic)
-│   ├── datasets_cmapss_config.json     # C-MAPSS only
-│   ├── datasets_multidomain_config.json # Cross-domain datasets
-│   └── run_kepin.json                   # Run config (seed, data_root, training)
-├── code/                          # Original research scripts (preserved)
-│   ├── kepin_model.py
-│   ├── kepin_losses.py
-│   ├── kepin_training.py
-│   ├── kepin_cmapss_optimized.py
-│   ├── GenericTimeSeriesDataset.py
-│   ├── CMAPSSDataset.py
-│   └── ...
-├── experiments_result/             # Saved models, predictions, figures
-├── paper/                          # LaTeX source and figures
-├── requirements.txt
-├── setup.py
-└── README.md
-```
-
----
-
-## Installation
-
-### Prerequisites
-
-- **Python** ≥ 3.10
-- **CUDA** ≥ 12.0 (for GPU training; tested on NVIDIA A100-PCIE-40GB)
-- **conda** (recommended)
-
-For bit-for-bit replication, record the exact CUDA driver and cuDNN versions
-used when generating paper results and archive them alongside the release.
-
-### Setup
+**Environment:** TensorFlow 2.16 / Keras 3 (see `requirements.txt`). The data comes from `code/C-MAPSS-Data` on `main`, linked from `dynamic_koopman/kepin_core/C-MAPSS-Data`.
 
 ```bash
-# Clone the repository
-git clone https://github.com/<your-username>/KPDD.git
-cd KPDD
+cd dynamic_koopman
 
-# Create and activate Conda environment
-conda create -n kepin python=3.10 -y
-conda activate kepin
+# original KePIN (reproduction), paper protocol, seed 0
+python train.py --dataset FD002 --koopman svd --mode static --protocol paper --run_id 0
 
-# Install dependencies
-pip install -r requirements.txt
-pip install -e .
+# condition-aware KePIN (+ Koopman with control)
+python train.py --dataset FD002 --koopman svd --mode static --protocol paper --run_id 0 --cond_norm --koop_control
 
-# Optional: PyTorch baselines (install the CUDA-matched wheel from pytorch.org)
-# pip install torch==2.3.1
+# wear model (Koopman rollout + wear accumulator)
+python train.py --dataset FD002 --koopman eig --mode static --head wear --protocol paper --run_id 0
+
+# KePIN with Koopman removed (ablation)
+python train.py --dataset FD002 --koopman none --mode static --protocol paper --run_id 0
+
+# stricter evaluation: add  --protocol clean   (validation on held-out training engines)
 ```
 
-### Key dependencies
+Outputs go to `dynamic_koopman/runs/<protocol>/<dataset>/<arm>/`. Use `python aggregate.py runs` for tables. `python aggregate.py results` rebuilds them from the committed results.
 
-| Package       | Version |
-|---------------|---------|
-| tensorflow    | ≥ 2.16 |
-| keras         | ≥ 3.0  |
-| numpy         | ≥ 1.24 |
-| pandas        | ≥ 2.0  |
-| scikit-learn  | ≥ 1.3  |
-| matplotlib    | ≥ 3.8  |
-| scipy         | ≥ 1.11 |
-| torch (optional) | ≥ 2.0 |
+**On a SLURM cluster:** run `python prepare_dirs.py tasks/<file>.txt`, then `sbatch slurm/queue.slurm tasks/<file>.txt`. The slurm scripts contain absolute paths from our cluster; adjust `DK=` and the conda activation lines for yours.
 
----
+## Limitations
 
-## Data Preparation
+- **Protocol:** the headline numbers use the original KePIN protocol (test-set model selection). Final clean-protocol runs of all models are still to do.
+- **Novelty of the input layer:** per-condition normalisation is common practice on C-MAPSS. Whether the learned layer beats plain per-condition preprocessing has not yet been tested.
+- **Seeds:** 3 per model, as in the paper. Differences below about 0.5 RMSE are not reliably detectable.
 
-### C-MAPSS (Turbofan Engine Degradation)
+## Credits
 
-The C-MAPSS dataset files (`train_FD001.txt`, …, `RUL_FD004.txt`) should be placed in:
-
-```
-code/C-MAPSS-Data/
-```
-
-> The data is included in this repository. If missing, download from the [NASA Prognostics Data Repository](https://data.nasa.gov/dataset/C-MAPSS-Aircraft-Engine-Simulator-Data/xaut-bemq).
-
-### Cross-Domain Datasets
-
-For Jena Climate, Cylinder Wake, and Building Energy datasets:
-
-```bash
-python code/download_datasets.py
-```
-
-This downloads datasets into `code/datasets/`.
-
-### Synthetic Datasets
-
-Synthetic ODE, weather, and finance datasets are generated on-the-fly by `GenericTimeSeriesDataset` — no download required.
-
----
-
-## Configuration & Reproducibility
-
-### Run configuration
-
-Use a single JSON run config to control seeds, dataset configs, and training defaults:
-
-```bash
-python scripts/train.py --run_config configs/run_kepin.json
-```
-
-You can still override any field with CLI flags (e.g., `--epochs`, `--seed`, `--output_dir`).
-
-### Data root handling
-
-All dataset paths are resolved relative to `KEPIN_DATA_ROOT` (or `KPDD_DATA_ROOT`) if set. This
-lets you keep large datasets outside the repo while reusing the same configs.
-
-```bash
-export KEPIN_DATA_ROOT=/path/to/data
-python scripts/train.py --config configs/datasets_kepin_config.json
-```
-
-### Deterministic runs
-
-For deterministic kernels, pass `--seed` and `--deterministic`. The CLI disables XLA and mixed
-precision automatically in deterministic mode to minimize nondeterministic kernels.
-
-```bash
-python scripts/train.py --config configs/datasets_kepin_config.json \
-    --seed 42 --deterministic
-```
-
-Exact hardware, driver, and CUDA/cuDNN versions still matter for bit-for-bit replication.
-
----
-
-## Quick Start
-
-```python
-from kepin.models import KePINModel, auto_configure, build_kepin_model
-from kepin.losses import make_kepin_loss
-from kepin.training import KePINTrainer
-from kepin.utils.gpu import setup_gpu
-import keras
-
-# Setup GPU
-setup_gpu()
-
-# Build model (auto-configures architecture based on data shape)
-model = build_kepin_model(seq_len=30, n_features=15, n_train=16000)
-
-# Create loss and optimizer
-loss_fn = make_kepin_loss(
-    loss_weights_layer=model.loss_weight_layer,
-    use_auto_weights=True,
-    domain_mode="degradation",
-)
-optimizer = keras.optimizers.Adam(learning_rate=8e-4)
-
-# Train
-trainer = KePINTrainer(model, loss_fn, optimizer)
-history = trainer.fit(X_train, Y_train, X_val, Y_val,
-                      epochs=200, batch_size=512, patience=40)
-
-# Predict
-import tensorflow as tf
-y_pred = model.predict_rul(tf.constant(X_test)).numpy()
-```
-
----
-
-## Training
-
-### Train from a run config
-
-```bash
-python scripts/train.py --run_config configs/run_kepin.json
-```
-
-### Train on all C-MAPSS datasets
-
-```bash
-python scripts/train.py --config configs/datasets_kepin_config.json \
-    --epochs 200 --patience 40 --n_runs 3
-```
-
-### Train a single dataset (by index)
-
-```bash
-python scripts/train.py --config configs/datasets_kepin_config.json \
-    --dataset_idx 0 --epochs 200
-```
-
-### Enhanced training (SWA + mixup + warmup)
-
-```bash
-python scripts/train.py --config configs/datasets_kepin_config.json \
-    --enhanced --epochs 250 --n_runs 3 --patience 50
-```
-
-### Quick synthetic test
-
-```bash
-python scripts/train.py --mode synthetic --epochs 50
-```
-
-### Key CLI arguments
-
-| Argument          | Default | Description                              |
-|-------------------|---------|------------------------------------------|
-| `--config`        | —       | Path to JSON dataset config              |
-| `--dataset_idx`   | all     | Train only this dataset index            |
-| `--epochs`        | 200     | Maximum training epochs                  |
-| `--batch_size`    | auto    | Override batch size (auto for A100)      |
-| `--lr`            | auto    | Override learning rate                   |
-| `--patience`      | 40      | Early stopping patience                  |
-| `--n_runs`        | 1       | Independent runs per dataset             |
-| `--enhanced`      | false   | Use SWA + mixup + warmup                |
-| `--no_auto_weights` | false | Disable Kendall uncertainty weighting    |
-
----
-
-## Evaluation
-
-### Evaluate saved predictions
-
-```bash
-# Single file
-python scripts/evaluate.py --npz experiments_result/kepin/CMAPSS_FD001/predictions_CMAPSS_FD001_run0.npz
-
-# All predictions in a directory
-python scripts/evaluate.py --dir experiments_result/kepin_20260224_071535 --nasa_score
-
-# Save results to CSV
-python scripts/evaluate.py --dir experiments_result/ --output_csv results_table.csv
-```
-
----
-
-## Ablation Study
-
-Remove individual loss components to measure their contribution:
-
-```bash
-python scripts/ablation.py --config configs/datasets_kepin_config.json \
-    --dataset_idx 0 --epochs 200 --n_runs 1
-
-# Run specific variants only
-python scripts/ablation.py --config configs/datasets_kepin_config.json \
-    --dataset_idx 0 --variants full no_koopman_loss no_spectral no_monotonicity
-```
-
-### Ablation variants
-
-| Variant              | Description                              |
-|----------------------|------------------------------------------|
-| `full`               | All 7 loss components (baseline)         |
-| `no_koopman_loss`    | Remove Koopman one-step prediction loss  |
-| `no_spectral`        | Remove spectral regularisation           |
-| `no_monotonicity`    | Remove monotonicity penalty              |
-| `no_multi_step`      | Remove multi-step rollout loss           |
-| `no_auto_weights`    | Replace Kendall weighting with fixed     |
-| `no_koopman_module`  | Remove entire Koopman operator           |
-
----
-
-## Reproducing Paper Figures
-
-The paper figures are generated from saved prediction and history artifacts
-(`predictions_*.npz`, `history_*.csv`, `eigenvalues_*.npz`). A minimal
-reproduction flow is:
-
-```bash
-# 1) Train all datasets into a single results directory
-python scripts/train.py --config configs/datasets_all_config.json \
-    --output_dir experiments_result/kepin_repro
-
-# 2) Generate the paper figures from that directory
-python code/generate_paper_figures.py \
-    --results_dir experiments_result/kepin_repro \
-    --cmapss_dir experiments_result/kepin_repro \
-    --kepin_final_dir experiments_result/kepin_repro \
-    --improved_dir experiments_result/kepin_repro \
-    --fig_dir paper/figures
-```
-
-If your results are split across multiple runs, pass each directory explicitly
-to `--cmapss_dir`, `--kepin_final_dir`, and `--improved_dir`.
-
----
-
-## Key Results
-
-### C-MAPSS Benchmark (3-run ensemble, test RMSE)
-
-| Model              | FD001  | FD002  | FD003  | FD004  |
-|--------------------|:------:|:------:|:------:|:------:|
-| MLP                | 14.21  | 16.42  | 13.58  | 19.27  |
-| LSTM               | 13.47  | 15.89  | 11.86  | 18.41  |
-| BiLSTM             | 13.02  | 15.61  | 12.04  | 17.98  |
-| CNN-LSTM           | 13.15  | 16.03  | 12.31  | 18.12  |
-| Transformer        | 13.28  | 14.68  | 12.19  | 17.02  |
-| **KePIN (ours)**   | **12.92** | **15.08** | **11.42** | **17.04** |
-
-### Cross-Domain Generalisation
-
-| Dataset          | Metric | Best Baseline | KePIN  |
-|------------------|:------:|:-------------:|:------:|
-| Jena Climate     | RMSE   | 5.777         | 5.98   |
-| Cylinder Wake    | R²     | 0.8994        | 0.900  |
-| Building Energy  | R²     | 0.9642        | 0.963  |
-
----
-
-## Citation
-
-If you use this code in your research, please cite:
-
-Paper DOI: TBD
-
-Zenodo DOI: TBD
-
-
-## License
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This builds on the original KePIN code on `main`; see [README_KEPIN_ORIGINAL.md](README_KEPIN_ORIGINAL.md) for the paper and citation. The data is the NASA C-MAPSS turbofan degradation dataset.

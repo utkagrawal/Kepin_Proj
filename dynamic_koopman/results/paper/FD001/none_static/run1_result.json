@@ -1,0 +1,21 @@
+{
+  "dataset": "FD001",
+  "arm": "none_static",
+  "protocol": "paper",
+  "run_id": 1,
+  "rmse": 14.203146934509277,
+  "mae": 11.080059051513672,
+  "r2": 0.8743798011802618,
+  "score": 297.7657165527344,
+  "val_rmse": 14.203146934509277,
+  "weights_used": "best",
+  "epochs_trained": 73,
+  "train_time_s": 1487.87233543396,
+  "sec_per_epoch": 20.381812814163837,
+  "params": 1141033,
+  "gpu": "gpu-P100",
+  "slurm_job": "5045",
+  "smoke": false,
+  "mono_violation": 0.9816413029502602,
+  "slope_rmse": 20.792260552000176
+}

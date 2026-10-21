@@ -1,0 +1,21 @@
+{
+  "dataset": "FD002",
+  "arm": "svd_static",
+  "protocol": "clean",
+  "run_id": 1,
+  "rmse": 16.248735427856445,
+  "mae": 12.110772132873535,
+  "r2": 0.855617793064942,
+  "score": 1202.4345703125,
+  "val_rmse": 19.76792335510254,
+  "weights_used": "best",
+  "epochs_trained": 80,
+  "train_time_s": 2624.9020895957947,
+  "sec_per_epoch": 32.811276119947436,
+  "params": 1807513,
+  "gpu": "gpu-P100",
+  "slurm_job": "4890",
+  "smoke": false,
+  "mono_violation": 1.6098630180286488,
+  "slope_rmse": 24.293350759269842
+}

@@ -1,0 +1,38 @@
+# Generalisation check (2026-10-19): original KePIN vs wear model on FD001/FD003/FD004, 3 seeds.
+# clean protocol first (main result), then paper protocol. Workers re-read this file before every task.
+--dataset FD001 --koopman svd --mode static --protocol clean --run_id 0
+--dataset FD001 --koopman eig --mode static --head wear --protocol clean --run_id 0
+--dataset FD001 --koopman svd --mode static --protocol clean --run_id 1
+--dataset FD001 --koopman eig --mode static --head wear --protocol clean --run_id 1
+--dataset FD001 --koopman svd --mode static --protocol clean --run_id 2
+--dataset FD001 --koopman eig --mode static --head wear --protocol clean --run_id 2
+--dataset FD003 --koopman svd --mode static --protocol clean --run_id 0
+--dataset FD003 --koopman eig --mode static --head wear --protocol clean --run_id 0
+--dataset FD003 --koopman svd --mode static --protocol clean --run_id 1
+--dataset FD003 --koopman eig --mode static --head wear --protocol clean --run_id 1
+--dataset FD003 --koopman svd --mode static --protocol clean --run_id 2
+--dataset FD003 --koopman eig --mode static --head wear --protocol clean --run_id 2
+--dataset FD004 --koopman svd --mode static --protocol clean --run_id 0
+--dataset FD004 --koopman eig --mode static --head wear --protocol clean --run_id 0
+--dataset FD004 --koopman svd --mode static --protocol clean --run_id 1
+--dataset FD004 --koopman eig --mode static --head wear --protocol clean --run_id 1
+--dataset FD004 --koopman svd --mode static --protocol clean --run_id 2
+--dataset FD004 --koopman eig --mode static --head wear --protocol clean --run_id 2
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 0
+--dataset FD001 --koopman eig --mode static --head wear --protocol paper --run_id 0
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 1
+--dataset FD001 --koopman eig --mode static --head wear --protocol paper --run_id 1
+--dataset FD001 --koopman svd --mode static --protocol paper --run_id 2
+--dataset FD001 --koopman eig --mode static --head wear --protocol paper --run_id 2
+--dataset FD003 --koopman svd --mode static --protocol paper --run_id 0
+--dataset FD003 --koopman eig --mode static --head wear --protocol paper --run_id 0
+--dataset FD003 --koopman svd --mode static --protocol paper --run_id 1
+--dataset FD003 --koopman eig --mode static --head wear --protocol paper --run_id 1
+--dataset FD003 --koopman svd --mode static --protocol paper --run_id 2
+--dataset FD003 --koopman eig --mode static --head wear --protocol paper --run_id 2
+--dataset FD004 --koopman svd --mode static --protocol paper --run_id 0
+--dataset FD004 --koopman eig --mode static --head wear --protocol paper --run_id 0
+--dataset FD004 --koopman svd --mode static --protocol paper --run_id 1
+--dataset FD004 --koopman eig --mode static --head wear --protocol paper --run_id 1
+--dataset FD004 --koopman svd --mode static --protocol paper --run_id 2
+--dataset FD004 --koopman eig --mode static --head wear --protocol paper --run_id 2
