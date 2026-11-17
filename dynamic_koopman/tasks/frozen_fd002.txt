@@ -1,0 +1,25 @@
+# Frozen-encoder study (2026-11-05): does adaptive K help on a latent that KEEPS the nonlinear degradation?
+# Encoder pre-trained self-supervised (pretrain_ssl.py, reconstruction, no RUL), then frozen; only K + wear head train.
+# Control first (end-to-end encoder, nonlinear dynamic K with h re-read every forecast step).
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 0 --mode health --health_map ordered --gap_init 0 --regime_loss mono --dynamics nl_dynamic
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 1 --mode health --health_map ordered --gap_init 0 --regime_loss mono --dynamics nl_dynamic
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 2 --mode health --health_map ordered --gap_init 0 --regime_loss mono --dynamics nl_dynamic
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 0 --mode static --frozen_encoder
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 0 --mode health --health_map ordered --gap_init 0 --regime_loss mono --frozen_encoder
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 0 --mode health --health_map ordered --gap_init 0 --regime_loss mono --dynamics nl_dynamic --frozen_encoder
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 1 --mode static --frozen_encoder
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 1 --mode health --health_map ordered --gap_init 0 --regime_loss mono --frozen_encoder
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 1 --mode health --health_map ordered --gap_init 0 --regime_loss mono --dynamics nl_dynamic --frozen_encoder
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 2 --mode static --frozen_encoder
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 2 --mode health --health_map ordered --gap_init 0 --regime_loss mono --frozen_encoder
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 2 --mode health --health_map ordered --gap_init 0 --regime_loss mono --dynamics nl_dynamic --frozen_encoder
+# Linear encoder (2026-11-05): latent = linear map of cond-normalised sensors, keeps the ~5x curve; end-to-end.
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --encoder linear --run_id 0 --mode static
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --encoder linear --run_id 0 --mode health --health_map ordered --gap_init 0 --regime_loss mono
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --encoder linear --run_id 0 --mode health --health_map ordered --gap_init 0 --regime_loss mono --dynamics nl_dynamic
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --encoder linear --run_id 1 --mode static
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --encoder linear --run_id 1 --mode health --health_map ordered --gap_init 0 --regime_loss mono
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --encoder linear --run_id 1 --mode health --health_map ordered --gap_init 0 --regime_loss mono --dynamics nl_dynamic
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --encoder linear --run_id 2 --mode static
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --encoder linear --run_id 2 --mode health --health_map ordered --gap_init 0 --regime_loss mono
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --encoder linear --run_id 2 --mode health --health_map ordered --gap_init 0 --regime_loss mono --dynamics nl_dynamic

@@ -1,0 +1,12 @@
+# History-health hypernetwork Koopman in ORIGINAL KePIN (2026-11-09). h = health index from 42 engine-history
+# features (past flights only, per-condition z-scored drift since new + recent slope), trained label-free (mono).
+# A: K generated from h only | B: from h + age, adaptive rank | C (control): static K, [h, age] straight into the head.
+--dataset FD002 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 0 --mode hyper
+--dataset FD002 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 0 --mode hyper --hyper_age --hyper_rank
+--dataset FD002 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 0 --mode static --head_ctx
+--dataset FD002 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 1 --mode hyper
+--dataset FD002 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 1 --mode hyper --hyper_age --hyper_rank
+--dataset FD002 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 1 --mode static --head_ctx
+--dataset FD002 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 2 --mode hyper
+--dataset FD002 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 2 --mode hyper --hyper_age --hyper_rank
+--dataset FD002 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 2 --mode static --head_ctx

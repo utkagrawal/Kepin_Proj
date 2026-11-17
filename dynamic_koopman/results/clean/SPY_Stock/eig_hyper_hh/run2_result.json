@@ -1,0 +1,51 @@
+{
+  "dataset": "SPY_Stock",
+  "arm": "eig_hyper_hh",
+  "protocol": "clean",
+  "run_id": 2,
+  "rmse": 30.971309661865234,
+  "mae": 25.909727096557617,
+  "r2": -0.0004627043701503908,
+  "val_rmse": 0.14813131093978882,
+  "val_rmse_units": "normalised [0,1] target",
+  "y_min": 0.0,
+  "y_range": 404.0,
+  "train_stride": 1,
+  "arch": {
+    "n_blocks": 4,
+    "filters": [
+      64,
+      128,
+      128,
+      256
+    ],
+    "kernels": [
+      7,
+      5,
+      5,
+      3
+    ],
+    "latent_dim": 128,
+    "lstm_units": 128,
+    "n_heads": 4,
+    "head_key_dim": 32,
+    "dropout": 0.35,
+    "rollout": 3,
+    "spectral_k": 5,
+    "tier": "medium"
+  },
+  "weights_used": "best",
+  "epochs_trained": 369,
+  "train_time_s": 1196.29093003273,
+  "sec_per_epoch": 3.2419808401971006,
+  "params": 1360074,
+  "gpu": "gpu-A100",
+  "slurm_job": "6272",
+  "smoke": false,
+  "hist_h_corr_rul": -0.20963208178355114,
+  "hist_h_std": 0.022856242954730988,
+  "hyper_mean_rho_corr_h": 0.9998758767162574,
+  "hyper_rho_spread": 0.0006957700243219733,
+  "hyper_mean_rho_corr_rul": -0.21012067552734248,
+  "hyper_mean_rho_corr_age": -0.386076135092734
+}

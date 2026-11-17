@@ -1,0 +1,47 @@
+{
+  "dataset": "Jena_Climate",
+  "arm": "eig_static_hh_hctx",
+  "protocol": "clean",
+  "run_id": 0,
+  "rmse": 6.038052558898926,
+  "mae": 4.830326557159424,
+  "r2": 0.43859928647116875,
+  "val_rmse": 0.09453199803829193,
+  "val_rmse_units": "normalised [0,1] target",
+  "y_min": -22.65333366394043,
+  "y_range": 59.69166564941406,
+  "train_stride": 1,
+  "arch": {
+    "n_blocks": 4,
+    "filters": [
+      64,
+      128,
+      128,
+      256
+    ],
+    "kernels": [
+      7,
+      5,
+      5,
+      3
+    ],
+    "latent_dim": 128,
+    "lstm_units": 128,
+    "n_heads": 4,
+    "head_key_dim": 32,
+    "dropout": 0.35,
+    "rollout": 3,
+    "spectral_k": 5,
+    "tier": "medium"
+  },
+  "weights_used": "best",
+  "epochs_trained": 98,
+  "train_time_s": 880.1827692985535,
+  "sec_per_epoch": 8.981456829577077,
+  "params": 1352394,
+  "gpu": "gpu-A100",
+  "slurm_job": "6272",
+  "smoke": false,
+  "hist_h_corr_rul": -0.5551010115738129,
+  "hist_h_std": 0.21081659197807312
+}

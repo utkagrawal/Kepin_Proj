@@ -1,0 +1,14 @@
+# Regime-adaptive Koopman (2026-11-04): mode decay depends on a health index h
+# (healthy -> slow decay, near failure -> fast decay; ordered map), cond_norm inputs,
+# head also reads the state carried 10 flights ahead by K(h).
+# Arms: h unconstrained / h monotone over life / h supervised by RUL. FD002, paper protocol, 3 seeds.
+# Baseline: svd_static_cn (already run, ensemble 14.13).
+--dataset FD002 --koopman eig --mode health --protocol paper --run_id 0 --cond_norm --health_map ordered --head_state 10 --regime_loss mono
+--dataset FD002 --koopman eig --mode health --protocol paper --run_id 0 --cond_norm --health_map ordered --head_state 10
+--dataset FD002 --koopman eig --mode health --protocol paper --run_id 0 --cond_norm --health_map ordered --head_state 10 --regime_loss sup
+--dataset FD002 --koopman eig --mode health --protocol paper --run_id 1 --cond_norm --health_map ordered --head_state 10 --regime_loss mono
+--dataset FD002 --koopman eig --mode health --protocol paper --run_id 1 --cond_norm --health_map ordered --head_state 10
+--dataset FD002 --koopman eig --mode health --protocol paper --run_id 1 --cond_norm --health_map ordered --head_state 10 --regime_loss sup
+--dataset FD002 --koopman eig --mode health --protocol paper --run_id 2 --cond_norm --health_map ordered --head_state 10 --regime_loss mono
+--dataset FD002 --koopman eig --mode health --protocol paper --run_id 2 --cond_norm --health_map ordered --head_state 10
+--dataset FD002 --koopman eig --mode health --protocol paper --run_id 2 --cond_norm --health_map ordered --head_state 10 --regime_loss sup

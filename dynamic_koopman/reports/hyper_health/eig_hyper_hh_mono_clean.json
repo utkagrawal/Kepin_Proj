@@ -1,0 +1,53 @@
+{
+  "knockout": {
+    "normal": [
+      14.168701171875,
+      13.783637046813965,
+      13.996739387512207
+    ],
+    "same K for all engines": [
+      30.226354598999023,
+      30.202434539794922,
+      28.981021881103516
+    ],
+    "h shuffled": [
+      39.98637771606445,
+      41.060401916503906,
+      38.62366485595703
+    ],
+    "spectral features fixed": [
+      30.199451446533203,
+      30.324867248535156,
+      29.358013153076172
+    ]
+  },
+  "per_run": [
+    {
+      "corr_mean_rho_h": -0.9776616236225634,
+      "corr_alive10_h": -0.7920271360464427,
+      "alive10_healthy": 1.0,
+      "alive10_near_failure": 49.07948717948718,
+      "median_half_life_healthy": 0.3696121573448181,
+      "median_half_life_near_failure": 0.6464123129844666,
+      "modes_faster_near_failure": 1
+    },
+    {
+      "corr_mean_rho_h": -0.9618297202371132,
+      "corr_alive10_h": -0.8551022543347531,
+      "alive10_healthy": 0.0,
+      "alive10_near_failure": 63.79076923076923,
+      "median_half_life_healthy": 0.36523640155792236,
+      "median_half_life_near_failure": 0.8263843059539795,
+      "modes_faster_near_failure": 0
+    },
+    {
+      "corr_mean_rho_h": -0.9859243773406161,
+      "corr_alive10_h": -0.8901028115509736,
+      "alive10_healthy": 1.0,
+      "alive10_near_failure": 63.88923076923077,
+      "median_half_life_healthy": 0.4180804491043091,
+      "median_half_life_near_failure": 0.7835880517959595,
+      "modes_faster_near_failure": 0
+    }
+  ]
+}

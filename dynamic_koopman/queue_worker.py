@@ -26,7 +26,20 @@ def _arm(a):
         (f"_future{float(a['--future_loss']):g}" if float(a.get("--future_loss", 0) or 0) > 0 else "") + \
         (f"_sub{a['--future_subspace']}" if float(a.get("--future_loss", 0) or 0) > 0
          and int(a.get("--future_subspace", 0) or 0) else "") + \
-        ("_cn" if "--cond_norm" in a else "") + ("_ctrl" if "--koop_control" in a else "")
+        ("_cn" if "--cond_norm" in a else "") + ("_ctrl" if "--koop_control" in a else "") + \
+        ("_ord" if a.get("--health_map", "free") == "ordered" else "") + \
+        {"gate": "", "mixture": "_mix", "engine": "_eng"}[a.get("--adapt", "gate")] + \
+        ("_sigA" if a.get("--health_source", "latent") == "signal_a" else "") + \
+        {"linear": "", "nl_static": "_nls", "nl_dynamic": "_nld"}[a.get("--dynamics", "linear")] + \
+        ("_frz" if "--frozen_encoder" in a else "") + \
+        ("_lin" if a.get("--encoder", "deep") == "linear" else "") + \
+        ("_hh" if "--hist_health" in a else "") + ("_hctx" if "--head_ctx" in a else "") + \
+        ("_age" if "--hyper_age" in a else "") + ("_rank" if "--hyper_rank" in a else "") + \
+        (f"_gap{float(a['--gap_init']):g}" if float(a.get("--gap_init", -4.0)) != -4.0 else "") + \
+        (f"_hs{a['--head_state']}" if int(a.get("--head_state", 0) or 0) else "") + \
+        ("_fc" if "--forecast_head" in a else "") + \
+        ("" if a.get("--regime_loss", "none") == "none" else f"_{a['--regime_loss']}" +
+         ("" if float(a.get("--regime_weight", 1.0)) == 1.0 else f"{float(a['--regime_weight']):g}"))
 
 
 def task_id(line):

@@ -1,0 +1,14 @@
+# Signal-A-driven regime Koopman (2026-11-04). Question: can a readable, hand-made regime signal
+# (condition-normalised Signal A: 4 moments, h = sigmoid(w.A + b)) drive the decay, and does a
+# large decay gap survive training (healthy -> slow shrink, near failure -> fast)?
+# Arms: sigA (gap init 0.036) | sigA + gap init 1.0 | learned h + gap init 1.0 (control). FD002 paper, 3 seeds.
+# Reference: eig_health_cn_ord_hs10_mono (learned h, small gap) 14.16 ens; svd_static_cn 14.13.
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --health_map ordered --head_state 10 --regime_loss mono --run_id 0 --health_source signal_a --gap_init 0
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --health_map ordered --head_state 10 --regime_loss mono --run_id 0 --health_source signal_a
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --health_map ordered --head_state 10 --regime_loss mono --run_id 0 --gap_init 0
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --health_map ordered --head_state 10 --regime_loss mono --run_id 1 --health_source signal_a --gap_init 0
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --health_map ordered --head_state 10 --regime_loss mono --run_id 1 --health_source signal_a
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --health_map ordered --head_state 10 --regime_loss mono --run_id 1 --gap_init 0
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --health_map ordered --head_state 10 --regime_loss mono --run_id 2 --health_source signal_a --gap_init 0
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --health_map ordered --head_state 10 --regime_loss mono --run_id 2 --health_source signal_a
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --health_map ordered --head_state 10 --regime_loss mono --run_id 2 --gap_init 0

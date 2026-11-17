@@ -1,0 +1,47 @@
+{
+  "dataset": "SPY_Stock",
+  "arm": "eig_static_hh_hctx",
+  "protocol": "clean",
+  "run_id": 0,
+  "rmse": 60.109188079833984,
+  "mae": 48.834938049316406,
+  "r2": -2.768456351047404,
+  "val_rmse": 0.1455521136522293,
+  "val_rmse_units": "normalised [0,1] target",
+  "y_min": 0.0,
+  "y_range": 404.0,
+  "train_stride": 1,
+  "arch": {
+    "n_blocks": 4,
+    "filters": [
+      64,
+      128,
+      128,
+      256
+    ],
+    "kernels": [
+      7,
+      5,
+      5,
+      3
+    ],
+    "latent_dim": 128,
+    "lstm_units": 128,
+    "n_heads": 4,
+    "head_key_dim": 32,
+    "dropout": 0.35,
+    "rollout": 3,
+    "spectral_k": 5,
+    "tier": "medium"
+  },
+  "weights_used": "best",
+  "epochs_trained": 353,
+  "train_time_s": 1043.0139858722687,
+  "sec_per_epoch": 2.954713840997928,
+  "params": 1352138,
+  "gpu": "gpu-A100",
+  "slurm_job": "6272",
+  "smoke": false,
+  "hist_h_corr_rul": -0.34748151292017226,
+  "hist_h_std": 0.07938151806592941
+}

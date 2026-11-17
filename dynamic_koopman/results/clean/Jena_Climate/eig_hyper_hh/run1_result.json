@@ -1,0 +1,51 @@
+{
+  "dataset": "Jena_Climate",
+  "arm": "eig_hyper_hh",
+  "protocol": "clean",
+  "run_id": 1,
+  "rmse": 5.590799808502197,
+  "mae": 4.534115791320801,
+  "r2": 0.5186875339427763,
+  "val_rmse": 0.08589300513267517,
+  "val_rmse_units": "normalised [0,1] target",
+  "y_min": -22.65333366394043,
+  "y_range": 59.69166564941406,
+  "train_stride": 1,
+  "arch": {
+    "n_blocks": 4,
+    "filters": [
+      64,
+      128,
+      128,
+      256
+    ],
+    "kernels": [
+      7,
+      5,
+      5,
+      3
+    ],
+    "latent_dim": 128,
+    "lstm_units": 128,
+    "n_heads": 4,
+    "head_key_dim": 32,
+    "dropout": 0.35,
+    "rollout": 3,
+    "spectral_k": 5,
+    "tier": "medium"
+  },
+  "weights_used": "best",
+  "epochs_trained": 86,
+  "train_time_s": 794.4186515808105,
+  "sec_per_epoch": 9.237426181172216,
+  "params": 1360330,
+  "gpu": "gpu-A100",
+  "slurm_job": "6272",
+  "smoke": false,
+  "hist_h_corr_rul": 0.039914157663600056,
+  "hist_h_std": 0.03139938414096832,
+  "hyper_mean_rho_corr_h": -0.9968502305617597,
+  "hyper_rho_spread": 0.0020610527135431767,
+  "hyper_mean_rho_corr_rul": -0.033520486718674504,
+  "hyper_mean_rho_corr_age": -0.14983146180648835
+}

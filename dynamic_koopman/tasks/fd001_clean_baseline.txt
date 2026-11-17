@@ -1,0 +1,2 @@
+--dataset FD001 --koopman svd --mode static --protocol clean --run_id 1
+--dataset FD001 --koopman svd --mode static --protocol clean --run_id 2

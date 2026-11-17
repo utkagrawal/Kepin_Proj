@@ -1,0 +1,43 @@
+{
+  "dataset": "Building_Energy",
+  "arm": "eig_static",
+  "protocol": "clean",
+  "run_id": 1,
+  "rmse": 0.09819544851779938,
+  "mae": 0.06527392566204071,
+  "r2": 0.9454771261919439,
+  "val_rmse": 0.08764610439538956,
+  "val_rmse_units": "normalised [0,1] target",
+  "y_min": 2.3082100597093813e-05,
+  "y_range": 1.9773715734481812,
+  "train_stride": 4,
+  "arch": {
+    "n_blocks": 3,
+    "filters": [
+      64,
+      128,
+      128
+    ],
+    "kernels": [
+      7,
+      5,
+      3
+    ],
+    "latent_dim": 64,
+    "lstm_units": 64,
+    "n_heads": 4,
+    "head_key_dim": 16,
+    "dropout": 0.3,
+    "rollout": 3,
+    "spectral_k": 4,
+    "tier": "small"
+  },
+  "weights_used": "best",
+  "epochs_trained": 89,
+  "train_time_s": 2458.063638448715,
+  "sec_per_epoch": 27.618692566839496,
+  "params": 485481,
+  "gpu": "gpu-A100",
+  "slurm_job": "6272",
+  "smoke": false
+}

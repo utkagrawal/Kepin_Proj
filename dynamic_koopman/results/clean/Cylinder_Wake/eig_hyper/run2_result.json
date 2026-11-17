@@ -1,0 +1,46 @@
+{
+  "dataset": "Cylinder_Wake",
+  "arm": "eig_hyper",
+  "protocol": "clean",
+  "run_id": 2,
+  "rmse": 0.005130053032189608,
+  "mae": 0.004103117622435093,
+  "r2": 0.8981022996236308,
+  "val_rmse": 0.02687988616526127,
+  "val_rmse_units": "normalised [0,1] target",
+  "y_min": -0.09133179485797882,
+  "y_range": 0.19079503417015076,
+  "train_stride": 2,
+  "arch": {
+    "n_blocks": 3,
+    "filters": [
+      64,
+      128,
+      128
+    ],
+    "kernels": [
+      7,
+      5,
+      3
+    ],
+    "latent_dim": 64,
+    "lstm_units": 64,
+    "n_heads": 4,
+    "head_key_dim": 16,
+    "dropout": 0.3,
+    "rollout": 3,
+    "spectral_k": 4,
+    "tier": "small"
+  },
+  "weights_used": "best",
+  "epochs_trained": 106,
+  "train_time_s": 3039.7884221076965,
+  "sec_per_epoch": 28.67724926516695,
+  "params": 497769,
+  "gpu": "gpu-P100",
+  "slurm_job": "6273",
+  "smoke": false,
+  "hyper_rho_spread": 0.01142897829413414,
+  "hyper_mean_rho_corr_rul": 0.5180726715595046,
+  "hyper_mean_rho_corr_age": 0.12531153758380387
+}

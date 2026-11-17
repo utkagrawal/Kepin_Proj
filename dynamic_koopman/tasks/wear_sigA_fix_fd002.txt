@@ -1,0 +1,16 @@
+# Re-run of the Signal A wear model after the noise fix (Signal A now uses cond_norm's floored std).
+--dataset FD002 --koopman eig --mode static --head wear --cond_norm --protocol paper --health_source signal_a --run_id 0
+--dataset FD002 --koopman eig --mode static --head wear --cond_norm --protocol paper --health_source signal_a --run_id 1
+--dataset FD002 --koopman eig --mode static --head wear --cond_norm --protocol paper --health_source signal_a --run_id 2
+# Static vs adaptive K in the condition-aware wear model (2026-11-05). Everything identical to
+# eig_static_wear_cn (ens 13.68) except the operator that carries the health forecast:
+# gate (health-gated decay, gap init 1.0) / mixture (3 regime operators) / engine (local K per window).
+--dataset FD002 --koopman eig --mode health --head wear --cond_norm --protocol paper --run_id 0 --health_map ordered --gap_init 0 --regime_loss mono
+--dataset FD002 --koopman eig --mode health --head wear --cond_norm --protocol paper --run_id 0 --adapt mixture --regime_loss mono
+--dataset FD002 --koopman eig --mode health --head wear --cond_norm --protocol paper --run_id 0 --adapt engine
+--dataset FD002 --koopman eig --mode health --head wear --cond_norm --protocol paper --run_id 1 --health_map ordered --gap_init 0 --regime_loss mono
+--dataset FD002 --koopman eig --mode health --head wear --cond_norm --protocol paper --run_id 1 --adapt mixture --regime_loss mono
+--dataset FD002 --koopman eig --mode health --head wear --cond_norm --protocol paper --run_id 1 --adapt engine
+--dataset FD002 --koopman eig --mode health --head wear --cond_norm --protocol paper --run_id 2 --health_map ordered --gap_init 0 --regime_loss mono
+--dataset FD002 --koopman eig --mode health --head wear --cond_norm --protocol paper --run_id 2 --adapt mixture --regime_loss mono
+--dataset FD002 --koopman eig --mode health --head wear --cond_norm --protocol paper --run_id 2 --adapt engine

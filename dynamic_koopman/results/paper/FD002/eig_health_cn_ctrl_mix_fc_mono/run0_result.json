@@ -1,0 +1,41 @@
+{
+  "dataset": "FD002",
+  "arm": "eig_health_cn_ctrl_mix_fc_mono",
+  "protocol": "paper",
+  "run_id": 0,
+  "rmse": 14.616655349731445,
+  "mae": 11.034465789794922,
+  "r2": 0.8831656588364531,
+  "score": 986.60693359375,
+  "val_rmse": 14.616655349731445,
+  "weights_used": "best",
+  "epochs_trained": 77,
+  "train_time_s": 4117.218871593475,
+  "sec_per_epoch": 53.47037495575942,
+  "params": 1964732,
+  "gpu": "gpu-P100",
+  "slurm_job": "5960",
+  "smoke": false,
+  "mono_violation": 1.5004611836159356,
+  "slope_rmse": 21.949267400032358,
+  "health_corr_rul": 0.8940320717183822,
+  "health_std": 0.4459654986858368,
+  "keep10_nearfail_over_healthy": 0.013089461252093315,
+  "regime_share": [
+    0.5454545454545454,
+    0.0,
+    0.45454545454545453
+  ],
+  "regime_mean_rul": [
+    105.84782409667969,
+    null,
+    32.54782485961914
+  ],
+  "regime_decay_offset_mean": [
+    -0.44419121742248535,
+    -0.48819270730018616,
+    -0.9569148421287537
+  ],
+  "regime_loss_end": 0.020018501454032958,
+  "regime_h_drop_end": 0.15301528591662644
+}

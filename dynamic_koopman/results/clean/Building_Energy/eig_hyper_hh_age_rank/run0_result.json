@@ -1,0 +1,52 @@
+{
+  "dataset": "Building_Energy",
+  "arm": "eig_hyper_hh_age_rank",
+  "protocol": "clean",
+  "run_id": 0,
+  "rmse": 0.09743418544530869,
+  "mae": 0.06430243700742722,
+  "r2": 0.9463192319665951,
+  "val_rmse": 0.08626169711351395,
+  "val_rmse_units": "normalised [0,1] target",
+  "y_min": 2.3082100597093813e-05,
+  "y_range": 1.9773715734481812,
+  "train_stride": 4,
+  "arch": {
+    "n_blocks": 3,
+    "filters": [
+      64,
+      128,
+      128
+    ],
+    "kernels": [
+      7,
+      5,
+      3
+    ],
+    "latent_dim": 64,
+    "lstm_units": 64,
+    "n_heads": 4,
+    "head_key_dim": 16,
+    "dropout": 0.3,
+    "rollout": 3,
+    "spectral_k": 4,
+    "tier": "small"
+  },
+  "weights_used": "best",
+  "epochs_trained": 90,
+  "train_time_s": 3379.71138715744,
+  "sec_per_epoch": 37.55234874619378,
+  "params": 492618,
+  "gpu": "gpu-P100",
+  "slurm_job": "6273",
+  "smoke": false,
+  "hist_h_corr_rul": -0.5638515146949964,
+  "hist_h_std": 0.02656889706850052,
+  "hyper_mean_rho_corr_h": 0.38882599724562183,
+  "hyper_active_modes_corr_h": 0.0,
+  "hyper_rho_spread": 0.0016705775633454323,
+  "hyper_mean_rho_corr_rul": 0.015926307096707726,
+  "hyper_mean_rho_corr_age": 0.994725860767357,
+  "hyper_active_modes_mean": 23.0,
+  "hyper_active_modes_corr_rul": 0.0
+}

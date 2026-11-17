@@ -1,0 +1,23 @@
+{
+  "dataset": "FD002",
+  "arm": "eig_health_cn_ctrl_eng_fc",
+  "protocol": "paper",
+  "run_id": 0,
+  "rmse": 14.311088562011719,
+  "mae": 10.395552635192871,
+  "r2": 0.88799953554904,
+  "score": 982.525390625,
+  "val_rmse": 14.311088562011719,
+  "weights_used": "best",
+  "epochs_trained": 83,
+  "train_time_s": 3577.911664247513,
+  "sec_per_epoch": 43.10736944876521,
+  "params": 1956089,
+  "gpu": "gpu-P100",
+  "slurm_job": "5960",
+  "smoke": false,
+  "mono_violation": 1.3372989521846887,
+  "slope_rmse": 20.580837809262228,
+  "keep10_nearfail_over_healthy": 7.08043098449707,
+  "engine_mix_alpha_mean": 0.5007233619689941
+}

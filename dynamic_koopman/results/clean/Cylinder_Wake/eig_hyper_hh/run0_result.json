@@ -1,0 +1,49 @@
+{
+  "dataset": "Cylinder_Wake",
+  "arm": "eig_hyper_hh",
+  "protocol": "clean",
+  "run_id": 0,
+  "rmse": 0.00509574543684721,
+  "mae": 0.004075376782566309,
+  "r2": 0.8994606447679347,
+  "val_rmse": 0.026744982227683067,
+  "val_rmse_units": "normalised [0,1] target",
+  "y_min": -0.09133179485797882,
+  "y_range": 0.19079503417015076,
+  "train_stride": 2,
+  "arch": {
+    "n_blocks": 3,
+    "filters": [
+      64,
+      128,
+      128
+    ],
+    "kernels": [
+      7,
+      5,
+      3
+    ],
+    "latent_dim": 64,
+    "lstm_units": 64,
+    "n_heads": 4,
+    "head_key_dim": 16,
+    "dropout": 0.3,
+    "rollout": 3,
+    "spectral_k": 4,
+    "tier": "small"
+  },
+  "weights_used": "best",
+  "epochs_trained": 118,
+  "train_time_s": 2191.3730385303497,
+  "sec_per_epoch": 18.57095795364703,
+  "params": 490218,
+  "gpu": "gpu-A100",
+  "slurm_job": "6272",
+  "smoke": false,
+  "hist_h_corr_rul": -0.07599467968991948,
+  "hist_h_std": 0.02878608927130699,
+  "hyper_mean_rho_corr_h": -0.9994497646555106,
+  "hyper_rho_spread": 0.00038887286791577935,
+  "hyper_mean_rho_corr_rul": 0.07550390178747926,
+  "hyper_mean_rho_corr_age": -0.1932857384322947
+}

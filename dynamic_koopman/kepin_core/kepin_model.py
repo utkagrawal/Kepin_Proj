@@ -314,6 +314,9 @@ class KePINModel(keras.Model):
             spec_feats_batch = tf.cast(spec_feats, tf.float32)
 
         head_input = tf.concat([pooled, spec_feats_batch], axis=-1)
+        extra = getattr(self, "_head_extra", None)      # optional extra head inputs (set by subclasses)
+        if extra is not None:
+            head_input = tf.concat([head_input, tf.cast(extra, tf.float32)], axis=-1)
 
         # Deep RUL head with skip
         h = self.head_dense1(head_input)

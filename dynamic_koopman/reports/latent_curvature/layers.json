@@ -1,0 +1,136 @@
+{
+  "self-supervised (no RUL)": {
+    "0 input (cond_norm + EMA)": {
+      "curvature": 4.982526232269263,
+      "share_faster_late": 1.0,
+      "linear_r2_remaining": 0.5796026889014516
+    },
+    "1 input_proj + BN + ReLU": {
+      "curvature": 3.352758980958802,
+      "share_faster_late": 0.9916666666666667,
+      "linear_r2_remaining": 0.5846100587869785
+    },
+    "2 conv block 0": {
+      "curvature": 3.198487144146201,
+      "share_faster_late": 0.9541666666666667,
+      "linear_r2_remaining": 0.6211800282293591
+    },
+    "3 conv block 1": {
+      "curvature": 2.6226827263915733,
+      "share_faster_late": 0.9041666666666667,
+      "linear_r2_remaining": 0.6363921457810917
+    },
+    "4 conv block 2": {
+      "curvature": 2.667646452537369,
+      "share_faster_late": 0.8875,
+      "linear_r2_remaining": 0.6293593159102782
+    },
+    "5 conv block 3": {
+      "curvature": 2.5118851779156333,
+      "share_faster_late": 0.8458333333333333,
+      "linear_r2_remaining": 0.6288442971184822
+    },
+    "6 BiLSTM": {
+      "curvature": 2.633195356180772,
+      "share_faster_late": 0.9,
+      "linear_r2_remaining": 0.6244248736233029
+    },
+    "7 LayerNorm after LSTM": {
+      "curvature": 2.6418843367140865,
+      "share_faster_late": 0.8916666666666667,
+      "linear_r2_remaining": 0.624833128997645
+    },
+    "8 post-LSTM proj + BN": {
+      "curvature": 2.7821873406293762,
+      "share_faster_late": 0.875,
+      "linear_r2_remaining": 0.6171459906485446
+    },
+    "9 attention + LayerNorm": {
+      "curvature": 2.8204868257007387,
+      "share_faster_late": 0.875,
+      "linear_r2_remaining": 0.6172090613036088
+    },
+    "10 feed-forward + LayerNorm": {
+      "curvature": 2.904835319915104,
+      "share_faster_late": 0.8833333333333333,
+      "linear_r2_remaining": 0.6146038559728506
+    },
+    "11 latent projection": {
+      "curvature": 2.829692982975867,
+      "share_faster_late": 0.8875,
+      "linear_r2_remaining": 0.6140664995543028
+    },
+    "12 latent BN (= latent z)": {
+      "curvature": 2.794732076669369,
+      "share_faster_late": 0.8916666666666667,
+      "linear_r2_remaining": 0.614030883601367
+    }
+  },
+  "RUL-trained (wear model)": {
+    "0 input (cond_norm + EMA)": {
+      "curvature": 5.221613034141826,
+      "share_faster_late": 1.0,
+      "linear_r2_remaining": 0.5792421179289883
+    },
+    "1 input_proj + BN + ReLU": {
+      "curvature": 3.4353218021910052,
+      "share_faster_late": 0.9916666666666667,
+      "linear_r2_remaining": 0.5884661595457001
+    },
+    "2 conv block 0": {
+      "curvature": 2.5061316977725823,
+      "share_faster_late": 0.8958333333333334,
+      "linear_r2_remaining": 0.6723264017838106
+    },
+    "3 conv block 1": {
+      "curvature": 2.140882178847301,
+      "share_faster_late": 0.8375,
+      "linear_r2_remaining": 0.6837322767442056
+    },
+    "4 conv block 2": {
+      "curvature": 2.1276451099442024,
+      "share_faster_late": 0.8416666666666667,
+      "linear_r2_remaining": 0.6855416685756823
+    },
+    "5 conv block 3": {
+      "curvature": 2.095713572764968,
+      "share_faster_late": 0.8333333333333334,
+      "linear_r2_remaining": 0.6883420783153205
+    },
+    "6 BiLSTM": {
+      "curvature": 1.935277705561505,
+      "share_faster_late": 0.8,
+      "linear_r2_remaining": 0.6983841060191412
+    },
+    "7 LayerNorm after LSTM": {
+      "curvature": 1.9102246387814619,
+      "share_faster_late": 0.7833333333333333,
+      "linear_r2_remaining": 0.6983311539153461
+    },
+    "8 post-LSTM proj + BN": {
+      "curvature": 1.9767198976772455,
+      "share_faster_late": 0.8083333333333333,
+      "linear_r2_remaining": 0.7015083698389438
+    },
+    "9 attention + LayerNorm": {
+      "curvature": 1.8495654566007327,
+      "share_faster_late": 0.7541666666666667,
+      "linear_r2_remaining": 0.7232967268693297
+    },
+    "10 feed-forward + LayerNorm": {
+      "curvature": 1.787702294670137,
+      "share_faster_late": 0.7583333333333333,
+      "linear_r2_remaining": 0.7299851610685029
+    },
+    "11 latent projection": {
+      "curvature": 1.7727365462712277,
+      "share_faster_late": 0.7583333333333333,
+      "linear_r2_remaining": 0.7297114801745054
+    },
+    "12 latent BN (= latent z)": {
+      "curvature": 1.7912364403050074,
+      "share_faster_late": 0.7416666666666667,
+      "linear_r2_remaining": 0.7306683774360676
+    }
+  }
+}

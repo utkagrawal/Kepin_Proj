@@ -1,0 +1,16 @@
+2026-11-10 11:48:00.663333: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2026-11-10 11:48:02.783665: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/userhome/mtech/a.utkarsh/miniconda3/envs/kepin/lib/python3.10/site-packages/keras/src/layers/layer.py:1295: UserWarning: Layer 'dynamic_ke_pin' looks like it has unbuilt state, but Keras is not able to trace the layer `call()` in order to build it automatically. Possible causes:
+1. The `call()` method of your layer may be crashing. Try to `__call__()` the layer eagerly on some test input first to see if it works. E.g. `x = np.random.random((3, 4)); y = layer(x)`
+2. If the `call()` method is correct, then you may need to implement the `def build(self, input_shape)` method on your layer. It should create all variables used by the layer (e.g. by calling `layer.build()` on all its children layers).
+Exception encountered: ''Invalid dtype: complex64''
+  warnings.warn(
+/userhome/mtech/a.utkarsh/miniconda3/envs/kepin/lib/python3.10/site-packages/keras/src/layers/layer.py:361: UserWarning: `build()` was called on layer 'dynamic_ke_pin', however the layer does not have a `build()` method implemented and it looks like it has unbuilt state. This will cause the layer to be marked as built, despite not being actually built, which may cause failures down the line. Make sure to implement a proper `build()` method.
+  warnings.warn(
+[gpu_config] No GPU detected — running on CPU
+[gpu_config] No GPU detected — running on CPU
+FD001 clean 0 {"normal": 13.79, "same K for all engines": 24.81, "h shuffled": 30.19, "spectral features fixed": 24.66} {'h_corr_rul_capped': 0.935, 'h_falls_over_life_share': 1.0, 'corr_mean_rho_h': -0.967, 'corr_mean_rho_rul': -0.948, 'mean_rho_healthy': 0.143, 'mean_rho_near_failure': 0.392, 'slow_modes_healthy': 0.035, 'slow_modes_near_failure': 43.649, 'median_half_life_healthy': 0.358, 'median_half_life_near_failure': 0.759, 'h_flipped': False}
+FD001 clean 1 {"normal": 14.43, "same K for all engines": 26.34, "h shuffled": 36.69, "spectral features fixed": 26.43} {'h_corr_rul_capped': 0.941, 'h_falls_over_life_share': 1.0, 'corr_mean_rho_h': -0.969, 'corr_mean_rho_rul': -0.948, 'mean_rho_healthy': 0.141, 'mean_rho_near_failure': 0.406, 'slow_modes_healthy': 0.032, 'slow_modes_near_failure': 42.86, 'median_half_life_healthy': 0.359, 'median_half_life_near_failure': 0.808, 'h_flipped': False}
+FD001 clean 2 {"normal": 15.35, "same K for all engines": 19.53, "h shuffled": 23.4, "spectral features fixed": 19.5} {'h_corr_rul_capped': 0.868, 'h_falls_over_life_share': 1.0, 'corr_mean_rho_h': -0.987, 'corr_mean_rho_rul': -0.903, 'mean_rho_healthy': 0.199, 'mean_rho_near_failure': 0.389, 'slow_modes_healthy': 1.792, 'slow_modes_near_failure': 48.0, 'median_half_life_healthy': 0.402, 'median_half_life_near_failure': 0.72, 'h_flipped': False}
+saved FD001 clean

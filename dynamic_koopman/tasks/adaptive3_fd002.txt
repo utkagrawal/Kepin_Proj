@@ -1,0 +1,18 @@
+# Three ways to make the Koopman operator adaptive (2026-11-05). All: cond_norm inputs + control
+# term (z = s + C u, condition-free state), learned health head, FD002 paper protocol, 3 seeds.
+#  gate     : health-gated decay, gap init 1.0 (head reads state 10 ahead / forecast head 1,5,10,25,50)
+#  mixture  : 3 regime operators blended by soft regime probabilities (forecast head)
+#  engine   : per-engine eigenvalues fitted on the window, blended with the fleet ones (forecast head)
+# References: svd_static_cn_ctrl 14.20+-0.07 (single runs), svd_static_cn 14.53, gap0 gate w/o ctrl 14.42.
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --koop_control --run_id 0 --health_map ordered --gap_init 0 --forecast_head --regime_loss mono
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --koop_control --run_id 0 --adapt mixture --forecast_head --regime_loss mono
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --koop_control --run_id 0 --adapt engine --forecast_head
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --koop_control --run_id 0 --health_map ordered --gap_init 0 --head_state 10 --regime_loss mono
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --koop_control --run_id 1 --health_map ordered --gap_init 0 --forecast_head --regime_loss mono
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --koop_control --run_id 1 --adapt mixture --forecast_head --regime_loss mono
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --koop_control --run_id 1 --adapt engine --forecast_head
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --koop_control --run_id 1 --health_map ordered --gap_init 0 --head_state 10 --regime_loss mono
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --koop_control --run_id 2 --health_map ordered --gap_init 0 --forecast_head --regime_loss mono
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --koop_control --run_id 2 --adapt mixture --forecast_head --regime_loss mono
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --koop_control --run_id 2 --adapt engine --forecast_head
+--dataset FD002 --koopman eig --mode health --protocol paper --cond_norm --koop_control --run_id 2 --health_map ordered --gap_init 0 --head_state 10 --regime_loss mono

@@ -1,0 +1,42 @@
+{
+  "dataset": "FD002",
+  "arm": "eig_health_wear_cn_mix_mono",
+  "protocol": "paper",
+  "run_id": 1,
+  "rmse": 14.14028549194336,
+  "mae": 10.831637382507324,
+  "r2": 0.8906570414001022,
+  "score": 824.890869140625,
+  "val_rmse": 14.14028549194336,
+  "weights_used": "best",
+  "epochs_trained": 79,
+  "train_time_s": 3872.6989204883575,
+  "sec_per_epoch": 49.02150532263744,
+  "params": 1673085,
+  "gpu": "gpu-P100",
+  "slurm_job": "5987",
+  "smoke": false,
+  "mono_violation": 1.1820184114686838,
+  "slope_rmse": 22.023422734318117,
+  "health_corr_rul": 0.9186094135413239,
+  "health_std": 0.14238421618938446,
+  "keep10_nearfail_over_healthy": 0.5164151787757874,
+  "regime_share": [
+    0.5612648221343873,
+    0.43873517786561267,
+    0.0
+  ],
+  "regime_mean_rul": [
+    103.95774841308594,
+    32.32432556152344,
+    null
+  ],
+  "regime_decay_offset_mean": [
+    -0.37354475259780884,
+    -1.0229859352111816,
+    -1.2435458898544312
+  ],
+  "regime_loss_end": 0.01854133414104581,
+  "regime_h_drop_end": 0.08358095094561577,
+  "wear_rate_corr_rul": -0.9097845861378148
+}

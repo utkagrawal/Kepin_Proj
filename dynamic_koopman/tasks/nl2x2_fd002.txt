@@ -1,0 +1,9 @@
+# 2x2 study (2026-11-05), condition-aware wear model (K is the only path to the RUL), FD002 paper, 3 seeds.
+# Done: linear static eig_static_wear_cn (13.68); linear dynamic gate/mix/local (14.17/14.04/14.17).
+# New: nonlinear static (K + bounded MLP), nonlinear dynamic (K(h) with h re-read every forecast step).
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 0 --mode health --health_map ordered --gap_init 0 --regime_loss mono --dynamics nl_dynamic
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 0 --mode static --dynamics nl_static
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 1 --mode health --health_map ordered --gap_init 0 --regime_loss mono --dynamics nl_dynamic
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 1 --mode static --dynamics nl_static
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 2 --mode health --health_map ordered --gap_init 0 --regime_loss mono --dynamics nl_dynamic
+--dataset FD002 --koopman eig --head wear --cond_norm --protocol paper --run_id 2 --mode static --dynamics nl_static

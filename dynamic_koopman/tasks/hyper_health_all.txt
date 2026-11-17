@@ -1,0 +1,55 @@
+# History-health hypernetwork arms A/B/C on FD004, FD003, FD001; clean + paper (2026-11-09). Baseline: svd_static (exists).
+--dataset FD004 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 0 --mode hyper --hyper_age --hyper_rank
+--dataset FD004 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 0 --mode static --head_ctx
+--dataset FD004 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 0 --mode hyper
+--dataset FD004 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 0 --mode hyper --hyper_age --hyper_rank
+--dataset FD004 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 0 --mode static --head_ctx
+--dataset FD004 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 0 --mode hyper
+--dataset FD004 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 1 --mode hyper --hyper_age --hyper_rank
+--dataset FD004 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 1 --mode static --head_ctx
+--dataset FD004 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 1 --mode hyper
+--dataset FD004 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 1 --mode hyper --hyper_age --hyper_rank
+--dataset FD004 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 1 --mode static --head_ctx
+--dataset FD004 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 1 --mode hyper
+--dataset FD004 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 2 --mode hyper --hyper_age --hyper_rank
+--dataset FD004 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 2 --mode static --head_ctx
+--dataset FD004 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 2 --mode hyper
+--dataset FD004 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 2 --mode hyper --hyper_age --hyper_rank
+--dataset FD004 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 2 --mode static --head_ctx
+--dataset FD004 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 2 --mode hyper
+--dataset FD003 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 0 --mode hyper --hyper_age --hyper_rank
+--dataset FD003 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 0 --mode static --head_ctx
+--dataset FD003 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 0 --mode hyper
+--dataset FD003 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 0 --mode hyper --hyper_age --hyper_rank
+--dataset FD003 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 0 --mode static --head_ctx
+--dataset FD003 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 0 --mode hyper
+--dataset FD003 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 1 --mode hyper --hyper_age --hyper_rank
+--dataset FD003 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 1 --mode static --head_ctx
+--dataset FD003 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 1 --mode hyper
+--dataset FD003 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 1 --mode hyper --hyper_age --hyper_rank
+--dataset FD003 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 1 --mode static --head_ctx
+--dataset FD003 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 1 --mode hyper
+--dataset FD003 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 2 --mode hyper --hyper_age --hyper_rank
+--dataset FD003 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 2 --mode static --head_ctx
+--dataset FD003 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 2 --mode hyper
+--dataset FD003 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 2 --mode hyper --hyper_age --hyper_rank
+--dataset FD003 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 2 --mode static --head_ctx
+--dataset FD003 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 2 --mode hyper
+--dataset FD001 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 0 --mode hyper --hyper_age --hyper_rank
+--dataset FD001 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 0 --mode static --head_ctx
+--dataset FD001 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 0 --mode hyper
+--dataset FD001 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 0 --mode hyper --hyper_age --hyper_rank
+--dataset FD001 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 0 --mode static --head_ctx
+--dataset FD001 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 0 --mode hyper
+--dataset FD001 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 1 --mode hyper --hyper_age --hyper_rank
+--dataset FD001 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 1 --mode static --head_ctx
+--dataset FD001 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 1 --mode hyper
+--dataset FD001 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 1 --mode hyper --hyper_age --hyper_rank
+--dataset FD001 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 1 --mode static --head_ctx
+--dataset FD001 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 1 --mode hyper
+--dataset FD001 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 2 --mode hyper --hyper_age --hyper_rank
+--dataset FD001 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 2 --mode static --head_ctx
+--dataset FD001 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 2 --mode hyper
+--dataset FD001 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 2 --mode hyper --hyper_age --hyper_rank
+--dataset FD001 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 2 --mode static --head_ctx
+--dataset FD001 --koopman eig --protocol paper --regime_loss mono --hist_health --run_id 2 --mode hyper

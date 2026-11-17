@@ -1,0 +1,582 @@
+{
+  "FD002": {
+    "A_signal": {
+      "mean_eta2_condition_global": 0.992336127380906,
+      "mean_eta2_condition_percond": 0.002715053695048501,
+      "mean_absorr_rul_global": 0.01725830586504036,
+      "mean_absorr_rul_percond": 0.3452847402036101,
+      "mean_absorr_rul_ema_global_first": 0.05923501267989717,
+      "mean_absorr_rul_ema_percond_first": 0.45878734512689245,
+      "max_absorr_rul_global": 0.09182149620395573,
+      "max_absorr_rul_percond": 0.7707264677332745,
+      "ema_alpha": 0.06451612903225806,
+      "theory_condition_variance_left_by_ema": 0.03333333333333333,
+      "per_sensor": [
+        {
+          "sensor": "setting1",
+          "eta2_condition_global": 0.9999999667139607,
+          "eta2_condition_percond": 2.4395190562306375e-06,
+          "absorr_rul_global": 0.00044022032271745395,
+          "absorr_rul_percond": 0.0015425994976078388,
+          "absorr_rul_ema_global_first": 0.008926331084545611,
+          "absorr_rul_ema_percond_first": 0.0040736138207146085
+        },
+        {
+          "sensor": "setting2",
+          "eta2_condition_global": 0.9999956716173672,
+          "eta2_condition_percond": 4.3056959254379626e-05,
+          "absorr_rul_global": 0.00012442971844930473,
+          "absorr_rul_percond": 0.001381747042687569,
+          "absorr_rul_ema_global_first": 0.0016764357881133812,
+          "absorr_rul_ema_percond_first": 0.010408182951986557
+        },
+        {
+          "sensor": "setting3",
+          "eta2_condition_global": 0.9999999999999999,
+          "eta2_condition_percond": 0.0,
+          "absorr_rul_global": 9.127007914159986e-05,
+          "absorr_rul_percond": 0.0,
+          "absorr_rul_ema_global_first": 0.02155782464196796,
+          "absorr_rul_ema_percond_first": 0.0
+        },
+        {
+          "sensor": "s1",
+          "eta2_condition_global": 1.0000000000000002,
+          "eta2_condition_percond": 0.0,
+          "absorr_rul_global": 0.0010267898197702807,
+          "absorr_rul_percond": 0.0,
+          "absorr_rul_ema_global_first": 0.006658064920121977,
+          "absorr_rul_ema_percond_first": 0.0
+        },
+        {
+          "sensor": "s2",
+          "eta2_condition_global": 0.9998578346428821,
+          "eta2_condition_percond": 0.001045781937573708,
+          "absorr_rul_global": 0.00849739073431501,
+          "absorr_rul_percond": 0.6328153512433822,
+          "absorr_rul_ema_global_first": 0.02575832311914718,
+          "absorr_rul_ema_percond_first": 0.8031894884894598
+        },
+        {
+          "sensor": "s3",
+          "eta2_condition_global": 0.9971191050634325,
+          "eta2_condition_percond": 0.0002526825539809515,
+          "absorr_rul_global": 0.033872886497906714,
+          "absorr_rul_percond": 0.6179655169287416,
+          "absorr_rul_ema_global_first": 0.11064895994860127,
+          "absorr_rul_ema_percond_first": 0.7993541954223521
+        },
+        {
+          "sensor": "s4",
+          "eta2_condition_global": 0.9956722960089684,
+          "eta2_condition_percond": 0.0005959600787021151,
+          "absorr_rul_global": 0.04907659595846695,
+          "absorr_rul_percond": 0.7382753459535788,
+          "absorr_rul_ema_global_first": 0.16303592950537177,
+          "absorr_rul_ema_percond_first": 0.8046039720495355
+        },
+        {
+          "sensor": "s5",
+          "eta2_condition_global": 1.0,
+          "eta2_condition_percond": 0.0,
+          "absorr_rul_global": 0.000801854323876191,
+          "absorr_rul_percond": 0.0,
+          "absorr_rul_ema_global_first": 0.008464130502715134,
+          "absorr_rul_ema_percond_first": 0.0
+        },
+        {
+          "sensor": "s6",
+          "eta2_condition_global": 0.9999994704087201,
+          "eta2_condition_percond": 0.003209213762530905,
+          "absorr_rul_global": 0.0010564910579011918,
+          "absorr_rul_percond": 0.3689806050200781,
+          "absorr_rul_ema_global_first": 0.007429906793661633,
+          "absorr_rul_ema_percond_first": 0.7301574728307627
+        },
+        {
+          "sensor": "s7",
+          "eta2_condition_global": 0.999983660712086,
+          "eta2_condition_percond": 0.006939573863380945,
+          "absorr_rul_global": 0.0014439413654152627,
+          "absorr_rul_percond": 0.5327967206168709,
+          "absorr_rul_ema_global_first": 0.004486690439223577,
+          "absorr_rul_ema_percond_first": 0.7499512533471091
+        },
+        {
+          "sensor": "s8",
+          "eta2_condition_global": 0.9999974535504236,
+          "eta2_condition_percond": 0.00037989638259765485,
+          "absorr_rul_global": 0.0010274794279073868,
+          "absorr_rul_percond": 0.31873526533085283,
+          "absorr_rul_ema_global_first": 0.013384817448374638,
+          "absorr_rul_ema_percond_first": 0.39181545185319905
+        },
+        {
+          "sensor": "s9",
+          "eta2_condition_global": 0.9970453158506161,
+          "eta2_condition_percond": 0.00012471808028840755,
+          "absorr_rul_global": 0.02225320961440478,
+          "absorr_rul_percond": 0.39682970173022286,
+          "absorr_rul_ema_global_first": 0.06631173036925152,
+          "absorr_rul_ema_percond_first": 0.3962682721484049
+        },
+        {
+          "sensor": "s10",
+          "eta2_condition_global": 0.9997419194226054,
+          "eta2_condition_percond": 0.009511825897767112,
+          "absorr_rul_global": 0.0020109193279469377,
+          "absorr_rul_percond": 0.10666784539211997,
+          "absorr_rul_ema_global_first": 0.015958428799131844,
+          "absorr_rul_ema_percond_first": 0.35322094014441086
+        },
+        {
+          "sensor": "s11",
+          "eta2_condition_global": 0.9945309189579483,
+          "eta2_condition_percond": 0.00044453314482833714,
+          "absorr_rul_global": 0.05742058116893704,
+          "absorr_rul_percond": 0.7707264677332745,
+          "absorr_rul_ema_global_first": 0.18350744996932303,
+          "absorr_rul_ema_percond_first": 0.7958948905674825
+        },
+        {
+          "sensor": "s12",
+          "eta2_condition_global": 0.9999878747868775,
+          "eta2_condition_percond": 0.008061358990968232,
+          "absorr_rul_global": 0.001225079804153947,
+          "absorr_rul_percond": 0.5552433902681085,
+          "absorr_rul_ema_global_first": 0.003753249223895273,
+          "absorr_rul_ema_percond_first": 0.7472017959619112
+        },
+        {
+          "sensor": "s13",
+          "eta2_condition_global": 0.9999962644954492,
+          "eta2_condition_percond": 0.00040101247601179185,
+          "absorr_rul_global": 0.0006968314831284573,
+          "absorr_rul_percond": 0.31325275703436833,
+          "absorr_rul_ema_global_first": 0.019484330856647917,
+          "absorr_rul_ema_percond_first": 0.38512688071070184
+        },
+        {
+          "sensor": "s14",
+          "eta2_condition_global": 0.9629835352156827,
+          "eta2_condition_percond": 1.3955293615375668e-05,
+          "absorr_rul_global": 0.057203728585510094,
+          "absorr_rul_percond": 0.3009199154969829,
+          "absorr_rul_ema_global_first": 0.14456944767011698,
+          "absorr_rul_ema_percond_first": 0.2918350991504684
+        },
+        {
+          "sensor": "s15",
+          "eta2_condition_global": 0.9973269368647871,
+          "eta2_condition_percond": 0.00020855498367169603,
+          "absorr_rul_global": 0.0375234256598815,
+          "absorr_rul_percond": 0.7247039454630166,
+          "absorr_rul_ema_global_first": 0.1482052813860717,
+          "absorr_rul_ema_percond_first": 0.7954193565867979
+        },
+        {
+          "sensor": "s16",
+          "eta2_condition_global": 0.8748346604632522,
+          "eta2_condition_percond": 0.0247173246664641,
+          "absorr_rul_global": 0.09182149620395573,
+          "absorr_rul_percond": 0.2580146883684503,
+          "absorr_rul_ema_global_first": 0.28094740751611613,
+          "absorr_rul_ema_percond_first": 0.6258892199518431
+        },
+        {
+          "sensor": "s17",
+          "eta2_condition_global": 0.9973463685068105,
+          "eta2_condition_percond": 0.00034643775751148285,
+          "absorr_rul_global": 0.034103550480790355,
+          "absorr_rul_percond": 0.648242188694464,
+          "absorr_rul_ema_global_first": 0.11137409177599322,
+          "absorr_rul_ema_percond_first": 0.8076454737467201
+        },
+        {
+          "sensor": "s18",
+          "eta2_condition_global": 1.0,
+          "eta2_condition_percond": 0.0,
+          "absorr_rul_global": 0.0005176949872962081,
+          "absorr_rul_percond": 0.0,
+          "absorr_rul_ema_global_first": 0.01514689092818939,
+          "absorr_rul_ema_percond_first": 0.0
+        },
+        {
+          "sensor": "s19",
+          "eta2_condition_global": 0.9999999999999999,
+          "eta2_condition_percond": 0.0,
+          "absorr_rul_global": 9.127007914159986e-05,
+          "absorr_rul_percond": 0.0,
+          "absorr_rul_ema_global_first": 0.02155782464196796,
+          "absorr_rul_ema_percond_first": 0.0
+        },
+        {
+          "sensor": "s20",
+          "eta2_condition_global": 0.999821851964083,
+          "eta2_condition_percond": 0.004251244669385081,
+          "absorr_rul_global": 0.005984625300751968,
+          "absorr_rul_percond": 0.5006504583959774,
+          "absorr_rul_ema_global_first": 0.019661939176097095,
+          "absorr_rul_ema_percond_first": 0.7614598371237654
+        },
+        {
+          "sensor": "s21",
+          "eta2_condition_global": 0.9998259518957909,
+          "eta2_condition_percond": 0.004611717663575509,
+          "absorr_rul_global": 0.005887578759202679,
+          "absorr_rul_percond": 0.49908925467585785,
+          "absorr_rul_ema_global_first": 0.019134817812885892,
+          "absorr_rul_ema_percond_first": 0.7573808861877936
+        }
+      ]
+    },
+    "B_parameters": {
+      "runs": [
+        {
+          "run": 0,
+          "median_rel_change_scale": 0.004201936721801758,
+          "p90_rel_change_scale": 0.01307947158813477,
+          "median_abs_change_offset": 0.035319440151790005,
+          "corr_learned_vs_init_scale": 0.9971843041087369,
+          "corr_learned_vs_init_offset": 0.9999830626525066,
+          "median_shift_of_centre_in_sd_units": 0.04785570506169061
+        },
+        {
+          "run": 1,
+          "median_rel_change_scale": 0.005185842514038086,
+          "p90_rel_change_scale": 0.016539812088012702,
+          "median_abs_change_offset": 0.03130391948717026,
+          "corr_learned_vs_init_scale": 0.9962726587649231,
+          "corr_learned_vs_init_offset": 0.99998365124517,
+          "median_shift_of_centre_in_sd_units": 0.05621429178434197
+        },
+        {
+          "run": 2,
+          "median_rel_change_scale": 0.0038644313812255856,
+          "p90_rel_change_scale": 0.013665342330932622,
+          "median_abs_change_offset": 0.03545719783185319,
+          "corr_learned_vs_init_scale": 0.9969427847276767,
+          "corr_learned_vs_init_offset": 0.9999784349192258,
+          "median_shift_of_centre_in_sd_units": 0.06334905615402175
+        }
+      ],
+      "sensor_gain_vs_init_mean_over_conditions_and_runs": {
+        "s16": 1.0429052536807588,
+        "s14": 1.0288967087038994,
+        "s6": 1.0038352489471436,
+        "s15": 1.0028456052144368,
+        "s13": 1.002499008178711,
+        "s10": 1.0023141702016194,
+        "setting2": 1.0022724151611326,
+        "s2": 1.001726182301839,
+        "setting1": 1.0014397621154785,
+        "s18": 1.0013373057047528,
+        "s7": 1.0005238850911458,
+        "s9": 1.0001164118448893,
+        "s11": 0.9997795263926187,
+        "s17": 0.9997232755025229,
+        "s12": 0.9994852383931477,
+        "s4": 0.9992914676666261,
+        "s20": 0.9992117404937745,
+        "s5": 0.9990130106608074,
+        "s1": 0.9979591210683186,
+        "s21": 0.9978010972340902,
+        "s3": 0.9970059235890706,
+        "s8": 0.995186201731364,
+        "setting3": 0.9934714794158935,
+        "s19": 0.9927124500274657
+      },
+      "gain_consistency_across_runs_corr": 0.9342266493011967
+    }
+  },
+  "FD004": {
+    "A_signal": {
+      "mean_eta2_condition_global": 0.992901824894397,
+      "mean_eta2_condition_percond": 0.0011334887941070032,
+      "mean_absorr_rul_global": 0.022569324951827948,
+      "mean_absorr_rul_percond": 0.29471540022130965,
+      "mean_absorr_rul_ema_global_first": 0.07876250490058805,
+      "mean_absorr_rul_ema_percond_first": 0.3357680752105332,
+      "max_absorr_rul_global": 0.10534129749746003,
+      "max_absorr_rul_percond": 0.7721299305777651,
+      "ema_alpha": 0.06451612903225806,
+      "theory_condition_variance_left_by_ema": 0.03333333333333333,
+      "per_sensor": [
+        {
+          "sensor": "setting1",
+          "eta2_condition_global": 0.999999966783805,
+          "eta2_condition_percond": 1.1129509213639997e-05,
+          "absorr_rul_global": 0.00011701306623004346,
+          "absorr_rul_percond": 0.0033548067593723464,
+          "absorr_rul_ema_global_first": 0.013871025340045836,
+          "absorr_rul_ema_percond_first": 0.0026821397865153577
+        },
+        {
+          "sensor": "setting2",
+          "eta2_condition_global": 0.9999956786725951,
+          "eta2_condition_percond": 2.3169723900868046e-05,
+          "absorr_rul_global": 0.0019185662132862923,
+          "absorr_rul_percond": 0.00505957418867558,
+          "absorr_rul_ema_global_first": 0.01684348400298691,
+          "absorr_rul_ema_percond_first": 0.015664905435069536
+        },
+        {
+          "sensor": "setting3",
+          "eta2_condition_global": 1.0000000000000002,
+          "eta2_condition_percond": 0.0,
+          "absorr_rul_global": 0.00617458011757867,
+          "absorr_rul_percond": 0.0,
+          "absorr_rul_ema_global_first": 0.013410959527763227,
+          "absorr_rul_ema_percond_first": 0.0
+        },
+        {
+          "sensor": "s1",
+          "eta2_condition_global": 1.0,
+          "eta2_condition_percond": 0.0,
+          "absorr_rul_global": 0.0015321419587431648,
+          "absorr_rul_percond": 0.0,
+          "absorr_rul_ema_global_first": 0.01652903784843294,
+          "absorr_rul_ema_percond_first": 0.0
+        },
+        {
+          "sensor": "s2",
+          "eta2_condition_global": 0.9998307657003082,
+          "eta2_condition_percond": 0.0004660006537803202,
+          "absorr_rul_global": 0.011148187087447201,
+          "absorr_rul_percond": 0.5940164185579011,
+          "absorr_rul_ema_global_first": 0.047363401502649664,
+          "absorr_rul_ema_percond_first": 0.7047227470919186
+        },
+        {
+          "sensor": "s3",
+          "eta2_condition_global": 0.9962141895130755,
+          "eta2_condition_percond": 0.00022031244208802004,
+          "absorr_rul_global": 0.0449636474453048,
+          "absorr_rul_percond": 0.6598670029334905,
+          "absorr_rul_ema_global_first": 0.16347339219196688,
+          "absorr_rul_ema_percond_first": 0.7734086306273474
+        },
+        {
+          "sensor": "s4",
+          "eta2_condition_global": 0.9942874809200972,
+          "eta2_condition_percond": 0.00043528637939913635,
+          "absorr_rul_global": 0.059572171031409105,
+          "absorr_rul_percond": 0.732242226694304,
+          "absorr_rul_ema_global_first": 0.2126056746666512,
+          "absorr_rul_ema_percond_first": 0.7675069420165356
+        },
+        {
+          "sensor": "s5",
+          "eta2_condition_global": 1.0000000000000002,
+          "eta2_condition_percond": 0.0,
+          "absorr_rul_global": 0.001027790215967417,
+          "absorr_rul_percond": 0.0,
+          "absorr_rul_ema_global_first": 0.016813792357726166,
+          "absorr_rul_ema_percond_first": 0.0
+        },
+        {
+          "sensor": "s6",
+          "eta2_condition_global": 0.9999921523912996,
+          "eta2_condition_percond": 8.606638302173496e-05,
+          "absorr_rul_global": 0.001991155022315993,
+          "absorr_rul_percond": 0.14556151561247202,
+          "absorr_rul_ema_global_first": 0.019457795602131574,
+          "absorr_rul_ema_percond_first": 0.14399106702146902
+        },
+        {
+          "sensor": "s7",
+          "eta2_condition_global": 0.9997947926860603,
+          "eta2_condition_percond": 0.0009077832761827542,
+          "absorr_rul_global": 0.006495096131400279,
+          "absorr_rul_percond": 0.28961941105061173,
+          "absorr_rul_ema_global_first": 0.033750766902028564,
+          "absorr_rul_ema_percond_first": 0.31697054681698345
+        },
+        {
+          "sensor": "s8",
+          "eta2_condition_global": 0.9999977387884934,
+          "eta2_condition_percond": 0.0005147403337756277,
+          "absorr_rul_global": 0.006586227314403903,
+          "absorr_rul_percond": 0.5340321613423121,
+          "absorr_rul_ema_global_first": 0.021043300320571216,
+          "absorr_rul_ema_percond_first": 0.6038144541225104
+        },
+        {
+          "sensor": "s9",
+          "eta2_condition_global": 0.9970416709242406,
+          "eta2_condition_percond": 0.00034882732768531504,
+          "absorr_rul_global": 0.037565313954255365,
+          "absorr_rul_percond": 0.6077542870203528,
+          "absorr_rul_ema_global_first": 0.13366326965473138,
+          "absorr_rul_ema_percond_first": 0.6084509001733437
+        },
+        {
+          "sensor": "s10",
+          "eta2_condition_global": 0.9981748021795388,
+          "eta2_condition_percond": 0.0024227927994489667,
+          "absorr_rul_global": 0.019036822910868237,
+          "absorr_rul_percond": 0.3484761599970361,
+          "absorr_rul_ema_global_first": 0.07043684351847486,
+          "absorr_rul_ema_percond_first": 0.4161279840968793
+        },
+        {
+          "sensor": "s11",
+          "eta2_condition_global": 0.9923256203467149,
+          "eta2_condition_percond": 0.0003188218715317787,
+          "absorr_rul_global": 0.07336430189823126,
+          "absorr_rul_percond": 0.7721299305777651,
+          "absorr_rul_ema_global_first": 0.2520060507741969,
+          "absorr_rul_ema_percond_first": 0.7744382165820649
+        },
+        {
+          "sensor": "s12",
+          "eta2_condition_global": 0.9997958012776811,
+          "eta2_condition_percond": 0.0010144655771342308,
+          "absorr_rul_global": 0.00673750153103023,
+          "absorr_rul_percond": 0.3064670880113282,
+          "absorr_rul_ema_global_first": 0.03458331988540015,
+          "absorr_rul_ema_percond_first": 0.33344489833190516
+        },
+        {
+          "sensor": "s13",
+          "eta2_condition_global": 0.9999967549351205,
+          "eta2_condition_percond": 0.0005111406073650308,
+          "absorr_rul_global": 0.007127110690173357,
+          "absorr_rul_percond": 0.5292329613262389,
+          "absorr_rul_ema_global_first": 0.01677765641240789,
+          "absorr_rul_ema_percond_first": 0.5987355861949948
+        },
+        {
+          "sensor": "s14",
+          "eta2_condition_global": 0.9653007414468996,
+          "eta2_condition_percond": 2.424418130571576e-05,
+          "absorr_rul_global": 0.10534129749746003,
+          "absorr_rul_percond": 0.5332370659493402,
+          "absorr_rul_ema_global_first": 0.301149476915722,
+          "absorr_rul_ema_percond_first": 0.5236386831675162
+        },
+        {
+          "sensor": "s15",
+          "eta2_condition_global": 0.9910721126043908,
+          "eta2_condition_percond": 0.0002220640603381584,
+          "absorr_rul_global": 0.007080940801633689,
+          "absorr_rul_percond": 0.01147281743812926,
+          "absorr_rul_ema_global_first": 0.01929961999886649,
+          "absorr_rul_ema_percond_first": 0.005052560345452785
+        },
+        {
+          "sensor": "s16",
+          "eta2_condition_global": 0.8999608517746724,
+          "eta2_condition_percond": 0.01931480587915546,
+          "absorr_rul_global": 0.08434976766830574,
+          "absorr_rul_percond": 0.24748629135015845,
+          "absorr_rul_ema_global_first": 0.2605403269523632,
+          "absorr_rul_ema_percond_first": 0.5914382971798315
+        },
+        {
+          "sensor": "s17",
+          "eta2_condition_global": 0.9964797625748388,
+          "eta2_condition_percond": 0.0002855459991095151,
+          "absorr_rul_global": 0.0448043744341288,
+          "absorr_rul_percond": 0.6817814680266518,
+          "absorr_rul_ema_global_first": 0.16347367044449604,
+          "absorr_rul_ema_percond_first": 0.77498971287038
+        },
+        {
+          "sensor": "s18",
+          "eta2_condition_global": 1.0,
+          "eta2_condition_percond": 0.0,
+          "absorr_rul_global": 0.0057835079101800435,
+          "absorr_rul_percond": 0.0,
+          "absorr_rul_ema_global_first": 0.018200674303969294,
+          "absorr_rul_ema_percond_first": 0.0
+        },
+        {
+          "sensor": "s19",
+          "eta2_condition_global": 1.0000000000000002,
+          "eta2_condition_percond": 0.0,
+          "absorr_rul_global": 0.00617458011757867,
+          "absorr_rul_percond": 0.0,
+          "absorr_rul_ema_global_first": 0.013410959527763227,
+          "absorr_rul_ema_percond_first": 0.0
+        },
+        {
+          "sensor": "s20",
+          "eta2_condition_global": 0.9996912621478179,
+          "eta2_condition_percond": 3.3000277285743766e-05,
+          "absorr_rul_global": 0.0013831591074501234,
+          "absorr_rul_percond": 0.03585539126676362,
+          "absorr_rul_ema_global_first": 0.015899616978306833,
+          "absorr_rul_ema_percond_first": 0.04953202188907894
+        },
+        {
+          "sensor": "s21",
+          "eta2_condition_global": 0.9996916517978779,
+          "eta2_condition_percond": 4.35337768460548e-05,
+          "absorr_rul_global": 0.0013885447184883175,
+          "absorr_rul_percond": 0.0355230272085272,
+          "absorr_rul_ema_global_first": 0.015696001984460462,
+          "absorr_rul_ema_percond_first": 0.05382351130299969
+        }
+      ]
+    },
+    "B_parameters": {
+      "runs": [
+        {
+          "run": 0,
+          "median_rel_change_scale": 0.006874608993530273,
+          "p90_rel_change_scale": 0.02520153045654297,
+          "median_abs_change_offset": 0.05146471093469396,
+          "corr_learned_vs_init_scale": 0.9880091782796745,
+          "corr_learned_vs_init_offset": 0.9999739265167353,
+          "median_shift_of_centre_in_sd_units": 0.07919408152473939
+        },
+        {
+          "run": 1,
+          "median_rel_change_scale": 0.007301712036132812,
+          "p90_rel_change_scale": 0.026659793853759804,
+          "median_abs_change_offset": 0.04524374072833348,
+          "corr_learned_vs_init_scale": 0.9883779968201946,
+          "corr_learned_vs_init_offset": 0.9999700671525986,
+          "median_shift_of_centre_in_sd_units": 0.07393964020283222
+        },
+        {
+          "run": 2,
+          "median_rel_change_scale": 0.0072253704071044925,
+          "p90_rel_change_scale": 0.023707857131958013,
+          "median_abs_change_offset": 0.04501168380704801,
+          "corr_learned_vs_init_scale": 0.9872696810323106,
+          "corr_learned_vs_init_offset": 0.9999705129163073,
+          "median_shift_of_centre_in_sd_units": 0.07635611923794527
+        }
+      ],
+      "sensor_gain_vs_init_mean_over_conditions_and_runs": {
+        "s16": 1.1188837123587245,
+        "s14": 1.060098847730311,
+        "s13": 1.0195322513580323,
+        "setting3": 1.0119687875111898,
+        "s15": 1.005303192138672,
+        "s21": 1.003217633565267,
+        "s2": 1.0017464955647786,
+        "setting2": 1.0015471140543621,
+        "s3": 1.001544427871704,
+        "s9": 1.0011212507883707,
+        "s11": 1.0004796663920086,
+        "s12": 0.999531110127767,
+        "s4": 0.9993195374806723,
+        "s6": 0.9988344351450603,
+        "s5": 0.9984681447347006,
+        "s10": 0.9982618967692058,
+        "s17": 0.9981916427612304,
+        "s20": 0.9981313705444336,
+        "s8": 0.9972336292266846,
+        "setting1": 0.9970670541127523,
+        "s7": 0.9967902819315593,
+        "s1": 0.9962823232014973,
+        "s19": 0.9955406665802001,
+        "s18": 0.9873628298441569
+      },
+      "gain_consistency_across_runs_corr": 0.9610325554710609
+    }
+  }
+}

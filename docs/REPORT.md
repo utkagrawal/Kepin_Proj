@@ -1,10 +1,12 @@
 # RC-KePIN Project: Full Report of the Investigation
 
-*18–21 October 2026 · Dataset: NASA C-MAPSS (FD001–FD004) · All paths are relative to the `RCKePIN/` folder*
+*18 October – 10 November 2026 (Part 3 added 10 Nov) · Dataset: NASA C-MAPSS (FD001–FD004) · All paths are relative to the `RCKePIN/` folder*
 
 ---
 
 ## Summary
+
+> **Update (10 November 2026), Part 3:** a **hypernetwork Koopman operator** driven by a label-free **health number from the engine's whole history** makes Koopman essential in KePIN (+8 to +16 RMSE when removed, against 0.00 before) and gives a consistent, readable picture of how the rule changes with health on all four datasets. Engine-history health improves KePIN by about 2–5 RMSE on all four datasets (fair test), but a control that gives the same health number straight to the predictor does just as well. See **Part 3** (Steps 19–22).
 
 **The headline result:** a **condition-aware KePIN** beats the original KePIN and the published paper on the two hardest datasets.
 
@@ -231,14 +233,20 @@
 
 In the original KePIN, the operator is **one fixed matrix**, so these 12 numbers are computed once and **copied to every engine** (`tf.tile`). A brand-new engine and one about to fail receive **exactly the same Koopman numbers**. They cannot help tell engines apart.
 
-**Our test:** in our dynamic models the 12 numbers *do* differ per engine. We replaced them with a constant and measured the effect:
+**Our test (feature replacement):** in our dynamic models (A: operating condition; B: learned health) the 12 numbers *can* differ per engine. For each trained FD002 model (fair-test runs 0–2) we replaced every engine's 12 numbers with **their average over the 253 test engines**. The constant is derived from the model itself, not random, so the predictor still sees typical values and only the engine-to-engine differences are removed. Then we re-scored the model.
 
-| Model | Error with real features | Error with a constant | Largest change in any prediction |
+- **Code:** `dynamic_koopman/analyze_spectral_freeze.py`. The constant is `const = feats.mean(axis=0)`; the replacement is the function `frozen`, swapped in for `kepin_model.extract_spectral_features`.
+- **Results:** `dynamic_koopman/reports/spectral_freeze/summary.json`.
+
+| Model | How much the 12 numbers differ between engines | Error: real → constant | Largest change in any prediction |
 |---|---|---|---|
-| B: learned health, run 0 | 15.538 | 15.538 | 0.000 flights |
-| A: operating condition, run 0 | 16.207 | 16.208 | 0.09 flights |
+| Fixed rule (control), runs 0–2 | 0 (identical by design) | unchanged | 0.000 flights |
+| A: operating condition, runs 0–2 | small (0.001–0.005) | 16.207 → 16.208; others unchanged | 0.090 / 0.002 / 0.002 flights |
+| B: learned health, runs 0–2 | essentially none (≈ 0.0000004) | unchanged | 0.000 flights |
 
-**Explanation:** the predictor ignores the Koopman information. It is like improving a car's speedometer when the driver never looks at it. Making the rule dynamic cannot change the predictions.
+Only A really tests the question. B's learned health hardly moved the slow Koopman modes the 12 numbers describe, so its numbers were already effectively constant.
+
+**Explanation:** the predictor ignores the Koopman information (in A, where it does vary a little, removing it changes predictions by at most 0.09 flights). It is like improving a car's speedometer when the driver never looks at it. Making the rule dynamic cannot change the predictions.
 
 ---
 
@@ -553,6 +561,113 @@ predictor reads z                                predictor reads the WEAR STATE 
 
 ---
 
+<!-- PART3 START -->
+## Part 3: making the Koopman operator adaptive (22 October – 10 November 2026)
+
+**The question:** instead of one Koopman rule for the whole fleet, can each engine get its own rule that depends on how healthy it is? Does that help accuracy, and does it explain anything? (Full easy-language version with all figures: `KePIN_Project_Explained.pdf`, sections 13–23.)
+
+### Step 19: Adaptive rules built from the 30-flight window (condition-aware KePIN and wear model)
+
+- **Health index without labels.** A learned health number h collapses to a constant unless told what health is. One rule fixes it, the *mono loss*: a later window of the same engine must have a lower h. It never uses RUL labels, yet h correlates 0.87–0.90 with true remaining life, falls in 100% of engines and ignores the flying condition (R² 0.00).
+- **Three adaptive rules** (health gate, mixture of regimes, a rule fitted per engine): none beat the static rule (FD002: 13.87 static vs 13.97–14.17). Knockout: forcing every engine to the healthy or failing rule changes RMSE by **0.00**. The predictor reads the hidden state directly, so a rule computed from it adds nothing.
+- **Wear model (Koopman is the predictor):** Koopman matters (freezing its fading modes costs +1.5 to +3.0) but adapting it does not (static 13.68 vs 14.04–14.17; healthy rule for everyone: −0.01).
+- **Why:** the encoder straightens the degradation curve. The cleaned sensors speed up 5× near failure; a self-supervised latent keeps 2.8×, the RUL-trained latent only 1.8× (the first ReLU removes most). On encoders that keep the curve the gate helped, but its h was not health (R² ≈ 0 with RUL): extra capacity, not adaptation.
+
+![Curvature through the encoder](figures/16_curvature_layers.png)
+
+**Lesson:** an adaptive Koopman rule fed from the window has nothing new to say. Health information must come from outside the window, and Koopman must sit on a path the predictor uses.
+
+### Step 20: Hypernetwork Koopman in original KePIN
+
+A **hypernetwork** is a small network that writes the settings of another part of the model. Following Hyper-LR-PINN (Cho et al., NeurIPS 2023), the Koopman rule is written as **K = P · diag(ρ<sub>k</sub> R(θ<sub>k</sub>)) · Pᵀ**: the directions P are shared by all engines, and the hypernetwork (Dense 64 ReLU → Dense, zero-initialised) writes each engine's 64 fade factors ρ<sub>k</sub> and turn angles θ<sub>k</sub> (and optional on/off gates). The eigenvalues then differ per engine, so KePIN's 12 spectral features, which were identical for all engines, now carry per-engine information.
+
+![Hypernetwork architecture](figures/17_hyper_architecture.png)
+
+First runs (FD002, paper's method): window context 14.72 (knockout **0.00**); window + age 14.39; + on/off gates **14.04** (knockout +2.4, age shuffled +7.7). **Rule found:** Koopman contributes only when its spectrum carries information the predictor cannot already see.
+
+### Step 21: Health from the engine's whole history
+
+- **42 engine-history features** per window, from all flights so far (past only, so usable at test time); each sensor scaled per flying condition, then *drift since new* (last 10 flights − first 10) and *current rate* (slope of the last 30). Linear fit to remaining life on test engines: R² 0.81 (FD001), 0.81 (FD002), 0.82 (FD003), 0.83 (FD004).
+- **Health net** (Dense 32 ReLU → Dense 1 sigmoid) turns them into h, trained only with the mono loss.
+- **Three arms:** **A** hypernetwork reads only h (so every change of K is caused by health); **B** reads h + age, with on/off gates; **C (control)** static K, and h + age go straight into the predictor.
+
+![Results on all datasets](figures/29_results_all.png)
+
+**Fair test** (ensemble RMSE / NASA score, 3 seeds):
+
+| Dataset | original KePIN | A: health only | B: health + age | C: control |
+|---|---|---|---|---|
+| FD001 | 14.32 / 399 | 13.98 / 312 | 11.68 / 216 | 11.85 / 229 |
+| FD002 | 15.40 / 1062 | 13.70 / 847 | 11.77 / 610 | 11.99 / 636 |
+| FD003 | 13.12 / 373 | 13.14 / 294 | 11.06 / 221 | 11.31 / 234 |
+| FD004 | 17.84 / 1658 | 15.21 / 1131 | 12.92 / 754 | 12.64 / 759 |
+
+**Paper's method** (ensemble RMSE / NASA score, 3 seeds):
+
+| Dataset | original KePIN | A: health only | B: health + age | C: control |
+|---|---|---|---|---|
+| FD001 | 12.92 / 268 | 12.28 / 229 | 10.59 / 192 | 10.55 / 176 |
+| FD002 | 15.00 / 869 | 13.09 / 668 | 11.03 / 543 | 11.04 / 465 |
+| FD003 | 11.56 / 227 | 11.61 / 201 | 9.90 / 149 | 10.11 / 158 |
+| FD004 | 17.11 / 1265 | 14.51 / 956 | 11.84 / 593 | 11.88 / 588 |
+
+**Fair test, bootstrap over test engines (difference [95% range]):**
+
+| Dataset | A − KePIN | B − KePIN | C − KePIN | **B − C** |
+|---|---|---|---|---|
+| FD001 | -0.34 [-2.22, +1.47] | -2.65 [-4.37, -0.91] | -2.48 [-4.19, -0.86] | **-0.17 [-0.99, +0.65]** |
+| FD002 | -1.70 [-3.39, -0.06] | -3.63 [-5.36, -1.95] | -3.41 [-5.03, -1.80] | **-0.22 [-0.78, +0.31]** |
+| FD003 | +0.02 [-1.97, +2.22] | -2.06 [-4.41, +0.47] | -1.81 [-3.99, +0.71] | **-0.25 [-0.91, +0.38]** |
+| FD004 | -2.63 [-4.02, -1.34] | -4.92 [-6.56, -3.36] | -5.20 [-6.94, -3.57] | **+0.29 [-0.29, +0.92]** |
+
+- **History health helps on every dataset:** B and C beat original KePIN by about 2–5 RMSE; biggest on FD004 (the hardest). FD003's gain (≈ −2) has a 95% range touching 0 (only 100 test engines).
+- **B ties C on all four datasets.** The hypernetwork Koopman passes the health information on; it is not an extra source of accuracy.
+- **A** helps on the multi-condition datasets (FD002, FD004) but not on FD001/FD003.
+- **Caveat:** in 9 of 72 models h came out *flipped* (rises towards failure). Accuracy is unaffected; for explanations the direction should be anchored. All arm A fair-test models have the right direction.
+
+### Step 22: How the hypernetwork makes Koopman explainable (arm A, fair test, all datasets)
+
+![The idea](figures/22_hyper_concept.png)
+
+In arm A the hypernetwork reads **one number, h**. So the whole Koopman rule of an engine is a function of its health, and the model's reasoning can be checked in four steps (`analyze_hyper_explain.py`, `reports/hyper_explain/`).
+
+![Eigenvalues healthy vs near failure](figures/23_eig_circle.png)
+
+![h over life](figures/26_h_trajectories.png)
+
+![Life curves](figures/25_life_all.png)
+
+| Arm A, fair test (avg of 3 seeds) | h falls over life | corr(h, RUL) | corr(avg ρ, h) | avg ρ healthy → near failure | slow modes (ρ > 0.3) | knockout: same K for all | h shuffled |
+|---|---|---|---|---|---|---|---|
+| FD001 | 100% of engines | 0.92 | -0.97 | 0.16 → 0.40 | 1 → 45 of 64 | +9.0 | +15.6 |
+| FD002 | 100% of engines | 0.94 | -0.98 | 0.17 → 0.39 | 1 → 59 of 64 | +15.8 | +25.9 |
+| FD003 | 100% of engines | 0.94 | -0.97 | 0.18 → 0.30 | 5 → 20 of 64 | +7.6 | +13.0 |
+| FD004 | 100% of engines | 0.92 | -0.97 | 0.17 → 0.40 | 0 → 62 of 64 | +13.9 | +23.6 |
+
+![Knockout on all datasets](figures/27_knockout_all.png)
+
+![Health dial](figures/24_health_dial.png)
+
+1. **The health number is health:** trained without RUL labels, it falls over life in 100% of engines on all four datasets.
+2. **The Koopman rule follows health the same way everywhere:** as h falls, modes fade less (ρ about 0.15 → 0.3–0.4) and many more modes stay slow (about 0–1 → 20–60 of 64), with a clear *failure regime* at low h.
+3. **The prediction goes through the Koopman rule:** breaking that path costs 8–16 RMSE (0.00 in original KePIN).
+4. **Health dial (what-if):** keeping an engine's 30 flights fixed and feeding a chosen h from 0 to 1 moves its prediction smoothly by about 35–95 flights; the rule switches to its failure regime below h ≈ 0.25 (FD002).
+- **Opposite to the original hypothesis:** the latent space is squeezed hardest while healthy and kept larger near failure, on every dataset and seed.
+- **Honest caveat:** most modes still lose half their size within one step, so the spectrum is a readable *health code* more than multi-step dynamics.
+
+![Per-mode fade factor vs health](figures/28_mode_heatmaps.png)
+
+### Part 3 conclusions
+
+1. **An adaptive Koopman operator contributes only when it carries information the predictor cannot otherwise see** (window context: 0.00; age: +2.4; history health: +8 to +16).
+2. **Engine-history health improves KePIN on all four datasets** (≈ −2 to −5 RMSE, fair test).
+3. **The health-driven hypernetwork Koopman (arm A) is a consistent, readable explanation** of the model, with a per-engine what-if tool, but **Koopman is not needed for the accuracy** (B ties C everywhere).
+4. **Next:** anchor the direction of h; make Koopman necessary (e.g. wear-model forecast with a history-health hypernetwork rule).
+
+---
+
+<!-- PART3 END -->
+
 ## Appendix: file map
 
 | Purpose | File(s) |
@@ -574,6 +689,7 @@ predictor reads z                                predictor reads the WEAR STATE 
 | Koopman trained on the real future (Steps 16–17) | `dynamic_koopman/future_trainer.py`; `train.py --future_loss`, `--future_subspace` |
 | KePIN with Koopman removed (Step 15) | `train.py --koopman none` |
 | Condition-aware Koopman KePIN (Step 18) | `dynamic_koopman/dk_model.py` (`_condition_aware_call`); `train.py --cond_norm --koop_control` |
+| Feature replacement experiment (Step 9) | `dynamic_koopman/analyze_spectral_freeze.py`, `dynamic_koopman/reports/spectral_freeze/summary.json` |
 | Is the wear state condition-free? (probes) | `dynamic_koopman/analyze_condition_state.py`, `dynamic_koopman/reports/fd002_condition_state/summary.json` |
 | Experiment task lists | `dynamic_koopman/tasks/` (`no_koopman.txt`, `future_koopman.txt`, `future_subspace.txt`, `condition_aware.txt`, …) |
 | Overview figure | `dynamic_koopman/reports/make_overview_figure.py` |

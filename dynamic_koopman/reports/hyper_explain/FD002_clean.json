@@ -1,0 +1,63 @@
+{
+  "dataset": "FD002",
+  "protocol": "clean",
+  "runs": [
+    {
+      "knockout": {
+        "normal": 14.168701171875,
+        "same K for all engines": 30.226354598999023,
+        "h shuffled": 39.98637771606445,
+        "spectral features fixed": 30.199451446533203
+      },
+      "h_corr_rul_capped": 0.9410779341071416,
+      "h_falls_over_life_share": 1.0,
+      "corr_mean_rho_h": -0.9776616236225634,
+      "corr_mean_rho_rul": -0.9209668919753937,
+      "mean_rho_healthy": 0.15768472850322723,
+      "mean_rho_near_failure": 0.33331596851348877,
+      "slow_modes_healthy": 1.0,
+      "slow_modes_near_failure": 49.07948717948718,
+      "median_half_life_healthy": 0.3696121573448181,
+      "median_half_life_near_failure": 0.6464123129844666,
+      "h_flipped": false
+    },
+    {
+      "knockout": {
+        "normal": 13.783637046813965,
+        "same K for all engines": 30.202434539794922,
+        "h shuffled": 41.060401916503906,
+        "spectral features fixed": 30.324867248535156
+      },
+      "h_corr_rul_capped": 0.9315432564568503,
+      "h_falls_over_life_share": 1.0,
+      "corr_mean_rho_h": -0.9618297202371132,
+      "corr_mean_rho_rul": -0.935901459945354,
+      "mean_rho_healthy": 0.15206506848335266,
+      "mean_rho_near_failure": 0.43202662467956543,
+      "slow_modes_healthy": 0.0,
+      "slow_modes_near_failure": 63.79076923076923,
+      "median_half_life_healthy": 0.36523640155792236,
+      "median_half_life_near_failure": 0.8263843059539795,
+      "h_flipped": false
+    },
+    {
+      "knockout": {
+        "normal": 13.996739387512207,
+        "same K for all engines": 28.981021881103516,
+        "h shuffled": 38.62366485595703,
+        "spectral features fixed": 29.358013153076172
+      },
+      "h_corr_rul_capped": 0.9433359336297918,
+      "h_falls_over_life_share": 1.0,
+      "corr_mean_rho_h": -0.9859243773406161,
+      "corr_mean_rho_rul": -0.9370335009791845,
+      "mean_rho_healthy": 0.19384001195430756,
+      "mean_rho_near_failure": 0.41704779863357544,
+      "slow_modes_healthy": 1.0,
+      "slow_modes_near_failure": 63.88923076923077,
+      "median_half_life_healthy": 0.4180804491043091,
+      "median_half_life_near_failure": 0.7835880517959595,
+      "h_flipped": false
+    }
+  ]
+}

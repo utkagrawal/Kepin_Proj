@@ -1,0 +1,13 @@
+# Hypernetwork Koopman on ORIGINAL KePIN (2026-11-06; after Hyper-LR-PINN, NeurIPS 2023): original pipeline
+# (EMA inputs, KePIN head), shared orthogonal basis P, hypernetwork(context) -> per-engine decay/rotation.
+# Context: window [mean z, z_T]; +age (flights flown so far, known at test time); +rank (ReLU mode gates).
+# Baselines (same pipeline): eig_static (single 15.34), svd_static (ens 15.00, paper 15.08).
+--dataset FD002 --koopman eig --mode hyper --protocol paper --run_id 0
+--dataset FD002 --koopman eig --mode hyper --protocol paper --run_id 0 --hyper_age
+--dataset FD002 --koopman eig --mode hyper --protocol paper --run_id 0 --hyper_age --hyper_rank
+--dataset FD002 --koopman eig --mode hyper --protocol paper --run_id 1
+--dataset FD002 --koopman eig --mode hyper --protocol paper --run_id 1 --hyper_age
+--dataset FD002 --koopman eig --mode hyper --protocol paper --run_id 1 --hyper_age --hyper_rank
+--dataset FD002 --koopman eig --mode hyper --protocol paper --run_id 2
+--dataset FD002 --koopman eig --mode hyper --protocol paper --run_id 2 --hyper_age
+--dataset FD002 --koopman eig --mode hyper --protocol paper --run_id 2 --hyper_age --hyper_rank

@@ -1,0 +1,10 @@
+# Clean protocol (val = 20% train engines) re-run of arms A/B/C (2026-11-09)
+--dataset FD002 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 0 --mode hyper
+--dataset FD002 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 0 --mode hyper --hyper_age --hyper_rank
+--dataset FD002 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 0 --mode static --head_ctx
+--dataset FD002 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 1 --mode hyper
+--dataset FD002 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 1 --mode hyper --hyper_age --hyper_rank
+--dataset FD002 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 1 --mode static --head_ctx
+--dataset FD002 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 2 --mode hyper
+--dataset FD002 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 2 --mode hyper --hyper_age --hyper_rank
+--dataset FD002 --koopman eig --protocol clean --regime_loss mono --hist_health --run_id 2 --mode static --head_ctx

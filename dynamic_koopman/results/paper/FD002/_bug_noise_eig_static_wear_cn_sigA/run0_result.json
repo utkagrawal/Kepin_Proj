@@ -1,0 +1,29 @@
+{
+  "dataset": "FD002",
+  "arm": "eig_static_wear_cn_sigA",
+  "protocol": "paper",
+  "run_id": 0,
+  "rmse": 34.839988708496094,
+  "mae": 27.48235321044922,
+  "r2": 0.3362102814555257,
+  "score": 6275.8994140625,
+  "val_rmse": 34.839988708496094,
+  "weights_used": "best",
+  "epochs_trained": 148,
+  "train_time_s": 4919.385493755341,
+  "sec_per_epoch": 33.23909117402257,
+  "params": 1664254,
+  "gpu": "gpu-P100",
+  "slurm_job": "5979",
+  "smoke": false,
+  "mono_violation": 0.9312722435510151,
+  "slope_rmse": 33.712642957214776,
+  "sigA_wear_w": {
+    "mean": 0.0035760006867349148,
+    "var": -0.10682106018066406,
+    "skew": -0.003606389509513974,
+    "kurt": -0.006669773254543543
+  },
+  "sigA_wear_b": -2.5824427604675293,
+  "wear_rate_corr_rul": 0.5428643943936482
+}

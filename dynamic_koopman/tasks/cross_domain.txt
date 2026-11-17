@@ -1,0 +1,73 @@
+# Cross-domain (original KePIN multi-domain benchmark), clean protocol, 3 seeds (2026-11-10). 6 arms.
+--dataset SPY_Stock --protocol clean --run_id 0 --koopman svd --mode static
+--dataset SPY_Stock --protocol clean --run_id 0 --koopman eig --mode static
+--dataset SPY_Stock --protocol clean --run_id 0 --koopman eig --mode hyper
+--dataset SPY_Stock --protocol clean --run_id 0 --koopman eig --mode hyper --hist_health
+--dataset SPY_Stock --protocol clean --run_id 0 --koopman eig --mode hyper --hist_health --hyper_age --hyper_rank
+--dataset SPY_Stock --protocol clean --run_id 0 --koopman eig --mode static --hist_health --head_ctx
+--dataset SPY_Stock --protocol clean --run_id 1 --koopman svd --mode static
+--dataset SPY_Stock --protocol clean --run_id 1 --koopman eig --mode static
+--dataset SPY_Stock --protocol clean --run_id 1 --koopman eig --mode hyper
+--dataset SPY_Stock --protocol clean --run_id 1 --koopman eig --mode hyper --hist_health
+--dataset SPY_Stock --protocol clean --run_id 1 --koopman eig --mode hyper --hist_health --hyper_age --hyper_rank
+--dataset SPY_Stock --protocol clean --run_id 1 --koopman eig --mode static --hist_health --head_ctx
+--dataset SPY_Stock --protocol clean --run_id 2 --koopman svd --mode static
+--dataset SPY_Stock --protocol clean --run_id 2 --koopman eig --mode static
+--dataset SPY_Stock --protocol clean --run_id 2 --koopman eig --mode hyper
+--dataset SPY_Stock --protocol clean --run_id 2 --koopman eig --mode hyper --hist_health
+--dataset SPY_Stock --protocol clean --run_id 2 --koopman eig --mode hyper --hist_health --hyper_age --hyper_rank
+--dataset SPY_Stock --protocol clean --run_id 2 --koopman eig --mode static --hist_health --head_ctx
+--dataset Jena_Climate --protocol clean --run_id 0 --koopman svd --mode static
+--dataset Jena_Climate --protocol clean --run_id 0 --koopman eig --mode static
+--dataset Jena_Climate --protocol clean --run_id 0 --koopman eig --mode hyper
+--dataset Jena_Climate --protocol clean --run_id 0 --koopman eig --mode hyper --hist_health
+--dataset Jena_Climate --protocol clean --run_id 0 --koopman eig --mode hyper --hist_health --hyper_age --hyper_rank
+--dataset Jena_Climate --protocol clean --run_id 0 --koopman eig --mode static --hist_health --head_ctx
+--dataset Jena_Climate --protocol clean --run_id 1 --koopman svd --mode static
+--dataset Jena_Climate --protocol clean --run_id 1 --koopman eig --mode static
+--dataset Jena_Climate --protocol clean --run_id 1 --koopman eig --mode hyper
+--dataset Jena_Climate --protocol clean --run_id 1 --koopman eig --mode hyper --hist_health
+--dataset Jena_Climate --protocol clean --run_id 1 --koopman eig --mode hyper --hist_health --hyper_age --hyper_rank
+--dataset Jena_Climate --protocol clean --run_id 1 --koopman eig --mode static --hist_health --head_ctx
+--dataset Jena_Climate --protocol clean --run_id 2 --koopman svd --mode static
+--dataset Jena_Climate --protocol clean --run_id 2 --koopman eig --mode static
+--dataset Jena_Climate --protocol clean --run_id 2 --koopman eig --mode hyper
+--dataset Jena_Climate --protocol clean --run_id 2 --koopman eig --mode hyper --hist_health
+--dataset Jena_Climate --protocol clean --run_id 2 --koopman eig --mode hyper --hist_health --hyper_age --hyper_rank
+--dataset Jena_Climate --protocol clean --run_id 2 --koopman eig --mode static --hist_health --head_ctx
+--dataset Cylinder_Wake --protocol clean --run_id 0 --koopman svd --mode static
+--dataset Cylinder_Wake --protocol clean --run_id 0 --koopman eig --mode static
+--dataset Cylinder_Wake --protocol clean --run_id 0 --koopman eig --mode hyper
+--dataset Cylinder_Wake --protocol clean --run_id 0 --koopman eig --mode hyper --hist_health
+--dataset Cylinder_Wake --protocol clean --run_id 0 --koopman eig --mode hyper --hist_health --hyper_age --hyper_rank
+--dataset Cylinder_Wake --protocol clean --run_id 0 --koopman eig --mode static --hist_health --head_ctx
+--dataset Cylinder_Wake --protocol clean --run_id 1 --koopman svd --mode static
+--dataset Cylinder_Wake --protocol clean --run_id 1 --koopman eig --mode static
+--dataset Cylinder_Wake --protocol clean --run_id 1 --koopman eig --mode hyper
+--dataset Cylinder_Wake --protocol clean --run_id 1 --koopman eig --mode hyper --hist_health
+--dataset Cylinder_Wake --protocol clean --run_id 1 --koopman eig --mode hyper --hist_health --hyper_age --hyper_rank
+--dataset Cylinder_Wake --protocol clean --run_id 1 --koopman eig --mode static --hist_health --head_ctx
+--dataset Cylinder_Wake --protocol clean --run_id 2 --koopman svd --mode static
+--dataset Cylinder_Wake --protocol clean --run_id 2 --koopman eig --mode static
+--dataset Cylinder_Wake --protocol clean --run_id 2 --koopman eig --mode hyper
+--dataset Cylinder_Wake --protocol clean --run_id 2 --koopman eig --mode hyper --hist_health
+--dataset Cylinder_Wake --protocol clean --run_id 2 --koopman eig --mode hyper --hist_health --hyper_age --hyper_rank
+--dataset Cylinder_Wake --protocol clean --run_id 2 --koopman eig --mode static --hist_health --head_ctx
+--dataset Building_Energy --protocol clean --run_id 0 --koopman svd --mode static
+--dataset Building_Energy --protocol clean --run_id 0 --koopman eig --mode static
+--dataset Building_Energy --protocol clean --run_id 0 --koopman eig --mode hyper
+--dataset Building_Energy --protocol clean --run_id 0 --koopman eig --mode hyper --hist_health
+--dataset Building_Energy --protocol clean --run_id 0 --koopman eig --mode hyper --hist_health --hyper_age --hyper_rank
+--dataset Building_Energy --protocol clean --run_id 0 --koopman eig --mode static --hist_health --head_ctx
+--dataset Building_Energy --protocol clean --run_id 1 --koopman svd --mode static
+--dataset Building_Energy --protocol clean --run_id 1 --koopman eig --mode static
+--dataset Building_Energy --protocol clean --run_id 1 --koopman eig --mode hyper
+--dataset Building_Energy --protocol clean --run_id 1 --koopman eig --mode hyper --hist_health
+--dataset Building_Energy --protocol clean --run_id 1 --koopman eig --mode hyper --hist_health --hyper_age --hyper_rank
+--dataset Building_Energy --protocol clean --run_id 1 --koopman eig --mode static --hist_health --head_ctx
+--dataset Building_Energy --protocol clean --run_id 2 --koopman svd --mode static
+--dataset Building_Energy --protocol clean --run_id 2 --koopman eig --mode static
+--dataset Building_Energy --protocol clean --run_id 2 --koopman eig --mode hyper
+--dataset Building_Energy --protocol clean --run_id 2 --koopman eig --mode hyper --hist_health
+--dataset Building_Energy --protocol clean --run_id 2 --koopman eig --mode hyper --hist_health --hyper_age --hyper_rank
+--dataset Building_Energy --protocol clean --run_id 2 --koopman eig --mode static --hist_health --head_ctx
